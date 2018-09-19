@@ -51,7 +51,7 @@ public class Sudoku {
     }
 
 
-    private byte[][] getBox(byte i, byte j) {
+    public byte[][] getBox(byte i, byte j) {
         byte[][] ret = {
             { grid[i * 3][j * 3],      this.grid[i * 3][j * 3 + 1],     this.grid[i * 3][j * 3 + 2] },
             { grid[i * 3 + 1][j * 3],  this.grid[i * 3 + 1][j * 3 + 1], this.grid[i * 3 + 1][j * 3 + 2] },
@@ -60,7 +60,7 @@ public class Sudoku {
         return ret;
     }
 
-    public static boolean checkBox(byte[][] box) {
+    private static boolean checkBox(byte[][] box) {
         byte ret = 0;
         byte i = 0;
         byte[] found = new byte[9];
@@ -74,18 +74,21 @@ public class Sudoku {
 
         return true;
     }
+    public boolean checkBox(byte i, byte j) {
+        return Sudoku.checkBox(this.getBox(i, j));
+    }
 
     public boolean isSolved() {
 
-        // check if rows and cols have sum of 9
+        // check if rows and cols have 9 unique
         for (byte i = 0; i < 9; i++)
             if (!checkCol(i) || !checkRow(i))
                 return false;
 
-        // check if boxes have sum of 9
+        // check if boxes have 9 unique
         for (byte i = 0; i < 3; i++)
             for (byte j = 0; j < 3; j++)
-                if (!checkBox(this.getBox(i, j)))
+                if (!this.checkBox(i, j))
                     return false;
 
         return true;
