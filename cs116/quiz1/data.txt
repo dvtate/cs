@@ -1,0 +1,18 @@
+clemson:ACC:12:0:2
+ucf:AAC:13:1:0
+temple:AAC:7:0:6
+alabama:SE:12:0:0
+louisville:ACC:8:2:5
+usc:PAC12:10:1:4
+tulane:AAC:5:1:7
+oklahoma:BIG12:12:3:2
+memphis:AAC:10:2:3
+houston:AAC:7:0:5
+kansas:BIG12:2:1:8
+wisconsin:BIG10:10:2:1
+virginia tech:ACC:9:1:4
+purdue:BIG10:7:5:1
+memphis:AAC:10:2:3
+ucf:AAC:13:1:0
+temple:AAC:7:0:6
+alabama:SE:12:0:0
