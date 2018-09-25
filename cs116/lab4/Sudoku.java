@@ -41,7 +41,7 @@ public class Sudoku {
 
     public boolean checkCol(byte col) {
         byte i = 0;
-        byte [] found = new byte[9];
+        byte[] found = new byte[9];
         for (byte[] r : this.grid) {
             if (findElem(found, r[col]))
                 return false;

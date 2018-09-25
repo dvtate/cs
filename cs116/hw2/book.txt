@@ -4,7 +4,7 @@ Microfabricated microneedles, a novel approach to transdermal drug delivery:GENR
 Nikola Tesla:GENRE_HISTORY:Sean Patrick
 English landscaping and literature, 1660-1840:GENRE_LITERATURE:E. Malins
 A history and theory of informed consent:GENRE_HISTORY:R. R. Faden,T. L. Beauchamp,N. M. King
-The Feminist Companion to Literature in English Women Writers From the Middle Ages to the Present:GENRE_LITERATURE:V. Blain,P. Clements,I. Grundy 
+The Feminist Companion to Literature in English Women Writers From the Middle Ages to the Present:GENRE_LITERATURE:V. Blain,P. Clements,I. Grundy
 Climate and atmospheric history of the past 420,000 years:GENRE_HISTORY:J. R. Petit, J. Jouzel,D. Raynaud,N. I. Barkov,J. M. Barnola
 The comparative method in evolutionary biology:GENRE_SCIENCE:P. H. Harvey,M. D. Pagel
 Human-computer interaction:GENRE_ENGINEERING:J. Preece,Y. Rogers,H. Sharp,D. Benyon,S. Holland
