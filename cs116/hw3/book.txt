@@ -1,0 +1,18 @@
+Thomas Jefferson and the Tripoli Pirates:GENRE_HISTORY:Brian Kilmeade,Don Yaeger:ABEW2345:234
+Component-oriented programming:GENRE_ENGINEERING:C. Szyperski,J. Bosch,W. Weck:HGNH4567:456
+Microfabricated microneedles, a novel approach to transdermal drug delivery:GENRE_ENGINEERING:S. Henry,D. V. McAllister,M. G. Allen:HJKG2342:378
+Nikola Tesla:GENRE_HISTORY:Sean Patrick:NJKG7456:987
+English landscaping and literature, 1660-1840:GENRE_LITERATURE:E. Malins:MNBV3456:980
+A history and theory of informed consent:GENRE_HISTORY:R. R. Faden,T. L. Beauchamp,N. M. King:HJGF7645:654
+The Feminist Companion to Literature in English Women Writers From the Middle Ages to the Present:GENRE_LITERATURE:V. Blain,P. Clements,I. Grundy:JHGF9089:767
+Climate and atmospheric history of the past 420,000 years:GENRE_HISTORY:J. R. Petit, J. Jouzel,D. Raynaud,N. I. Barkov,J. M. Barnola:FDST9878:675
+The comparative method in evolutionary biology:GENRE_SCIENCE:P. H. Harvey,M. D. Pagel:BGHF8976:234
+Human-computer interaction:GENRE_ENGINEERING:J. Preece,Y. Rogers,H. Sharp,D. Benyon,S. Holland:UYHG1223:889
+Free radicals in biology and medicine:GENRE_SCIENCE:B. Halliwell,J. M. C. Gutteridge:HGHB8909:234
+Electron transfers in chemistry and biology:GENRE_SCIENCE:R. A. Marcus,N. Sutin:LKJH2345:890
+English landscaping and literature, 1660-1840:GENRE_LITERATURE:E. Malins:MNBV3456:980
+Device electronics for integrated circuits:GENRE_ENGINEERING:R. S. Muller,T. I. Kamins,M. Chan,P. K. Ko:JHKG2343:654
+An outline of English literature:GENRE_LITERATURE:G. C. Thornley,G. Roberts:YUTY9098:89
+Gene Ontology:GENRE_SCIENCE:M. Ashburner,C. A. Ball,J. A. Blake,D. Botstein,H. Butler:KJHG8909:90
+Nikola Tesla:GENRE_HISTORY:Sean Patrick:NJKG7456:987
+Microfabricated microneedles, a novel approach to transdermal drug delivery:GENRE_ENGINEERING:S. Henry,D. V. McAllister,M. G. Allen:HJKG2342:378
