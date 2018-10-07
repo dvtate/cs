@@ -134,7 +134,7 @@ class Client {
             final int mid = (start + end) / 2; // avg
 
             // could be optimized into cmp; jlt; jgt; je
-            // not sure how jvm works tho so prolly different
+            // not sure how jvm works tho
             final int cmp = arr[mid].tag.compareTo(tag);
             if (cmp == 0) {
                 System.out.println(arr[mid]);
