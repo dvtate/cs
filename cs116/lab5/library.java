@@ -123,7 +123,7 @@ class library {
 					if (book != null && book.getGenre().equals(d))
 						g[--n] = book;
 
-				libAr[n++] = g;
+				libAr[i++] = g;
 			}
 
 
@@ -131,7 +131,7 @@ class library {
 			option1=scan.nextLine();
 
 			/*Task 8: Print out the array*/
-			for (int e = 0; i < libAr.length; i++) {
+			for (int e = 0; i < libAr.length; e++) {
 				for (BookRecord b : libAr[e])
 					System.out.println(b);
 			}

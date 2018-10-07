@@ -29,8 +29,6 @@ public class BookRecord {
             && b.tag.equals(this.tag);
     }
 
-
-    //
     public String toString() {
         return "=============================\n"
             + "Record #" + this.id
@@ -42,8 +40,6 @@ public class BookRecord {
             + "\n=============================\n";
     }
 
-
-    // useless funcitons (why use access modifiers when u can use public memers?)
     public String       getTitle()      { return this.title; }
     public String       getAuthor()     { return this.author; }
     public BookGenre    getGenre()      { return this.genre; }

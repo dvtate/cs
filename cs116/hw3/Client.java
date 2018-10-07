@@ -33,13 +33,19 @@ class Client {
         this.arr[index++] = book;
     }
 
+    // equicalent to overloading operator[]
     public BookRecord[] getArr() { return this.arr; }
     public BookRecord at(int index) { return this.arr[index]; }
     public void set(int index, BookRecord book) { this.arr[index] = book; }
 
+    // how many elems
+    public int size() { return this.index; }
+    public int length() { return this.size(); }
+
     // change to given size
     // replace arr with bigger array and copy values
     private void realloc(int size) {
+        // if (size < index) { throw }
         BookRecord[] newArr = new BookRecord[size];
         for (int i = 0; i < this.index; i++)
             newArr[i] = this.arr[i];
@@ -64,6 +70,7 @@ class Client {
         newArr = null;
     }
 
+    // is elem in arr?
     public boolean contains(BookRecord book) {
         for (int i = 0; i < this.index; i++)
             if (book.equals(this.arr[i]))
@@ -71,40 +78,22 @@ class Client {
         return false;
     }
 
-    /* i wrote this to emulate what I'm used to in c, but apparently this is built
-    *    into the langauge..
-    private static int strcmp(String a, String b) {
-        // should all be 8 chars but still adding this
-        // shorter strings sorted higher
-        if (a.length() != b.length())
-            return b.length() - a.length();
-
-        // compare chars until one is different
-        for (int i = 0; i < a.length(); i++)
-            if (a.charAt(i) != b.charAt(i))
-                return a.charAt(i) - b.charAt(i);
-
-        // identical strings :/
-        return 0;
-    }
-    */
-
-    public BookRecord [] sortString(BookRecord[] myArray, int noRecords) {
+    // selsction sort
+    public BookRecord [] sortString(BookRecord[] myArray, int noRecords) { // required signature
 
         for (int i = 0; i < noRecords; i++) {
 
             // initially assume lowest val is first one (prolly isnt)
             int ind = i;
-            String lval = myArray[i].tag;
+            String lval = myArray[i].tag; // char** lval = &arr[i]
 
             // find actual lowest value from values remaining
-            for (int j = i; j < noRecords; i++)
-                if (lval.compareTo(myArray[j].tag) > 0) {
-                    ind = j;
-                    lval = myArray[j].tag;
-                }
+            for (int j = i; j < noRecords; j++)
+                // if lower than first/current lowest, make that our new lowest value
+                if (lval.compareTo(myArray[j].tag) > 0) // strcmp(*lval, arr[j].tag)
+                    lval = myArray[ind = j].tag; // lval = &arr[ind]
 
-            // swap with first elem
+            // swap with first elem // std::swap
             BookRecord tmp = myArray[i];
             myArray[i] = myArray[ind];
             myArray[ind] = tmp;
@@ -113,7 +102,8 @@ class Client {
         return myArray;
     }
 
-    public BookRecord [] sortPages(BookRecord[] myArray, int noRecords) {
+    // selsction sort
+    public BookRecord [] sortPages(BookRecord[] myArray, int noRecords) { // required signature
 
         for (int i = 0; i < noRecords; i++) {
 
@@ -121,11 +111,10 @@ class Client {
             int ind = i, lval = myArray[i].pages;
 
             // find actual lowest value from values remaining
-            for (int j = i; j < noRecords; i++)
-                if (lval < myArray[j].pages) {
-                    ind = j;
-                    lval = myArray[j].pages;
-                }
+            for (int j = i; j < noRecords; j++)
+                // if lower than first/current lowest, make that our new lowest value
+                if (lval > myArray[j].pages)
+                    lval = myArray[ind = j].pages;
 
             // swap with first elem
             BookRecord tmp = myArray[i];
@@ -136,29 +125,27 @@ class Client {
         return myArray;
     }
 
+    // BST
     public void searchTag(String tag) {
-        int len = this.index, ind = len / 2;
 
-        while (len > 0) {
-            if (arr[ind].tag.compareTo(tag) < 0) {
-                // eliminate half of elems
-                len /= 2;
-                // index moves to new center
-                ind -= len / 2;
-                System.out.println("lt");
+        int start = 0, end = index - 1;
 
-            } else if (arr[ind].tag.compareTo(tag) < 0) { // compareTo > 0
-                // eliminate half of elems
-                len /= 2;
-                // index moves to new center
-                ind += len / 2;
+        while (end >= start) {
+            final int mid = (start + end) / 2; // avg
 
-            } else {
-                System.out.println(arr[ind]);
+            // could be optimized into cmp; jlt; jgt; je
+            // not sure how jvm works tho so prolly different
+            final int cmp = arr[mid].tag.compareTo(tag);
+            if (cmp == 0) {
+                System.out.println(arr[mid]);
                 return;
+            } else if (cmp > 0) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
             }
-
         }
+        System.out.println("No book with tag " + tag + " was found");
     }
 
     public static void main(String[] args) {
@@ -174,10 +161,11 @@ class Client {
         try {
 
             Scanner fin = new Scanner(new File(args[0])).useDelimiter("\\n");
-            // Nikola Tesla:GENRE_HISTORY:Sean Patrick:NJKG7456:987
-            // title : genre : author : tag : pages
+
+            // for each line
             while (fin.hasNext()) {
-                String[] label = fin.next().split(":");
+                // title : genre : author : tag : pages
+                final String[] label = fin.next().split(":");
                 BookRecord rec = new BookRecord(label[0], label[2], label[1], label[3], Integer.parseInt(label[4].trim()));
 
                 // have we seen this book before?
@@ -187,8 +175,8 @@ class Client {
                 // expansion handled by this method
                 else
                     books_db.push(rec);
-            }
 
+            }
             books_db.arr = books_db.sortString(books_db.arr, books_db.index);
 
 
@@ -213,9 +201,13 @@ class Client {
                 for (BookGenre d : BookGenre.values())
                     System.out.println("\t" + d);
 
-                BookGenre genre = BookGenre.valueOf(cin.nextLine().trim());
+                final BookGenre genre = BookGenre.valueOf(cin.nextLine().trim());
 
-                for (BookRecord book : books_db.getArr())
+                // sort by pages
+                final BookRecord[] sortedByPages
+                    = books_db.sortPages(books_db.getArr(), books_db.size());
+
+                for (BookRecord book : sortedByPages)
                     if (book != null && book.genre.equals(genre))
                         System.out.println(book);
 
@@ -230,7 +222,7 @@ class Client {
 
             case 'T': case 't':
                 System.out.print("Enter the tag:");
-                String tag = cin.nextLine();
+                final String tag = cin.nextLine().trim();
                 books_db.searchTag(tag);
                 break;
 
