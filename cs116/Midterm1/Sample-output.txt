@@ -1,0 +1,64 @@
+C:>java Midterm.Client.TeamClient
+===========================
+Team: Bears
+Wins: 6
+Losses: 0
+Winning Percentage: 1.0
+Over 500 Team
+===========================
+
+===========================
+Team: Panthers
+Wins: 5
+Losses: 1
+Winning Percentage: 0.8333333
+Over 500 Team
+===========================
+
+===========================
+Team: Tigers
+Wins: 9
+Losses: 5
+Winning Percentage: 0.64285713
+Over 500 Team
+===========================
+
+===========================
+Team: Mustangs
+Wins: 3
+Losses: 3
+Winning Percentage: 0.5
+500 Team
+===========================
+
+===========================
+Team: Raiders
+Wins: 6
+Losses: 6
+Winning Percentage: 0.5
+500 Team
+===========================
+
+===========================
+Team: Falcons
+Wins: 2
+Losses: 4
+Winning Percentage: 0.33333334
+Under 500 Team
+===========================
+
+===========================
+Team: Broncos
+Wins: 2
+Losses: 10
+Winning Percentage: 0.16666667
+Under 500 Team
+===========================
+
+===========================
+Team: Oreoles
+Wins: 0
+Losses: 0
+Winning Percentage: 0.0
+Under 500 Team
+===========================

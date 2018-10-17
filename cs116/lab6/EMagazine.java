@@ -1,3 +1,5 @@
+
+
 public class EMagazine extends Record {
     private int issue, vol;
     private String editor, url;

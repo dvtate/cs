@@ -1,0 +1,13 @@
+Panthers:5:1
+Tigers:4:2
+Raiders:3:3
+Broncos:1:5
+Falcons:2:4
+Tigers:4:2
+Raiders:3:3
+Broncos:1:5
+Bears:6:0
+Mustangs:3:3
+Oreoles:0:0
+Broncos:0:0
+Tigers:1:1
