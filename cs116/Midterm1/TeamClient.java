@@ -36,7 +36,7 @@ public class TeamClient {
 	// if in the list already return index, else return -1
 	public static int contains(ArrayList<Team> teams, String name) {
 		for (int i = 0; i < teams.size(); i++)
-			if (teams.get(i).getName() == name)
+			if (teams.get(i).getName().equals(name))
 				return i;
 		return -1;
 	}
