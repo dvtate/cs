@@ -119,6 +119,10 @@ public class Client {
             case 'L': case 'l':
                 System.out.print("Enter Customer ID: ");
                 String cid = cin.nextLine().trim();
+
+                // sort by date
+                orders = sort(orders);
+
                 for (Order o : orders)
                     if (o.getCustomerId().equals(cid))
                         if (o.type() == 'R') {
