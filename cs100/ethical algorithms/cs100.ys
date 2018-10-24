@@ -1,0 +1,55 @@
+
+# new operator <condition lambda> <list> list:filter
+# removes elements where condition not satisfied
+{
+	{ # run within temp scope
+		$list swap ~ =
+		$lam swap ~ =
+		$ret () =
+		{ # for each elem
+			{ # if condition is true
+				# add element to ret
+				$ret $e ~ list:push
+			} ($e) $lam @ if
+		} $list $e foreach
+		$ret ~
+	} @
+} "list:filter" define
+
+
+# this lambda filters applicants
+$bestApplicants {
+	$ret () =
+
+	# remove apps who didnt make a 100 in intro class
+	$ret { $u 3 ] num 100 >= return } ($u) lam
+		$apps list:filter =
+
+	# remove apps whos overall college average less than a 90
+	$ret { $u 9 ] num 90 >= return } ($u) lam
+		$ret ~ list:filter =
+
+
+	$ret ~ return
+
+} ($apps) lam =
+
+# populate applicant list using file "input.txt"
+$apps () =
+{
+	$apps $line "," split list:push
+} "input.txt" file_get_contents "\n" split $line foreach
+
+"loaded " $apps list:size + " applications." + println
+
+# filter applicants list to find most relevant
+$finalists ($apps) $bestApplicants @ =
+
+# print out finalists
+$finalists list:size " Finalists found:" + println
+$i 1 =
+{
+	$i " :\t" + $f + println
+	$i ++
+} $finalists $f foreach
+
