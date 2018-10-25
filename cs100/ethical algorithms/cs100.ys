@@ -1,6 +1,10 @@
+#!/bin/ys
 
-# new operator <condition lambda> <list> list:filter
+# list:filter, list:sort not natively implemented yet
+
+
 # removes elements where condition not satisfied
+# <condition lambdcd a> <list> list:filter
 {
 	{ # run within temp scope
 		$list swap ~ =
@@ -17,6 +21,34 @@
 } "list:filter" define
 
 
+# selection sorts list according to comparison lambda
+{
+	{
+		$list swap ~ =
+		$lam swap ~ =
+		{ # for each elem
+
+			# select highest elem
+			$m_ind 0 =
+
+			# find next lowest elem
+			{
+				{
+					$m_ind $g ~ =
+				} ($list $m_ind ] ~, $list $g ] ~) $lam @ 0 > if
+			} $i $list list:size range $g foreach
+
+			# swap
+			$temp $list $m_ind ] =
+			$list $m_ind ] $list $i ] =
+			$list $i ] $temp ~ =
+
+		} 0 $list list:size range $i foreach
+		$list ~
+	} @
+} "list:sort" define
+
+
 # this lambda filters applicants
 $bestApplicants {
 	$ret () =
@@ -25,14 +57,40 @@ $bestApplicants {
 	$ret { $u 3 ] num 100 >= return } ($u) lam
 		$apps list:filter =
 
-	# remove apps whos overall college average less than a 90
-	$ret { $u 9 ] num 90 >= return } ($u) lam
+	# remove apps whos overall college average less than a 75
+	$ret { $u 9 ] num 75 >= return } ($u) lam
 		$ret ~ list:filter =
 
+	# lambda to attribute a score to the applicant
+	$score {
+		$app 4 ] num 2 *        # data structures importance factor of 2
+		$app 5 ] num 1.5 * +    # software engineering importance factor 1.5
+		$app 6 ] num 2   * +    # algorithms importance factor 2
+		$app 7 ] num 0.5 * +    # computer organization importance factor .5
+		$app 8 ] num +          # OSs importance factor 1
+		$app 9 ] num +          # overall avg importance factor 1
+			return
+	} ($app) lam =
 
-	$ret ~ return
+	# sort by weighted score
+	$ret {
+		($b) $score @
+		($a) $score @ -
+		$b 4 ] num 2 * $b 6 ] num 2 * + $b 5 ] num 2 * +
+		 - return
+	} ($a, $b) lam $ret ~ list:sort =
 
-} ($apps) lam =
+	$ret2 () =
+	{
+		$ret2 $ret $i ] ~ list:push
+	} 0 20 range $i foreach
+
+	$ret2 ~ return
+
+} ($apps) lambda =
+
+
+
 
 # populate applicant list using file "input.txt"
 $apps () =
@@ -47,9 +105,8 @@ $finalists ($apps) $bestApplicants @ =
 
 # print out finalists
 $finalists list:size " Finalists found:" + println
-$i 1 =
 {
-	$i " :\t" + $f + println
-	$i ++
-} $finalists $f foreach
+	$i 1 + ":\t" + $finalists $i ] + println
+} 0 $finalists list:size range $i foreach
 
+exit
