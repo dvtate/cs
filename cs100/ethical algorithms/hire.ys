@@ -22,6 +22,7 @@
 
 
 # selection sorts list according to comparison lambda
+# 	this is why the script is so slow
 {
 	{
 		$list swap ~ =
@@ -51,15 +52,6 @@
 
 # this lambda filters applicants
 $bestApplicants {
-	$ret () =
-
-	# remove apps who didnt make a 100 in intro class
-	$ret { $u 3 ] num 100 >= return } ($u) lam
-		$apps list:filter =
-
-	# remove apps whos overall college average less than a 75
-	$ret { $u 9 ] num 75 >= return } ($u) lam
-		$ret ~ list:filter =
 
 	# lambda to attribute a score to the applicant
 	$score {
@@ -72,18 +64,29 @@ $bestApplicants {
 			return
 	} ($app) lam =
 
-	# sort by weighted score
-	$ret {
-		($b) $score @
-		($a) $score @ -
-		$b 4 ] num 2 * $b 6 ] num 2 * + $b 5 ] num 2 * +
-		 - return
-	} ($a, $b) lam $ret ~ list:sort =
 
+	$ret
+		# remove apps who didnt make a 100 in intro class
+		# and apps whos overall college average less than a 75
+		{ $u 3 ] num 100 >= $u 9 ] num 75 >= && return } ($u) lam
+			$apps ~ list:filter
+
+	"removed weakest apps." println
+
+		# sort by weighted score
+		{
+			($b) $score @
+			($a) $score @ - return
+		} ($a, $b) lam swap list:sort =
+
+	"sorted applicants based on weighted score." println
+
+	# top 20 move on
 	$ret2 () =
 	{
 		$ret2 $ret $i ] ~ list:push
 	} 0 20 range $i foreach
+	"took top 20 applicants." println
 
 	$ret2 ~ return
 
