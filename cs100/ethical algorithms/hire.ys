@@ -112,4 +112,5 @@ $finalists list:size " Finalists found:" + println
 	$i 1 + ":\t" + $finalists $i ] + println
 } 0 $finalists list:size range $i foreach
 
+
 exit

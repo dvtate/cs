@@ -1,22 +1,192 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
         <title>CS 100 Hiring</title>
 		<link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v2.3.7/dist/mini-default.min.css" />
+
+        <style media="screen">
+            body {
+                background-color: rgb(43, 43, 48);
+                color: white;
+            }
+
+            div {
+                border: 1px solid red;
+            }
+
+            textarea {
+                font-size: 10px;
+                width: 95%;
+                font-family: Monaco, monospace, "Lucida Console";
+                color: white;
+                background-color: #000;
+                height: 80%;
+            }
+            span.code {
+                font-family: Monaco, monospace, "Lucida Console";
+            }
+            div#body {
+                height: 100vh;
+            }
+
+            div.col-lg-4 {
+                border: 1px solid grey;
+            }
+            div {
+                background-color: rgb(43, 43, 48) !important;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="row" id="body">
+            <div class="col-lg-4">
+                <h3 style="display:inline-block">Enter your input.txt</h3>
+                <input type="file" id="file-input" accept="text/*" onchange="openFile(event)" />
+                <label for="file-input" class="button small">Use file</label>
+                <textarea id="input-txt"></textarea>
+
+
+                <script>
+                    function openFile(event) {
+                        console.log(event);
+                        var input = event.target;
+                        var reader = new FileReader();
+                        reader.onload = function() {
+                            document.getElementById("input-txt").innerText = reader.result;
+                        };
+                        reader.readAsText(input.files[0]);
+                        console.log(input.files);
+                    }
+
+
+                </script>
+            </div>
+
+            <div class="col-lg-4">
+                <h3 style="display:inline-block">Write Your Algorithm here:</h3>
+                <button class="small" onclick="proc()">Run</button><br/>
+
+                <span class="code">function bestApplicants(apps) {</span><br/>
+                <textarea id="algorithm">
+// apps is a matrix of numerical values
+
+
+// weighted score function (coefficients for relative importance of courses)
+const s = (a) => a[4] * 2 + a[5] * 1.5 + a[6] * 2 + a[7] * 0.5 + a[8] + a[9];
+
+return apps
+    // remove people who didn't get 100 in intro to cs
+    // remove people who don't have at least high C
+    .filter(a => a[3] >= 100 && a[9] >= 75)
+
+    // take top twenty sorted by weighted score function
+    .sort((a, b) => s(b) - s(a)) //
+    .slice(0, 20);
+
+
+
+// to make this compatible with internet explorer, delete everything above this line
+var score = function (a) {
+    return a[4] * 2 + a[5] * 1.5 + a[6] * 2 + a[7] * 0.5 + a[8] + a[9];
+}
+
+return apps
+    .filter(function (a) {
+        return a[3] >= 100 && a[9] >= 75;
+    }).sort(function (a, b) {
+        return score(b) - score(a);
+    }).slice(0, 20);
+                </textarea>
+                <br/><span class="code">}</span>
+            </div>
+
+            <div class="col-lg-4">
+                <h3>Finalists:</h3>
+                <div style="overflow-y:auto" id="output-box" class="container">
+                    <div class="col-sm-12">
+                        <div class="card fluid">
+                            <h5>Click the Run button whenever you're ready!</h5><hr/>
+                            <p>Make sure to enter an algorithm and data.</p>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
         <script type="text/javascript">
-            function out() {
-                const s = (a) => a[4] * 2 + a[5] * 1.5 + a[6] * 2 + a[7] * 0.5 + a[8] + a[9]; // score function
-                console.log("Finalists:\n" + require("fs").readFileSync("./input.txt").toString() // read input.txt
-                    .split('\n').map(l => l.split(',').map(Number)) // load file as matrix of numbers
-                    .filter(a => a[3] >= 100 && a[9] >= 75)         // remove unqualified apps
-                    .sort((a, b) => s(b) - s(a)).slice(0, 20)      // sort based on score keeping top 20
-                    .map((a, i) => `${i + 1}:\t${a}`).join('\n'));   // format for readability
+
+
+            // have to write ugly code to make compatible with IE
+            function proc() {
+
+                var text = document.getElementById("input-txt").value;
+                var algorithm = document.getElementById("algorithm").value;
+
+                // make sure they ahve input.txt
+                if (text.length == 0) {
+                    document.getElementById("output-box").innerHTML =
+                        "<div class=\"card fluid\"><h5>No input</h5><hr/><p>Make sure you loaded in the input.txt</p></div>";
+                    return;
+                }
+
+                // load apps matrix
+                var apps = text.split("\n").map(function (l) {
+                    return l.split(",").map(Number);
+                }).filter(function (l) { return l.length == 10; });
+
+                if (!apps || !apps.length) {
+
+                    console.log(apps);
+                    document.getElementById("output-box").innerHTML =
+                        "<div class=\"card fluid\"><h5>Ivalid input</h5><hr/><p>Make sure you loaded in the input.txt and it follows correct formatting</p></div>";
+                    return;
+                }
+
+                // make user algorithm into a fxn and capture output
+                var ret;
+                try {
+                    function bestApplicants(apps) {
+                        algorithm = "(function(apps){ \n" + algorithm
+                        + "})(" + JSON.stringify(apps) + ")";
+                        return eval(algorithm);
+                    }
+                    ret = bestApplicants(apps); // just to make errors look correctly
+                } catch (e) {
+                    document.getElementById("output-box").innerHTML =
+                        "<div class=\"card fluid\"><h5>Algorithm Error:</h5><hr/><p>You typed something that isn't legal</p><pre>"
+                        + e.stack + "</pre></div>";
+                        return;
+                }
+                console.log(ret);
+
+                // display output to user
+                try {
+                    var str = "<div class=\"col-sm-12\"><div class=\"card fluid\"><ul>"
+                     + ret.map(function (a) {
+                        // internet explorer doesn't support template strings ahhh
+                        return "<li>Applicant ID: " + a[0] + "</li>"
+                        + "<li>Gender: " + (a[1] ? "Male" : "Female") + "</li>"
+                        + "<li>US Citizen: " + (a[2] ? "No" : "Yes") + "</li>"
+                        + "<li>Intro to CS: " + a[3] + "</li>"
+                        + "<li>Data Structures: " + a[4] + "</li>"
+                        + "<li>Software Engineering: " + a[5] + "</li>"
+                        + "<li>Algorithms: " + a[6] + "</li>"
+                        + "<li>Computer Organization: " + a[7] + "</li>"
+                        + "<li>Operating Systems: " + a[8] + "</li>"
+                        + "<li>Overall College Average: " + a[9] + "</li>";
+                    }).join("</ul></div><div class=\"card fluid\"><ul>")
+                    + "</ul></div></div>";
+
+                    document.getElementById("output-box").innerHTML = str;
+                } catch (e) {
+                    document.getElementById("output-box").innerHTML =
+                        "<div class=\"card fluid\"><h5>Algorithm Error:</h5><hr/><p>Your Function either doesn't return, or returns an invalid return value</p></div>";
+                    return;
+                }
 
             }
         </script>
-    </head>
-    <body>
-
     </body>
 </html>
