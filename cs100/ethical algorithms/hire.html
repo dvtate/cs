@@ -10,10 +10,6 @@
                 color: white;
             }
 
-            div {
-                border: 1px solid red;
-            }
-
             textarea {
                 font-size: 10px;
                 width: 95%;
@@ -21,6 +17,7 @@
                 color: white;
                 background-color: #000;
                 height: 80%;
+                resize: vertical;
             }
             span.code {
                 font-family: Monaco, monospace, "Lucida Console";
@@ -37,6 +34,7 @@
             }
 
         </style>
+
     </head>
     <body>
         <div class="row" id="body">
@@ -44,7 +42,27 @@
                 <h3 style="display:inline-block">Enter your input.txt</h3>
                 <input type="file" id="file-input" accept="text/*" onchange="openFile(event)" />
                 <label for="file-input" class="button small">Use file</label>
-                <textarea id="input-txt"></textarea>
+                <textarea id="input-txt">
+You need to enter (ie- copy-paste) the input data
+or click the use file button to upload a file
+
+About input.txt:
+- each line represents an applicant
+- the values are comma separated and come in a specific order
+    + 0: applicant ID number
+    + 1: Gender (0=F, 1=M)
+    + 2: US Citizenship (0=Y, 1=N)
+    + 3: Intro to CS
+    + 4: Data Structures
+    + 5: Software Engineering
+    + 6: Algorithms
+    + 7: Computer Organization
+    + 8: Operating Systems
+    + 9: Overall College Average
+
+These are then loaded into a matrix and passed to the bestApplicants() function you define in the next box.
+
+                </textarea>
 
 
                 <script>
@@ -61,6 +79,7 @@
 
 
                 </script>
+
             </div>
 
             <div class="col-lg-4">
@@ -68,7 +87,7 @@
                 <button class="small" onclick="proc()">Run</button><br/>
 
                 <span class="code">function bestApplicants(apps) {</span><br/>
-                <textarea id="algorithm">
+                <textarea id="algorithm" class="js">
 // apps is a matrix of numerical values
 
 
@@ -81,7 +100,7 @@ return apps
     .filter(a => a[3] >= 100 && a[9] >= 75)
 
     // take top twenty sorted by weighted score function
-    .sort((a, b) => s(b) - s(a)) //
+    .sort((a, b) => s(b) - s(a))
     .slice(0, 20);
 
 
@@ -183,7 +202,6 @@ return apps
                 } catch (e) {
                     document.getElementById("output-box").innerHTML =
                         "<div class=\"card fluid\"><h5>Algorithm Error:</h5><hr/><p>Your Function either doesn't return, or returns an invalid return value</p></div>";
-                    return;
                 }
 
             }
