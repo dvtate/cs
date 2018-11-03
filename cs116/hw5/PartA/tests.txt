@@ -1,0 +1,11 @@
+
+
+
+
+
+
+defaults to short term loan (1yr)
+
+unique id
+
+doesn't allow loan amounts over $100000
