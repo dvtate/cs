@@ -1,0 +1,14 @@
+489 Victoria Court,Macomb, MI 48042:59 14th Street, Venice, FL 34293:11.1:1
+972 Route 11,Clifton Park, NY 12065:462 6th Avenue, Onalaska, WI 54650:23.4:2
+705 River Road,Kaukauna, WI 54130:385 Fairview Avenue, Bay Shore, NY 11706:0.5:2
+526 School Street, Wyandotte, MI 48192:931 Hickory Street, Little Rock, AR 72209:0.45:1
+968 Canal Street, Owosso, MI 48867:13 Madison Avenue, Kennewick, WA 99337:98:2
+906 Harrison Avenue, Amarillo, TX 79106:855 Devon Road, Oshkosh, WI 54901:4.5:1
+691 William Street, Land O Lakes, FL 34639:228 Jones Street, Sulphur, LA 70663:3.4:1
+601 Magnolia Court, Lowell, MA 01851:140 Orchard Lane, Little Rock, AR 72209:6.7:2
+587 Front Street North, Rock Hill, SC 29730:123 Brookside Drive, Huntsville, AL 35803:9.0:2
+637 Elm Street, Hightstown, NJ 08520:109 Jones Street, Woodhaven, NY 11421:8.8:1
+737 Cottage Street, Jupiter, FL 33458:825 Chestnut Avenue Grand Island, NE 68801:0.4:2
+144 Marshall Street, Encino, CA 91316:289 Orchard Lane, Holland, MI 49423:3.4:1
+137 Creek Road, Durham, NC 27703:512 Taylor Street,Maineville, OH 45039:11.6:2
+908 Country Club Drive, Bristol, CT 06010:361 Myrtle Avenue, Mankato, MN 56001:0.9:1

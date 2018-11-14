@@ -1,0 +1,7 @@
+1. D
+2. B
+3.
+program should output:
+ONE
+TWO
+THREE
