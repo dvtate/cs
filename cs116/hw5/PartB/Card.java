@@ -27,7 +27,6 @@ public class Card {
     private Suite suite;
     private Value value;
 
-
     public Card (Suite suite, Value value) {
         this.suite = suite;
         this.value = value;
