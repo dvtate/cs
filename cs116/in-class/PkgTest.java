@@ -6,7 +6,7 @@ import java.io.*;
 
 
 public class PkgTest {
-    public void fxntest() {
+    public static void fxntest() {
         System.out.println("test");
     }
 };
