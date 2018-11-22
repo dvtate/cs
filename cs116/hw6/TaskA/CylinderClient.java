@@ -1,6 +1,4 @@
 
-
-
 public class CylinderClient {
 
     public static void main(String[] args) {
