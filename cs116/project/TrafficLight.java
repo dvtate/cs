@@ -12,6 +12,12 @@ public class TrafficLight {
         this.orangeTicks = orangeTicks;
     }
 
+    public TrafficLight(TrafficLight tl) {
+        this.ticks = tl.getTicks();
+        this.greenTicks = tl.greenTicks;
+        this.orangeTicks = tl.orangeTicks;
+    }
+
     public int getTicks() { return this.ticks; }
     public void setTicks(int ticks) { this.ticks = ticks; }
 

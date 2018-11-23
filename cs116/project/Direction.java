@@ -1,2 +1,13 @@
+/*
+      n
+      ^
+      |
+w  <--O--> e
+      |
+      v
+      s
 
-public enum Direction { NS, SN, EW, WE };
+n.ever e.at s.oggy w.affles
+
+*/
+public enum Direction { NORTH, EAST, SOUTH, WEST };
