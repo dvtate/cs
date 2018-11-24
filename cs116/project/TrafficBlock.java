@@ -34,11 +34,17 @@ public class TrafficBlock extends Block {
             return;
 
         Block nextBlock = roads.getBlockById(this.getNext());
+        Auto auto = roads.getAutoById(super.getAuto());
         // move car if u can
-        if (nextBlock != null && nextBlock.vacant() && signal.isGreen()) {
+        if (nextBlock != null && nextBlock.vacant() && signal.isGreen() && auto.moveable(roads.getTicks())) {
+            log.put("[" + roads.getTicks() + "]: Auto#" + super.getAuto() + " moved from " + super.getType() + " Block#" + super.getId() + " to " + nextBlock.getType() + " Block#" + nextBlock.getId());
             nextBlock.setAuto(super.getAuto());
             super.setAuto(0);
+            auto.setMoved(roads.getTicks());
         } else if (nextBlock == null)
             System.out.println("WTF, trafficblock with null dest??");
+        else if (!signal.isGreen()) {
+            log.put("[" + roads.getTicks() + "]: Auto#" + super.getAuto() + " is waiting at the " + this.signal.getState() + " light.");
+        }
     }
 };

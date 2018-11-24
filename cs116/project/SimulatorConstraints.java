@@ -7,6 +7,7 @@ public class SimulatorConstraints {
     public double entryRate, turnRate;
     public int greenTicks, orangeTicks, simulationTicks, span;
 
+    public SimulatorConstraints() {}
     public SimulatorConstraints(
         double entryRate, double turnRate, int greenTicks, int orangeTicks,
         int simulationTicks, int span
