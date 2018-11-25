@@ -1,0 +1,8 @@
+.project
+.classpath
+cs116projuml*
+
+# output text file from logging
+out.txt
+
+.~CS*

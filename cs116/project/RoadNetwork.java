@@ -5,7 +5,7 @@ import java.util.*;
 public class RoadNetwork {
 
     protected List<Auto> autos;
-    protected List<Block> blocks;
+    protected List<Block> blocks; // i could technically have used normal arrays, but would have to do math..
 
     protected List<List<Integer>> waitTimes;
 
@@ -16,6 +16,7 @@ public class RoadNetwork {
     // cars spawn at entry blocks to road (nesw)
     protected int[] spawnPoints;
     protected int[] despawnPoints;
+
 
     public RoadNetwork (SimulatorConstraints constraints) {
         this.constraints = constraints;
@@ -44,9 +45,11 @@ public class RoadNetwork {
     }
 
     private void spawnAuto(Log log, int entry) {
-        Block b = this.getBlockById(this.spawnPoints[entry]);
+        Block
+        b = this.getBlockById(this.spawnPoints[entry]);
         if (!b.vacant()) {
-            System.out.println("Spawn block not vacant... too much traffic?");
+            //System.out.println("Spawn block not vacant... too much traffic?");
+            log.put("[" + this.getTicks() + "]: could not spawn auto as " + (new String[]{ "N", "E", "S", "W"})[(b.flow()[0].ordinal() + 2) % 4] + " spawn block is not vacant (slow traffic)");
             return;
         }
         Auto car = new Auto();
@@ -56,16 +59,12 @@ public class RoadNetwork {
         this.autos.add(car);
         //System.out.println("this.autos: " + this.autos.toString());
         String[] roadNames = {"NS", "EW", "WE", "SN"};
-        log.put("[" + this.getTicks() + "]: Auto#" + car.getId() + " entered simulation via " + roadNames[entry]);
+        log.put("[" + this.getTicks() + "]: Auto#" + car.getId() + " entered simulation via " + b.toString() + " going " + b.flow()[0]);
     }
 
     // de-spawn car when it exits simulation
     public void deleteAuto(int id, int blockId) {
-        System.out.printf("Despawn Points(" + blockId + "): ");
-        for (int pt : this.despawnPoints)
-            System.out.printf(pt + ", ");
-        //System.out.println("Looking for Auto#" + id);
-        //System.out.println("this.autos: " + autos.toString());
+        // note: logging handled by NormalBlock::tick()
         for (int i = 0; i < this.autos.size(); i++)
             if (this.autos.get(i).getId() == id) {
 
@@ -109,23 +108,24 @@ public class RoadNetwork {
         */
 
 
+        // unfortunately left+right depends on where you're coming from
+        IntersectionBlock
+            nwib = new IntersectionBlock(Direction.WEST, Direction.SOUTH), // 1
+            neib = new IntersectionBlock(Direction.NORTH, Direction.WEST),
+            swib = new IntersectionBlock(Direction.SOUTH, Direction.EAST),
+            seib = new IntersectionBlock(Direction.NORTH, Direction.EAST); // 4
+
         // declaring and defining the key intersection components
         TrafficLight    nstl = new TrafficLight(this.constraints.greenTicks, this.constraints.orangeTicks),
                         wetl = new TrafficLight(this.constraints.greenTicks, this.constraints.orangeTicks);
         nstl.setRed();
         wetl.setGreen();
 
-        // unfortunately left+right depends on where you're coming from
-        IntersectionBlock   nwib = new IntersectionBlock(Direction.WEST, Direction.SOUTH),
-                            neib = new IntersectionBlock(Direction.WEST, Direction.NORTH),
-                            swib = new IntersectionBlock(Direction.SOUTH, Direction.EAST),
-                            seib = new IntersectionBlock(Direction.NORTH, Direction.EAST);
 
-
-        TrafficBlock    ntb = new TrafficBlock(Direction.SOUTH, nstl),  // north-facing trafficblock
+        TrafficBlock    ntb = new TrafficBlock(Direction.SOUTH, nstl), // 5
                         etb = new TrafficBlock(Direction.WEST, wetl),
                         stb = new TrafficBlock(Direction.NORTH, nstl),
-                        wtb = new TrafficBlock(Direction.EAST, wetl);
+                        wtb = new TrafficBlock(Direction.EAST, wetl); // 8
 
 
         // declaring the road leading to the intersection
@@ -191,19 +191,17 @@ public class RoadNetwork {
 
         }
 
+        /*
+        System.out.println("\nnc ids: [" + ncNorms[0].getId() + ", " + ncNorms[this.constraints.span - 2].getId() + "]%4");
+        System.out.println("ec ids: [" + ecNorms[0].getId() + ", " + ecNorms[this.constraints.span - 2].getId() + "]%4");
+        System.out.println("sc ids: [" + scNorms[0].getId() + ", " + scNorms[this.constraints.span - 2].getId() + "]%4");
+        System.out.println("wc ids: [" + wcNorms[0].getId() + ", " + wcNorms[this.constraints.span - 2].getId() + "]%4");
+        System.out.println("cn ids: [" + cnNorms[0].getId() + ", " + cnNorms[this.constraints.span - 1].getId() + "]%4");
+        System.out.println("ce ids: [" + ceNorms[0].getId() + ", " + ceNorms[this.constraints.span - 1].getId() + "]%4");
+        System.out.println("cs ids: [" + csNorms[0].getId() + ", " + csNorms[this.constraints.span - 1].getId() + "]%4");
+        System.out.println("cw ids: [" + cwNorms[0].getId() + ", " + cwNorms[this.constraints.span - 1].getId() + "]%4");
+        */
 
-        System.out.println("nc ids: [" + ncNorms[0].getId() + ", " + ncNorms[this.constraints.span - 2].getId() + "]");
-        System.out.println("ec ids: [" + ecNorms[0].getId() + ", " + ecNorms[this.constraints.span - 2].getId() + "]");
-        System.out.println("sc ids: [" + scNorms[0].getId() + ", " + scNorms[this.constraints.span - 2].getId() + "]");
-        System.out.println("wc ids: [" + wcNorms[0].getId() + ", " + wcNorms[this.constraints.span - 2].getId() + "]");
-        System.out.println("cn ids: [" + cnNorms[0].getId() + ", " + cnNorms[this.constraints.span - 1].getId() + "]");
-        System.out.println("ce ids: [" + ceNorms[0].getId() + ", " + ceNorms[this.constraints.span - 1].getId() + "]");
-        System.out.println("cs ids: [" + csNorms[0].getId() + ", " + csNorms[this.constraints.span - 1].getId() + "]");
-        System.out.println("cw ids: [" + cwNorms[0].getId() + ", " + cwNorms[this.constraints.span - 1].getId() + "]");
-
-
-        // we now have 8 linked roads, 4 traffic blocks and 4 intersection blocks
-        // time to link them together *correctly*
 
         // glhf
         ncNorms[this.constraints.span - 2].setNeighbor(2, ntb.getId());
@@ -214,11 +212,11 @@ public class RoadNetwork {
         etb.setNeighbors(0, ecNorms[this.constraints.span - 2].getId(), 0, neib.getId());
         stb.setNeighbors(seib.getId(), 0, scNorms[this.constraints.span - 2].getId(), 0);
         wtb.setNeighbors(0, swib.getId(), 0, wcNorms[this.constraints.span - 2].getId());
-        cnNorms[0].setNeighbor(3, neib.getId());
+        cnNorms[0].setNeighbor(3, neib.getId()); // technically not needed...
         ceNorms[0].setNeighbor(2, seib.getId());
         csNorms[0].setNeighbor(0, swib.getId());
         cwNorms[0].setNeighbor(1, nwib.getId());
-        nwib.setNeighbors(ntb.getId(), neib.getId(), swib.getId(), csNorms[0].getId());
+        nwib.setNeighbors(ntb.getId(), neib.getId(), swib.getId(), cwNorms[0].getId());
         neib.setNeighbors(cnNorms[0].getId(), etb.getId(), seib.getId(), nwib.getId());
         seib.setNeighbors(neib.getId(), ceNorms[0].getId(), stb.getId(), swib.getId());
         swib.setNeighbors(nwib.getId(), seib.getId(), csNorms[0].getId(), wtb.getId());
@@ -236,6 +234,7 @@ public class RoadNetwork {
         this.blocks.add(seib); this.blocks.add(swib); this.blocks.add(stb);
         this.blocks.add(etb);  this.blocks.add(wtb);
 
+        // populate spawn and despawn point arrays
         this.spawnPoints = new int[]{
             ncNorms[0].getId(), ecNorms[0].getId(), scNorms[0].getId(), wcNorms[0].getId()
         };
@@ -246,7 +245,6 @@ public class RoadNetwork {
             csNorms[this.constraints.span - 1].getId(),
             cwNorms[this.constraints.span - 1].getId(),
         };
-        // populate spawn and despawn point arrays
 
     }
 
@@ -258,11 +256,9 @@ public class RoadNetwork {
         // ajust clock of all cars on the road
         for (Auto a : this.autos)
             a.tick();
-
+        // update blocks && move cars
         for (Block b : this.blocks)
             b.tick(log, this);
-
-
 
         // spwn car if rng says so
         for (int i = 0; i < 4; i++) {
@@ -288,10 +284,10 @@ public class RoadNetwork {
 
     public double[] exitRates() {
         return new double[] {
-            this.waitTimes.get(0).size(),
-            this.waitTimes.get(1).size(),
-            this.waitTimes.get(2).size(),
-            this.waitTimes.get(3).size(),
+            (double) this.waitTimes.get(0).size() / (double) this.ticks,
+            (double) this.waitTimes.get(1).size() / (double) this.ticks,
+            (double) this.waitTimes.get(2).size() / (double) this.ticks,
+            (double) this.waitTimes.get(3).size() / (double) this.ticks,
         };
     }
 };

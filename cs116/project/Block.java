@@ -38,38 +38,11 @@ abstract class Block {
 	public int getAuto() { return this.autoId; }
 	public void setAuto(int autoId) { this.autoId = autoId; }
 
-
-
-
-
-	/*
-		- try to move auto along
-		normal:
-			-
-			-
-
-
-	*/
 	public abstract void tick(Log log, RoadNetwork roads);
-
 
 	// if there isn't a valid auto then it's vacant
 	public boolean vacant() { return this.autoId <= 0; }
 
-	/* would get hairy for intersections
-	public int getNextId(flow()) {
-
-	}
-	public int getPrevId() {
-
-	}
-	public void setPrev(int id) {
-
-	}
-	public void setNext(int id) {
-
-	}
-	*/
 
 	public String toString() {
 		return this.type.toString() + " Block#" + this.getId();

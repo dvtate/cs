@@ -1,7 +1,7 @@
 
 import java.util.*;
 import java.io.*;
-
+import java.io.*;
 
 public class Simulator {
 
@@ -45,22 +45,19 @@ public class Simulator {
             rn.tick(log);
         System.out.println("done.");
 
-        System.out.println("block32 nabos: ");
-        final int[] n = rn.getBlockById(32).getNeighbors();
-        for (int i = 0; i < 4; i++) {
-            System.out.println(rn.getBlockById(n[i]));
-        }
+        System.out.println("Open ./out.txt to see everything that happened...");
 
         System.out.println("Avg wait time: " + rn.averageWaitTime());
         double[] er = rn.exitRates();
         System.out.println("Exit Rates:"
-            + "\n  - N: " + er[0] + " / " + constraints.simulationTicks
-            + "\n  - E: " + er[1] + " / " + constraints.simulationTicks
-            + "\n  - S: " + er[2] + " / " + constraints.simulationTicks
-            + "\n  - W: " + er[3] + " / " + constraints.simulationTicks
+            + "\n  - N: " + er[0] + " vehicles per tick"
+            + "\n  - E: " + er[1] + " vehicles per tick"
+            + "\n  - S: " + er[2] + " vehicles per tick"
+            + "\n  - W: " + er[3] + " vehicles per tick"
         );
 
         log.write();
+        cin.close();
 
     }
 };

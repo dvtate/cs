@@ -24,8 +24,6 @@ public class TrafficBlock extends Block {
 
     public void setFlow(Direction forward) { this.forward = forward; }
 
-
-
     public int getNext() { return super.getNeighbor(this.forward); }
 
     public void tick(Log log, RoadNetwork roads) {
