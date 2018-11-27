@@ -14,8 +14,7 @@ public class Auto {
         this.id = uid++;
         this.ticks = 0;
     }
-
-
+    
     public int getId() { return this.id; }
 
     public Direction getDirection() { return this.orientation; }

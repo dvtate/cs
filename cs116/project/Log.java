@@ -9,15 +9,17 @@ public class Log {
 
     public Log(String fname) {
         this.fname = fname;
+        this.contents = "\n";
     }
     public Log() { this("out.txt"); }
 
+    // append entry
     public void put(String line) {
         //System.out.println(line);
         this.contents += line + "\n";
     }
 
-    // write to file...
+    // write to file
     public void write() {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(fname, false));

@@ -1,6 +1,4 @@
 
-
-
 public class IntersectionBlock extends Block {
 
     protected Direction[] forward;
