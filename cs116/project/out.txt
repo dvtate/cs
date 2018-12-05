@@ -1,432 +1,872 @@
 
 tick#0
-[1]: Auto#1 entered simulation via NORMAL Block#34 going WEST
 tick#1
-[2]: Auto#2 entered simulation via NORMAL Block#34 going WEST
 tick#2
-[3]: could not spawn auto as E spawn block is not vacant (slow traffic)
+[3]: Auto#1 entered simulation via NORMAL Block#34 going WEST
 tick#3
-[4]: Auto#3 entered simulation via NORMAL Block#34 going WEST
 tick#4
+[5]: Auto#2 entered simulation via NORMAL Block#35 going NORTH
 tick#5
-[6]: Auto#1 moved from NORMAL Block#50 to TRAFFIC Block#6
-[6]: Auto#1 is waiting at the ORANGE light.
 tick#6
-[7]: Auto#1 is waiting at the RED light.
-[7]: Auto#4 entered simulation via NORMAL Block#33 going SOUTH
-[7]: Auto#5 entered simulation via NORMAL Block#36 going EAST
 tick#7
+[8]: Auto#1 moved from NORMAL Block#50 to TRAFFIC Block#6
 [8]: Auto#1 is waiting at the RED light.
 tick#8
 [9]: Auto#1 is waiting at the RED light.
 tick#9
+[10]: Auto#2 moved from NORMAL Block#51 to TRAFFIC Block#7
 [10]: Auto#1 is waiting at the RED light.
 tick#10
+[11]: Auto#2 moved from TRAFFIC Block#7 to INTERSECT Block#4
 [11]: Auto#1 is waiting at the RED light.
-[11]: Auto#6 entered simulation via NORMAL Block#35 going NORTH
 tick#11
-[12]: Auto#4 moved from NORMAL Block#49 to TRAFFIC Block#5
-[12]: Auto#5 moved from NORMAL Block#52 to TRAFFIC Block#8
-[12]: Auto#4 is waiting at the ORANGE light.
+[12]: Auto#2 turned left to go NORTH
+[12]: Auto#2 moved from INTERSECT Block#4 to INTERSECT Block#2
 [12]: Auto#1 is waiting at the RED light.
-[12]: Auto#5 is waiting at the RED light.
-[12]: Auto#7 entered simulation via NORMAL Block#35 going NORTH
 tick#12
-[13]: Auto#4 is waiting at the ORANGE light.
+[13]: Auto#2 turned right to go NORTH
+[13]: Auto#2 moved from INTERSECT Block#2 to NORMAL Block#9
 [13]: Auto#1 is waiting at the RED light.
-[13]: Auto#5 is waiting at the RED light.
 tick#13
-[14]: Auto#4 is waiting at the RED light.
 [14]: Auto#1 moved from TRAFFIC Block#6 to INTERSECT Block#2
-[14]: Auto#5 moved from TRAFFIC Block#8 to INTERSECT Block#3
 tick#14
-[15]: Auto#2 moved from NORMAL Block#50 to TRAFFIC Block#6
 [15]: Auto#1 turned left to go WEST
 [15]: Auto#1 moved from INTERSECT Block#2 to INTERSECT Block#1
-[15]: Auto#4 is waiting at the RED light.
-[15]: Auto#5 turned right to go SOUTH
-[15]: Auto#5 moved from INTERSECT Block#3 to NORMAL Block#11
 tick#15
-[16]: Auto#6 moved from NORMAL Block#51 to TRAFFIC Block#7
-[16]: Auto#1 turned left to go SOUTH
-[16]: Auto#1 moved from INTERSECT Block#1 to INTERSECT Block#3
-[16]: Auto#4 is waiting at the RED light.
-[16]: Auto#6 is waiting at the RED light.
-[16]: Auto#2 moved from TRAFFIC Block#6 to INTERSECT Block#2
-[16]: Auto#8 entered simulation via NORMAL Block#36 going EAST
+[16]: Auto#1 turned right to go WEST
+[16]: Auto#1 moved from INTERSECT Block#1 to NORMAL Block#12
 tick#16
-[17]: Auto#3 moved from NORMAL Block#50 to TRAFFIC Block#6
-[17]: Auto#2 turned left to go WEST
-[17]: Auto#2 moved from INTERSECT Block#2 to INTERSECT Block#1
-[17]: Auto#4 is waiting at the RED light.
-[17]: Auto#1 turned right to go SOUTH
-[17]: Auto#1 moved from INTERSECT Block#3 to NORMAL Block#11
-[17]: Auto#6 is waiting at the RED light.
 tick#17
-[18]: Auto#2 turned left to go SOUTH
-[18]: Auto#2 moved from INTERSECT Block#1 to INTERSECT Block#3
-[18]: Auto#4 is waiting at the RED light.
-[18]: Auto#6 is waiting at the RED light.
-[18]: Auto#3 moved from TRAFFIC Block#6 to INTERSECT Block#2
+[18]: Auto#3 entered simulation via NORMAL Block#33 going SOUTH
+[18]: Auto#4 entered simulation via NORMAL Block#34 going WEST
 tick#18
-[19]: Auto#3 turned left to go WEST
-[19]: Auto#3 moved from INTERSECT Block#2 to INTERSECT Block#1
-[19]: Auto#4 is waiting at the RED light.
-[19]: Auto#2 turned right to go SOUTH
-[19]: Auto#2 moved from INTERSECT Block#3 to NORMAL Block#11
-[19]: Auto#6 is waiting at the RED light.
-[19]: Auto#9 entered simulation via NORMAL Block#36 going EAST
+[19]: Auto#2 left simulation via Block#29 going NORTH
+[19]: Auto#5 entered simulation via NORMAL Block#35 going NORTH
+[19]: Auto#6 entered simulation via NORMAL Block#36 going EAST
 tick#19
-[20]: Auto#3 turned right to go WEST
-[20]: Auto#3 moved from INTERSECT Block#1 to NORMAL Block#12
-[20]: Auto#4 is waiting at the RED light.
-[20]: Auto#6 is waiting at the RED light.
 tick#20
-[21]: Auto#5 left simulation via Block#31 going SOUTH
-[21]: Auto#8 moved from NORMAL Block#52 to TRAFFIC Block#8
-[21]: Auto#4 moved from TRAFFIC Block#5 to INTERSECT Block#1
-[21]: Auto#6 moved from TRAFFIC Block#7 to INTERSECT Block#4
-[21]: Auto#8 is waiting at the RED light.
-[21]: Auto#10 entered simulation via NORMAL Block#36 going EAST
 tick#21
-[22]: Auto#7 moved from NORMAL Block#51 to TRAFFIC Block#7
-[22]: Auto#4 turned right to go WEST
-[22]: Auto#4 moved from INTERSECT Block#1 to NORMAL Block#12
-[22]: Auto#6 turned left to go NORTH
-[22]: Auto#6 moved from INTERSECT Block#4 to INTERSECT Block#2
-[22]: Auto#8 is waiting at the RED light.
+[22]: Auto#1 left simulation via Block#32 going WEST
 tick#22
-[23]: Auto#1 left simulation via Block#31 going SOUTH
-[23]: Auto#6 turned right to go NORTH
-[23]: Auto#6 moved from INTERSECT Block#2 to NORMAL Block#9
-[23]: Auto#7 moved from TRAFFIC Block#7 to INTERSECT Block#4
-[23]: Auto#8 is waiting at the RED light.
+[23]: Auto#3 moved from NORMAL Block#49 to TRAFFIC Block#5
+[23]: Auto#4 moved from NORMAL Block#50 to TRAFFIC Block#6
+[23]: Auto#4 is waiting at the RED light.
+[23]: Auto#7 entered simulation via NORMAL Block#34 going WEST
 tick#23
-[24]: Auto#7 turned left to go NORTH
-[24]: Auto#7 moved from INTERSECT Block#4 to INTERSECT Block#2
-[24]: Auto#8 is waiting at the RED light.
+[24]: Auto#5 moved from NORMAL Block#51 to TRAFFIC Block#7
+[24]: Auto#6 moved from NORMAL Block#52 to TRAFFIC Block#8
+[24]: Auto#3 moved from TRAFFIC Block#5 to INTERSECT Block#1
+[24]: Auto#4 is waiting at the RED light.
+[24]: Auto#6 is waiting at the RED light.
 tick#24
-[25]: Auto#2 left simulation via Block#31 going SOUTH
-[25]: Auto#7 turned left to go WEST
-[25]: Auto#7 moved from INTERSECT Block#2 to INTERSECT Block#1
-[25]: Auto#8 is waiting at the RED light.
-[25]: Auto#11 entered simulation via NORMAL Block#36 going EAST
+[25]: Auto#3 turned left to go SOUTH
+[25]: Auto#3 moved from INTERSECT Block#1 to INTERSECT Block#3
+[25]: Auto#5 moved from TRAFFIC Block#7 to INTERSECT Block#4
+[25]: Auto#4 is waiting at the RED light.
+[25]: Auto#6 is waiting at the RED light.
 tick#25
-[26]: Auto#3 left simulation via Block#32 going WEST
-[26]: Auto#7 turned left to go SOUTH
-[26]: Auto#7 moved from INTERSECT Block#1 to INTERSECT Block#3
-[26]: Auto#8 is waiting at the RED light.
+[26]: Auto#5 turned left to go NORTH
+[26]: Auto#5 moved from INTERSECT Block#4 to INTERSECT Block#2
+[26]: Auto#3 turned left to go EAST
+[26]: Auto#3 moved from INTERSECT Block#3 to INTERSECT Block#4
+[26]: Auto#4 is waiting at the RED light.
+[26]: Auto#6 is waiting at the RED light.
+[26]: Auto#8 entered simulation via NORMAL Block#35 going NORTH
+[26]: Auto#9 entered simulation via NORMAL Block#36 going EAST
 tick#26
-[27]: Auto#7 turned right to go SOUTH
-[27]: Auto#7 moved from INTERSECT Block#3 to NORMAL Block#11
-[27]: Auto#8 is waiting at the RED light.
+[27]: Auto#5 turned left to go WEST
+[27]: Auto#5 moved from INTERSECT Block#2 to INTERSECT Block#1
+[27]: Auto#3 turned left to go NORTH
+[27]: Auto#3 moved from INTERSECT Block#4 to INTERSECT Block#2
+[27]: Auto#4 is waiting at the RED light.
+[27]: Auto#6 is waiting at the RED light.
 tick#27
-[28]: Auto#4 left simulation via Block#32 going WEST
-[28]: Auto#8 moved from TRAFFIC Block#8 to INTERSECT Block#3
+[28]: Auto#5 turned left to go SOUTH
+[28]: Auto#5 moved from INTERSECT Block#1 to INTERSECT Block#3
+[28]: Auto#3 turned left to go WEST
+[28]: Auto#3 moved from INTERSECT Block#2 to INTERSECT Block#1
+[28]: Auto#4 moved from TRAFFIC Block#6 to INTERSECT Block#2
 tick#28
-[29]: Auto#6 left simulation via Block#29 going NORTH
-[29]: Auto#9 moved from NORMAL Block#52 to TRAFFIC Block#8
-[29]: Auto#8 turned right to go SOUTH
-[29]: Auto#8 moved from INTERSECT Block#3 to NORMAL Block#11
+[29]: Auto#7 moved from NORMAL Block#50 to TRAFFIC Block#6
+[29]: Auto#3 turned right to go WEST
+[29]: Auto#3 moved from INTERSECT Block#1 to NORMAL Block#12
+[29]: Auto#4 turned right to go NORTH
+[29]: Auto#4 moved from INTERSECT Block#2 to NORMAL Block#9
+[29]: Auto#5 turned left to go EAST
+[29]: Auto#5 moved from INTERSECT Block#3 to INTERSECT Block#4
+[29]: Auto#6 moved from TRAFFIC Block#8 to INTERSECT Block#3
 tick#29
-[30]: Auto#9 moved from TRAFFIC Block#8 to INTERSECT Block#3
+[30]: Auto#5 turned right to go EAST
+[30]: Auto#5 moved from INTERSECT Block#4 to NORMAL Block#10
+[30]: Auto#6 turned left to go EAST
+[30]: Auto#6 moved from INTERSECT Block#3 to INTERSECT Block#4
+[30]: Auto#7 moved from TRAFFIC Block#6 to INTERSECT Block#2
 tick#30
-[31]: Auto#10 moved from NORMAL Block#52 to TRAFFIC Block#8
-[31]: Auto#9 turned left to go EAST
-[31]: Auto#9 moved from INTERSECT Block#3 to INTERSECT Block#4
+[31]: Auto#8 moved from NORMAL Block#51 to TRAFFIC Block#7
+[31]: Auto#9 moved from NORMAL Block#52 to TRAFFIC Block#8
+[31]: Auto#7 turned right to go NORTH
+[31]: Auto#7 moved from INTERSECT Block#2 to NORMAL Block#9
+[31]: Auto#6 turned right to go EAST
+[31]: Auto#6 moved from INTERSECT Block#4 to NORMAL Block#10
+[31]: Auto#8 is waiting at the RED light.
+[31]: Auto#10 entered simulation via NORMAL Block#34 going WEST
 tick#31
-[32]: Auto#9 turned left to go NORTH
-[32]: Auto#9 moved from INTERSECT Block#4 to INTERSECT Block#2
-[32]: Auto#10 moved from TRAFFIC Block#8 to INTERSECT Block#3
+[32]: Auto#8 is waiting at the RED light.
+[32]: Auto#9 moved from TRAFFIC Block#8 to INTERSECT Block#3
 tick#32
-[33]: Auto#7 left simulation via Block#31 going SOUTH
-[33]: Auto#11 moved from NORMAL Block#52 to TRAFFIC Block#8
-[33]: Auto#9 turned right to go NORTH
-[33]: Auto#9 moved from INTERSECT Block#2 to NORMAL Block#9
-[33]: Auto#10 turned left to go EAST
-[33]: Auto#10 moved from INTERSECT Block#3 to INTERSECT Block#4
-[33]: Auto#11 is waiting at the ORANGE light.
+[33]: Auto#9 turned right to go SOUTH
+[33]: Auto#9 moved from INTERSECT Block#3 to NORMAL Block#11
+[33]: Auto#8 is waiting at the RED light.
+[33]: Auto#11 entered simulation via NORMAL Block#34 going WEST
 tick#33
-[34]: Auto#10 turned right to go EAST
-[34]: Auto#10 moved from INTERSECT Block#4 to NORMAL Block#10
-[34]: Auto#11 is waiting at the ORANGE light.
+[34]: Auto#8 is waiting at the RED light.
 tick#34
-[35]: Auto#8 left simulation via Block#31 going SOUTH
-[35]: Auto#11 is waiting at the RED light.
+[35]: Auto#4 left simulation via Block#29 going NORTH
+[35]: Auto#3 left simulation via Block#32 going WEST
+[35]: Auto#8 moved from TRAFFIC Block#7 to INTERSECT Block#4
 tick#35
-[36]: Auto#11 is waiting at the RED light.
-[36]: Auto#12 entered simulation via NORMAL Block#33 going SOUTH
-[36]: Auto#13 entered simulation via NORMAL Block#35 going NORTH
+[36]: Auto#10 moved from NORMAL Block#50 to TRAFFIC Block#6
+[36]: Auto#5 left simulation via Block#30 going EAST
+[36]: Auto#8 turned right to go EAST
+[36]: Auto#8 moved from INTERSECT Block#4 to NORMAL Block#10
+[36]: Auto#10 is waiting at the RED light.
 tick#36
-[37]: Auto#11 is waiting at the RED light.
+[37]: Auto#7 left simulation via Block#29 going NORTH
+[37]: Auto#10 is waiting at the RED light.
+[37]: Auto#12 entered simulation via NORMAL Block#34 going WEST
 tick#37
-[38]: Auto#11 is waiting at the RED light.
-[38]: Auto#14 entered simulation via NORMAL Block#36 going EAST
+[38]: Auto#6 left simulation via Block#30 going EAST
+[38]: Auto#10 is waiting at the RED light.
 tick#38
-[39]: Auto#9 left simulation via Block#29 going NORTH
-[39]: Auto#11 is waiting at the RED light.
+[39]: Auto#9 left simulation via Block#31 going SOUTH
+[39]: Auto#10 is waiting at the RED light.
 tick#39
-[40]: Auto#10 left simulation via Block#30 going EAST
-[40]: Auto#11 is waiting at the RED light.
+[40]: Auto#10 is waiting at the RED light.
 tick#40
-[41]: Auto#12 moved from NORMAL Block#49 to TRAFFIC Block#5
-[41]: Auto#13 moved from NORMAL Block#51 to TRAFFIC Block#7
-[41]: Auto#12 is waiting at the ORANGE light.
-[41]: Auto#13 is waiting at the ORANGE light.
-[41]: Auto#11 is waiting at the RED light.
+[41]: Auto#10 is waiting at the RED light.
+[41]: Auto#13 entered simulation via NORMAL Block#34 going WEST
 tick#41
-[42]: Auto#12 is waiting at the RED light.
-[42]: Auto#13 is waiting at the RED light.
-[42]: Auto#11 moved from TRAFFIC Block#8 to INTERSECT Block#3
+[42]: Auto#8 left simulation via Block#30 going EAST
+[42]: Auto#10 moved from TRAFFIC Block#6 to INTERSECT Block#2
 tick#42
-[43]: Auto#14 moved from NORMAL Block#52 to TRAFFIC Block#8
-[43]: Auto#12 is waiting at the RED light.
-[43]: Auto#11 turned left to go EAST
-[43]: Auto#11 moved from INTERSECT Block#3 to INTERSECT Block#4
-[43]: Auto#13 is waiting at the RED light.
+[43]: Auto#11 moved from NORMAL Block#50 to TRAFFIC Block#6
+[43]: Auto#10 turned left to go WEST
+[43]: Auto#10 moved from INTERSECT Block#2 to INTERSECT Block#1
 tick#43
-[44]: Auto#12 is waiting at the RED light.
-[44]: Auto#11 turned right to go EAST
-[44]: Auto#11 moved from INTERSECT Block#4 to NORMAL Block#10
-[44]: Auto#13 is waiting at the RED light.
-[44]: Auto#14 moved from TRAFFIC Block#8 to INTERSECT Block#3
+[44]: Auto#10 turned right to go WEST
+[44]: Auto#10 moved from INTERSECT Block#1 to NORMAL Block#12
+[44]: Auto#11 moved from TRAFFIC Block#6 to INTERSECT Block#2
 tick#44
-[45]: Auto#12 is waiting at the RED light.
-[45]: Auto#14 turned right to go SOUTH
-[45]: Auto#14 moved from INTERSECT Block#3 to NORMAL Block#11
-[45]: Auto#13 is waiting at the RED light.
+[45]: Auto#12 moved from NORMAL Block#50 to TRAFFIC Block#6
+[45]: Auto#11 turned right to go NORTH
+[45]: Auto#11 moved from INTERSECT Block#2 to NORMAL Block#9
 tick#45
-[46]: Auto#12 is waiting at the RED light.
-[46]: Auto#13 is waiting at the RED light.
+[46]: Auto#12 moved from TRAFFIC Block#6 to INTERSECT Block#2
 tick#46
-[47]: Auto#12 is waiting at the RED light.
-[47]: Auto#13 is waiting at the RED light.
+[47]: Auto#13 moved from NORMAL Block#50 to TRAFFIC Block#6
+[47]: Auto#12 turned left to go WEST
+[47]: Auto#12 moved from INTERSECT Block#2 to INTERSECT Block#1
+[47]: Auto#13 is waiting at the ORANGE light.
+[47]: Auto#14 entered simulation via NORMAL Block#35 going NORTH
 tick#47
-[48]: Auto#12 is waiting at the RED light.
-[48]: Auto#13 is waiting at the RED light.
+[48]: Auto#12 turned left to go SOUTH
+[48]: Auto#12 moved from INTERSECT Block#1 to INTERSECT Block#3
+[48]: Auto#13 is waiting at the ORANGE light.
 tick#48
-[49]: Auto#12 moved from TRAFFIC Block#5 to INTERSECT Block#1
-[49]: Auto#13 moved from TRAFFIC Block#7 to INTERSECT Block#4
+[49]: Auto#12 turned left to go EAST
+[49]: Auto#12 moved from INTERSECT Block#3 to INTERSECT Block#4
+[49]: Auto#13 is waiting at the RED light.
 tick#49
-[50]: Auto#11 left simulation via Block#30 going EAST
-[50]: Auto#12 turned right to go WEST
-[50]: Auto#12 moved from INTERSECT Block#1 to NORMAL Block#12
-[50]: Auto#13 turned left to go NORTH
-[50]: Auto#13 moved from INTERSECT Block#4 to INTERSECT Block#2
+[50]: Auto#10 left simulation via Block#32 going WEST
+[50]: Auto#12 turned left to go NORTH
+[50]: Auto#12 moved from INTERSECT Block#4 to INTERSECT Block#2
+[50]: Auto#13 is waiting at the RED light.
+[50]: Auto#15 entered simulation via NORMAL Block#34 going WEST
 tick#50
-[51]: Auto#14 left simulation via Block#31 going SOUTH
-[51]: Auto#13 turned left to go WEST
-[51]: Auto#13 moved from INTERSECT Block#2 to INTERSECT Block#1
-[51]: Auto#15 entered simulation via NORMAL Block#33 going SOUTH
+[51]: Auto#11 left simulation via Block#29 going NORTH
+[51]: Auto#12 turned right to go NORTH
+[51]: Auto#12 moved from INTERSECT Block#2 to NORMAL Block#9
+[51]: Auto#13 is waiting at the RED light.
 tick#51
-[52]: Auto#13 turned left to go SOUTH
-[52]: Auto#13 moved from INTERSECT Block#1 to INTERSECT Block#3
+[52]: Auto#14 moved from NORMAL Block#51 to TRAFFIC Block#7
+[52]: Auto#13 is waiting at the RED light.
 tick#52
-[53]: Auto#13 turned left to go EAST
-[53]: Auto#13 moved from INTERSECT Block#3 to INTERSECT Block#4
+[53]: Auto#14 moved from TRAFFIC Block#7 to INTERSECT Block#4
+[53]: Auto#13 is waiting at the RED light.
 tick#53
-[54]: Auto#13 turned left to go NORTH
-[54]: Auto#13 moved from INTERSECT Block#4 to INTERSECT Block#2
-[54]: Auto#16 entered simulation via NORMAL Block#33 going SOUTH
+[54]: Auto#14 turned right to go EAST
+[54]: Auto#14 moved from INTERSECT Block#4 to NORMAL Block#10
+[54]: Auto#13 is waiting at the RED light.
 tick#54
-[55]: Auto#13 turned right to go NORTH
-[55]: Auto#13 moved from INTERSECT Block#2 to NORMAL Block#9
-[55]: Auto#17 entered simulation via NORMAL Block#34 going WEST
+[55]: Auto#13 is waiting at the RED light.
 tick#55
-[56]: Auto#15 moved from NORMAL Block#49 to TRAFFIC Block#5
-[56]: Auto#12 left simulation via Block#32 going WEST
-[56]: Auto#15 is waiting at the RED light.
+[56]: Auto#13 moved from TRAFFIC Block#6 to INTERSECT Block#2
+[56]: Auto#16 entered simulation via NORMAL Block#35 going NORTH
 tick#56
-[57]: Auto#15 is waiting at the RED light.
-[57]: Auto#18 entered simulation via NORMAL Block#33 going SOUTH
+[57]: Auto#12 left simulation via Block#29 going NORTH
+[57]: Auto#15 moved from NORMAL Block#50 to TRAFFIC Block#6
+[57]: Auto#13 turned left to go WEST
+[57]: Auto#13 moved from INTERSECT Block#2 to INTERSECT Block#1
 tick#57
-[58]: Auto#15 is waiting at the RED light.
-[58]: Auto#19 entered simulation via NORMAL Block#34 going WEST
+[58]: Auto#13 turned right to go WEST
+[58]: Auto#13 moved from INTERSECT Block#1 to NORMAL Block#12
+[58]: Auto#15 moved from TRAFFIC Block#6 to INTERSECT Block#2
 tick#58
-[59]: Auto#15 is waiting at the RED light.
+[59]: Auto#15 turned left to go WEST
+[59]: Auto#15 moved from INTERSECT Block#2 to INTERSECT Block#1
 tick#59
-[60]: Auto#17 moved from NORMAL Block#50 to TRAFFIC Block#6
-[60]: Auto#15 is waiting at the RED light.
+[60]: Auto#14 left simulation via Block#30 going EAST
+[60]: Auto#15 turned left to go SOUTH
+[60]: Auto#15 moved from INTERSECT Block#1 to INTERSECT Block#3
 tick#60
-[61]: Auto#13 left simulation via Block#29 going NORTH
-[61]: Auto#15 is waiting at the RED light.
-[61]: Auto#17 is waiting at the ORANGE light.
+[61]: Auto#16 moved from NORMAL Block#51 to TRAFFIC Block#7
+[61]: Auto#15 turned right to go SOUTH
+[61]: Auto#15 moved from INTERSECT Block#3 to NORMAL Block#11
+[61]: Auto#16 is waiting at the RED light.
+[61]: Auto#17 entered simulation via NORMAL Block#33 going SOUTH
 tick#61
-[62]: Auto#15 is waiting at the RED light.
-[62]: Auto#17 is waiting at the ORANGE light.
+[62]: Auto#16 is waiting at the RED light.
 tick#62
-[63]: Auto#15 moved from TRAFFIC Block#5 to INTERSECT Block#1
-[63]: Auto#17 is waiting at the RED light.
+[63]: Auto#16 moved from TRAFFIC Block#7 to INTERSECT Block#4
+[63]: Auto#18 entered simulation via NORMAL Block#36 going EAST
 tick#63
-[64]: Auto#16 moved from NORMAL Block#49 to TRAFFIC Block#5
-[64]: Auto#15 turned right to go WEST
-[64]: Auto#15 moved from INTERSECT Block#1 to NORMAL Block#12
-[64]: Auto#17 is waiting at the RED light.
-[64]: Auto#20 entered simulation via NORMAL Block#35 going NORTH
+[64]: Auto#13 left simulation via Block#32 going WEST
+[64]: Auto#16 turned left to go NORTH
+[64]: Auto#16 moved from INTERSECT Block#4 to INTERSECT Block#2
 tick#64
-[65]: Auto#16 moved from TRAFFIC Block#5 to INTERSECT Block#1
-[65]: Auto#17 is waiting at the RED light.
+[65]: Auto#16 turned right to go NORTH
+[65]: Auto#16 moved from INTERSECT Block#2 to NORMAL Block#9
+[65]: Auto#19 entered simulation via NORMAL Block#35 going NORTH
 tick#65
-[66]: Auto#18 moved from NORMAL Block#49 to TRAFFIC Block#5
-[66]: Auto#16 turned right to go WEST
-[66]: Auto#16 moved from INTERSECT Block#1 to NORMAL Block#12
-[66]: Auto#17 is waiting at the RED light.
+[66]: Auto#17 moved from NORMAL Block#49 to TRAFFIC Block#5
 tick#66
-[67]: Auto#18 moved from TRAFFIC Block#5 to INTERSECT Block#1
-[67]: Auto#17 is waiting at the RED light.
+[67]: Auto#15 left simulation via Block#31 going SOUTH
+[67]: Auto#17 moved from TRAFFIC Block#5 to INTERSECT Block#1
+[67]: Auto#20 entered simulation via NORMAL Block#34 going WEST
 tick#67
-[68]: Auto#18 turned right to go WEST
-[68]: Auto#18 moved from INTERSECT Block#1 to NORMAL Block#12
-[68]: Auto#17 is waiting at the RED light.
-[68]: Auto#21 entered simulation via NORMAL Block#35 going NORTH
+[68]: Auto#18 moved from NORMAL Block#52 to TRAFFIC Block#8
+[68]: Auto#17 turned right to go WEST
+[68]: Auto#17 moved from INTERSECT Block#1 to NORMAL Block#12
+[68]: Auto#18 is waiting at the RED light.
 tick#68
-[69]: Auto#20 moved from NORMAL Block#51 to TRAFFIC Block#7
-[69]: Auto#20 is waiting at the ORANGE light.
-[69]: Auto#17 is waiting at the RED light.
+[69]: Auto#18 is waiting at the RED light.
+[69]: Auto#21 entered simulation via NORMAL Block#34 going WEST
 tick#69
-[70]: Auto#15 left simulation via Block#32 going WEST
-[70]: Auto#20 is waiting at the RED light.
-[70]: Auto#17 moved from TRAFFIC Block#6 to INTERSECT Block#2
+[70]: Auto#19 moved from NORMAL Block#51 to TRAFFIC Block#7
+[70]: Auto#19 is waiting at the RED light.
+[70]: Auto#18 moved from TRAFFIC Block#8 to INTERSECT Block#3
+[70]: Auto#22 entered simulation via NORMAL Block#36 going EAST
 tick#70
-[71]: Auto#19 moved from NORMAL Block#50 to TRAFFIC Block#6
-[71]: Auto#17 turned left to go WEST
-[71]: Auto#17 moved from INTERSECT Block#2 to INTERSECT Block#1
-[71]: Auto#20 is waiting at the RED light.
+[71]: Auto#16 left simulation via Block#29 going NORTH
+[71]: Auto#18 turned left to go EAST
+[71]: Auto#18 moved from INTERSECT Block#3 to INTERSECT Block#4
+[71]: Auto#19 is waiting at the RED light.
 tick#71
-[72]: Auto#16 left simulation via Block#32 going WEST
-[72]: Auto#17 turned right to go WEST
-[72]: Auto#17 moved from INTERSECT Block#1 to NORMAL Block#12
-[72]: Auto#20 is waiting at the RED light.
-[72]: Auto#19 moved from TRAFFIC Block#6 to INTERSECT Block#2
+[72]: Auto#20 moved from NORMAL Block#50 to TRAFFIC Block#6
+[72]: Auto#18 turned left to go NORTH
+[72]: Auto#18 moved from INTERSECT Block#4 to INTERSECT Block#2
+[72]: Auto#19 is waiting at the RED light.
+[72]: Auto#23 entered simulation via NORMAL Block#35 going NORTH
 tick#72
-[73]: Auto#19 turned left to go WEST
-[73]: Auto#19 moved from INTERSECT Block#2 to INTERSECT Block#1
-[73]: Auto#20 is waiting at the RED light.
+[73]: Auto#18 turned right to go NORTH
+[73]: Auto#18 moved from INTERSECT Block#2 to NORMAL Block#9
+[73]: Auto#19 is waiting at the RED light.
+[73]: Auto#20 moved from TRAFFIC Block#6 to INTERSECT Block#2
+[73]: Auto#24 entered simulation via NORMAL Block#36 going EAST
 tick#73
-[74]: Auto#18 left simulation via Block#32 going WEST
-[74]: Auto#19 turned right to go WEST
-[74]: Auto#19 moved from INTERSECT Block#1 to NORMAL Block#12
-[74]: Auto#20 is waiting at the RED light.
+[74]: Auto#21 moved from NORMAL Block#50 to TRAFFIC Block#6
+[74]: Auto#17 left simulation via Block#32 going WEST
+[74]: Auto#20 turned right to go NORTH
+[74]: Auto#20 moved from INTERSECT Block#2 to NORMAL Block#9
+[74]: Auto#19 is waiting at the RED light.
 tick#74
-[75]: Auto#20 is waiting at the RED light.
-[75]: Auto#22 entered simulation via NORMAL Block#35 going NORTH
+[75]: Auto#22 moved from NORMAL Block#52 to TRAFFIC Block#8
+[75]: Auto#19 is waiting at the RED light.
+[75]: Auto#21 is waiting at the ORANGE light.
+[75]: Auto#22 is waiting at the ORANGE light.
 tick#75
-[76]: Auto#20 is waiting at the RED light.
+[76]: Auto#19 is waiting at the RED light.
+[76]: Auto#21 is waiting at the ORANGE light.
+[76]: Auto#22 is waiting at the ORANGE light.
 tick#76
-[77]: Auto#20 moved from TRAFFIC Block#7 to INTERSECT Block#4
-[77]: Auto#23 entered simulation via NORMAL Block#36 going EAST
+[77]: Auto#19 moved from TRAFFIC Block#7 to INTERSECT Block#4
+[77]: Auto#21 is waiting at the RED light.
+[77]: Auto#22 is waiting at the RED light.
+[77]: Auto#25 entered simulation via NORMAL Block#33 going SOUTH
+[77]: Auto#26 entered simulation via NORMAL Block#36 going EAST
 tick#77
-[78]: Auto#21 moved from NORMAL Block#51 to TRAFFIC Block#7
-[78]: Auto#17 left simulation via Block#32 going WEST
-[78]: Auto#20 turned right to go EAST
-[78]: Auto#20 moved from INTERSECT Block#4 to NORMAL Block#10
+[78]: Auto#23 moved from NORMAL Block#51 to TRAFFIC Block#7
+[78]: Auto#19 turned left to go NORTH
+[78]: Auto#19 moved from INTERSECT Block#4 to INTERSECT Block#2
+[78]: Auto#21 is waiting at the RED light.
+[78]: Auto#22 is waiting at the RED light.
 tick#78
-[79]: Auto#21 moved from TRAFFIC Block#7 to INTERSECT Block#4
+[79]: Auto#18 left simulation via Block#29 going NORTH
+[79]: Auto#19 turned right to go NORTH
+[79]: Auto#19 moved from INTERSECT Block#2 to NORMAL Block#9
+[79]: Auto#23 moved from TRAFFIC Block#7 to INTERSECT Block#4
+[79]: Auto#21 is waiting at the RED light.
+[79]: Auto#22 is waiting at the RED light.
 tick#79
-[80]: Auto#22 moved from NORMAL Block#51 to TRAFFIC Block#7
-[80]: Auto#19 left simulation via Block#32 going WEST
-[80]: Auto#21 turned left to go NORTH
-[80]: Auto#21 moved from INTERSECT Block#4 to INTERSECT Block#2
-[80]: Auto#24 entered simulation via NORMAL Block#35 going NORTH
+[80]: Auto#23 turned right to go EAST
+[80]: Auto#23 moved from INTERSECT Block#4 to NORMAL Block#10
+[80]: Auto#21 is waiting at the RED light.
+[80]: Auto#22 is waiting at the RED light.
 tick#80
-[81]: Auto#21 turned right to go NORTH
-[81]: Auto#21 moved from INTERSECT Block#2 to NORMAL Block#9
-[81]: Auto#22 moved from TRAFFIC Block#7 to INTERSECT Block#4
+[81]: Auto#20 left simulation via Block#29 going NORTH
+[81]: Auto#21 is waiting at the RED light.
+[81]: Auto#22 is waiting at the RED light.
 tick#81
-[82]: Auto#23 moved from NORMAL Block#52 to TRAFFIC Block#8
-[82]: Auto#22 turned left to go NORTH
-[82]: Auto#22 moved from INTERSECT Block#4 to INTERSECT Block#2
-[82]: Auto#23 is waiting at the RED light.
+[82]: Auto#25 moved from NORMAL Block#49 to TRAFFIC Block#5
+[82]: Auto#25 is waiting at the ORANGE light.
+[82]: Auto#21 is waiting at the RED light.
+[82]: Auto#22 is waiting at the RED light.
 tick#82
-[83]: Auto#22 turned right to go NORTH
-[83]: Auto#22 moved from INTERSECT Block#2 to NORMAL Block#9
-[83]: Auto#23 is waiting at the RED light.
-[83]: Auto#25 entered simulation via NORMAL Block#34 going WEST
-[83]: Auto#26 entered simulation via NORMAL Block#35 going NORTH
+[83]: Auto#25 is waiting at the ORANGE light.
+[83]: Auto#21 is waiting at the RED light.
+[83]: Auto#22 is waiting at the RED light.
+[83]: Auto#27 entered simulation via NORMAL Block#34 going WEST
+[83]: Auto#28 entered simulation via NORMAL Block#36 going EAST
 tick#83
-[84]: Auto#20 left simulation via Block#30 going EAST
-[84]: Auto#23 moved from TRAFFIC Block#8 to INTERSECT Block#3
+[84]: Auto#25 is waiting at the RED light.
+[84]: Auto#21 moved from TRAFFIC Block#6 to INTERSECT Block#2
+[84]: Auto#22 moved from TRAFFIC Block#8 to INTERSECT Block#3
 tick#84
-[85]: Auto#24 moved from NORMAL Block#51 to TRAFFIC Block#7
-[85]: Auto#23 turned right to go SOUTH
-[85]: Auto#23 moved from INTERSECT Block#3 to NORMAL Block#11
-[85]: Auto#24 is waiting at the RED light.
-[85]: Auto#27 entered simulation via NORMAL Block#36 going EAST
+[85]: Auto#19 left simulation via Block#29 going NORTH
+[85]: Auto#24 moved from NORMAL Block#52 to TRAFFIC Block#8
+[85]: Auto#21 turned left to go WEST
+[85]: Auto#21 moved from INTERSECT Block#2 to INTERSECT Block#1
+[85]: Auto#25 is waiting at the RED light.
+[85]: Auto#22 turned left to go EAST
+[85]: Auto#22 moved from INTERSECT Block#3 to INTERSECT Block#4
 tick#85
-[86]: Auto#24 is waiting at the RED light.
+[86]: Auto#23 left simulation via Block#30 going EAST
+[86]: Auto#21 turned right to go WEST
+[86]: Auto#21 moved from INTERSECT Block#1 to NORMAL Block#12
+[86]: Auto#25 is waiting at the RED light.
+[86]: Auto#22 turned right to go EAST
+[86]: Auto#22 moved from INTERSECT Block#4 to NORMAL Block#10
+[86]: Auto#24 moved from TRAFFIC Block#8 to INTERSECT Block#3
 tick#86
-[87]: Auto#21 left simulation via Block#29 going NORTH
-[87]: Auto#24 is waiting at the RED light.
-[87]: Auto#28 entered simulation via NORMAL Block#36 going EAST
+[87]: Auto#26 moved from NORMAL Block#52 to TRAFFIC Block#8
+[87]: Auto#25 is waiting at the RED light.
+[87]: Auto#24 turned left to go EAST
+[87]: Auto#24 moved from INTERSECT Block#3 to INTERSECT Block#4
 tick#87
-[88]: Auto#25 moved from NORMAL Block#50 to TRAFFIC Block#6
-[88]: Auto#24 is waiting at the RED light.
-[88]: Auto#29 entered simulation via NORMAL Block#35 going NORTH
-[88]: Auto#30 entered simulation via NORMAL Block#36 going EAST
+[88]: Auto#27 moved from NORMAL Block#50 to TRAFFIC Block#6
+[88]: Auto#25 is waiting at the RED light.
+[88]: Auto#24 turned right to go EAST
+[88]: Auto#24 moved from INTERSECT Block#4 to NORMAL Block#10
+[88]: Auto#26 moved from TRAFFIC Block#8 to INTERSECT Block#3
 tick#88
-[89]: Auto#22 left simulation via Block#29 going NORTH
-[89]: Auto#24 is waiting at the RED light.
-[89]: Auto#25 is waiting at the ORANGE light.
+[89]: Auto#28 moved from NORMAL Block#52 to TRAFFIC Block#8
+[89]: Auto#25 is waiting at the RED light.
+[89]: Auto#26 turned left to go EAST
+[89]: Auto#26 moved from INTERSECT Block#3 to INTERSECT Block#4
+[89]: Auto#27 is waiting at the ORANGE light.
+[89]: Auto#28 is waiting at the ORANGE light.
 tick#89
-[90]: Auto#27 moved from NORMAL Block#52 to TRAFFIC Block#8
-[90]: Auto#24 is waiting at the RED light.
-[90]: Auto#25 is waiting at the ORANGE light.
+[90]: Auto#25 is waiting at the RED light.
+[90]: Auto#26 turned left to go NORTH
+[90]: Auto#26 moved from INTERSECT Block#4 to INTERSECT Block#2
 [90]: Auto#27 is waiting at the ORANGE light.
-[90]: Auto#31 entered simulation via NORMAL Block#33 going SOUTH
+[90]: Auto#28 is waiting at the ORANGE light.
 tick#90
-[91]: Auto#23 left simulation via Block#31 going SOUTH
-[91]: Auto#24 moved from TRAFFIC Block#7 to INTERSECT Block#4
-[91]: Auto#25 is waiting at the RED light.
+[91]: Auto#26 turned right to go NORTH
+[91]: Auto#26 moved from INTERSECT Block#2 to NORMAL Block#9
+[91]: Auto#25 moved from TRAFFIC Block#5 to INTERSECT Block#1
 [91]: Auto#27 is waiting at the RED light.
+[91]: Auto#28 is waiting at the RED light.
 tick#91
-[92]: Auto#26 moved from NORMAL Block#51 to TRAFFIC Block#7
-[92]: Auto#24 turned right to go EAST
-[92]: Auto#24 moved from INTERSECT Block#4 to NORMAL Block#10
-[92]: Auto#25 is waiting at the RED light.
+[92]: Auto#22 left simulation via Block#30 going EAST
+[92]: Auto#21 left simulation via Block#32 going WEST
+[92]: Auto#25 turned left to go SOUTH
+[92]: Auto#25 moved from INTERSECT Block#1 to INTERSECT Block#3
 [92]: Auto#27 is waiting at the RED light.
+[92]: Auto#28 is waiting at the RED light.
 tick#92
-[93]: Auto#26 moved from TRAFFIC Block#7 to INTERSECT Block#4
-[93]: Auto#25 is waiting at the RED light.
+[93]: Auto#25 turned left to go EAST
+[93]: Auto#25 moved from INTERSECT Block#3 to INTERSECT Block#4
 [93]: Auto#27 is waiting at the RED light.
+[93]: Auto#28 is waiting at the RED light.
 tick#93
-[94]: Auto#29 moved from NORMAL Block#51 to TRAFFIC Block#7
-[94]: Auto#26 turned right to go EAST
-[94]: Auto#26 moved from INTERSECT Block#4 to NORMAL Block#10
-[94]: Auto#25 is waiting at the RED light.
+[94]: Auto#24 left simulation via Block#30 going EAST
+[94]: Auto#25 turned right to go EAST
+[94]: Auto#25 moved from INTERSECT Block#4 to NORMAL Block#10
 [94]: Auto#27 is waiting at the RED light.
+[94]: Auto#28 is waiting at the RED light.
 tick#94
-[95]: Auto#31 moved from NORMAL Block#49 to TRAFFIC Block#5
-[95]: Auto#29 moved from TRAFFIC Block#7 to INTERSECT Block#4
-[95]: Auto#25 is waiting at the RED light.
 [95]: Auto#27 is waiting at the RED light.
-[95]: Auto#32 entered simulation via NORMAL Block#33 going SOUTH
+[95]: Auto#28 is waiting at the RED light.
 tick#95
-[96]: Auto#31 is waiting at the ORANGE light.
-[96]: Auto#29 turned right to go EAST
-[96]: Auto#29 moved from INTERSECT Block#4 to NORMAL Block#10
-[96]: Auto#25 is waiting at the RED light.
 [96]: Auto#27 is waiting at the RED light.
-[96]: Auto#33 entered simulation via NORMAL Block#34 going WEST
-[96]: Auto#34 entered simulation via NORMAL Block#36 going EAST
+[96]: Auto#28 is waiting at the RED light.
 tick#96
-[97]: Auto#31 is waiting at the ORANGE light.
-[97]: Auto#25 is waiting at the RED light.
+[97]: Auto#26 left simulation via Block#29 going NORTH
 [97]: Auto#27 is waiting at the RED light.
+[97]: Auto#28 is waiting at the RED light.
+[97]: Auto#29 entered simulation via NORMAL Block#36 going EAST
 tick#97
-[98]: Auto#24 left simulation via Block#30 going EAST
-[98]: Auto#31 is waiting at the RED light.
-[98]: Auto#25 moved from TRAFFIC Block#6 to INTERSECT Block#2
-[98]: Auto#27 moved from TRAFFIC Block#8 to INTERSECT Block#3
+[98]: Auto#27 moved from TRAFFIC Block#6 to INTERSECT Block#2
+[98]: Auto#28 moved from TRAFFIC Block#8 to INTERSECT Block#3
 tick#98
-[99]: Auto#28 moved from NORMAL Block#52 to TRAFFIC Block#8
-[99]: Auto#25 turned left to go WEST
-[99]: Auto#25 moved from INTERSECT Block#2 to INTERSECT Block#1
-[99]: Auto#31 is waiting at the RED light.
-[99]: Auto#27 turned right to go SOUTH
-[99]: Auto#27 moved from INTERSECT Block#3 to NORMAL Block#11
+[99]: Auto#27 turned left to go WEST
+[99]: Auto#27 moved from INTERSECT Block#2 to INTERSECT Block#1
+[99]: Auto#28 turned right to go SOUTH
+[99]: Auto#28 moved from INTERSECT Block#3 to NORMAL Block#11
 tick#99
-[100]: Auto#26 left simulation via Block#30 going EAST
-[100]: Auto#25 turned right to go WEST
-[100]: Auto#25 moved from INTERSECT Block#1 to NORMAL Block#12
-[100]: Auto#31 is waiting at the RED light.
-[100]: Auto#28 moved from TRAFFIC Block#8 to INTERSECT Block#3
+[100]: Auto#25 left simulation via Block#30 going EAST
+[100]: Auto#27 turned right to go WEST
+[100]: Auto#27 moved from INTERSECT Block#1 to NORMAL Block#12
+[100]: Auto#30 entered simulation via NORMAL Block#34 going WEST
+tick#100
+tick#101
+[102]: Auto#29 moved from NORMAL Block#52 to TRAFFIC Block#8
+tick#102
+[103]: Auto#29 is waiting at the ORANGE light.
+tick#103
+[104]: Auto#29 is waiting at the ORANGE light.
+tick#104
+[105]: Auto#30 moved from NORMAL Block#50 to TRAFFIC Block#6
+[105]: Auto#28 left simulation via Block#31 going SOUTH
+[105]: Auto#30 is waiting at the RED light.
+[105]: Auto#29 is waiting at the RED light.
+[105]: Auto#31 entered simulation via NORMAL Block#36 going EAST
+tick#105
+[106]: Auto#27 left simulation via Block#32 going WEST
+[106]: Auto#30 is waiting at the RED light.
+[106]: Auto#29 is waiting at the RED light.
+tick#106
+[107]: Auto#30 is waiting at the RED light.
+[107]: Auto#29 is waiting at the RED light.
+[107]: Auto#32 entered simulation via NORMAL Block#35 going NORTH
+[107]: Auto#33 entered simulation via NORMAL Block#36 going EAST
+tick#107
+[108]: Auto#30 is waiting at the RED light.
+[108]: Auto#29 is waiting at the RED light.
+tick#108
+[109]: Auto#30 is waiting at the RED light.
+[109]: Auto#29 is waiting at the RED light.
+tick#109
+[110]: Auto#30 is waiting at the RED light.
+[110]: Auto#29 is waiting at the RED light.
+tick#110
+[111]: Auto#30 is waiting at the RED light.
+[111]: Auto#29 is waiting at the RED light.
+tick#111
+[112]: Auto#32 moved from NORMAL Block#51 to TRAFFIC Block#7
+[112]: Auto#32 is waiting at the RED light.
+[112]: Auto#30 moved from TRAFFIC Block#6 to INTERSECT Block#2
+[112]: Auto#29 moved from TRAFFIC Block#8 to INTERSECT Block#3
+tick#112
+[113]: Auto#31 moved from NORMAL Block#52 to TRAFFIC Block#8
+[113]: Auto#30 turned right to go NORTH
+[113]: Auto#30 moved from INTERSECT Block#2 to NORMAL Block#9
+[113]: Auto#29 turned right to go SOUTH
+[113]: Auto#29 moved from INTERSECT Block#3 to NORMAL Block#11
+[113]: Auto#32 is waiting at the RED light.
+tick#113
+[114]: Auto#32 is waiting at the RED light.
+[114]: Auto#31 moved from TRAFFIC Block#8 to INTERSECT Block#3
+tick#114
+[115]: Auto#33 moved from NORMAL Block#52 to TRAFFIC Block#8
+[115]: Auto#31 turned left to go EAST
+[115]: Auto#31 moved from INTERSECT Block#3 to INTERSECT Block#4
+[115]: Auto#32 is waiting at the RED light.
+tick#115
+[116]: Auto#31 turned right to go EAST
+[116]: Auto#31 moved from INTERSECT Block#4 to NORMAL Block#10
+[116]: Auto#32 is waiting at the RED light.
+[116]: Auto#33 moved from TRAFFIC Block#8 to INTERSECT Block#3
+tick#116
+[117]: Auto#33 turned right to go SOUTH
+[117]: Auto#33 moved from INTERSECT Block#3 to NORMAL Block#11
+[117]: Auto#32 is waiting at the RED light.
+tick#117
+[118]: Auto#32 is waiting at the RED light.
+tick#118
+[119]: Auto#30 left simulation via Block#29 going NORTH
+[119]: Auto#29 left simulation via Block#31 going SOUTH
+[119]: Auto#32 moved from TRAFFIC Block#7 to INTERSECT Block#4
+tick#119
+[120]: Auto#32 turned right to go EAST
+[120]: Auto#32 moved from INTERSECT Block#4 to NORMAL Block#10
+tick#120
+tick#121
+[122]: Auto#31 left simulation via Block#30 going EAST
+[122]: Auto#34 entered simulation via NORMAL Block#34 going WEST
+tick#122
+[123]: Auto#33 left simulation via Block#31 going SOUTH
+tick#123
+tick#124
+[125]: Auto#35 entered simulation via NORMAL Block#34 going WEST
+tick#125
+[126]: Auto#32 left simulation via Block#30 going EAST
+tick#126
+[127]: Auto#34 moved from NORMAL Block#50 to TRAFFIC Block#6
+tick#127
+[128]: Auto#34 moved from TRAFFIC Block#6 to INTERSECT Block#2
+tick#128
+[129]: Auto#34 turned left to go WEST
+[129]: Auto#34 moved from INTERSECT Block#2 to INTERSECT Block#1
+tick#129
+[130]: Auto#35 moved from NORMAL Block#50 to TRAFFIC Block#6
+[130]: Auto#34 turned left to go SOUTH
+[130]: Auto#34 moved from INTERSECT Block#1 to INTERSECT Block#3
+tick#130
+[131]: Auto#34 turned right to go SOUTH
+[131]: Auto#34 moved from INTERSECT Block#3 to NORMAL Block#11
+[131]: Auto#35 is waiting at the ORANGE light.
+[131]: Auto#36 entered simulation via NORMAL Block#33 going SOUTH
+tick#131
+[132]: Auto#35 is waiting at the ORANGE light.
+[132]: Auto#37 entered simulation via NORMAL Block#33 going SOUTH
+tick#132
+[133]: Auto#35 is waiting at the RED light.
+tick#133
+[134]: Auto#35 is waiting at the RED light.
+tick#134
+[135]: Auto#35 is waiting at the RED light.
+tick#135
+[136]: Auto#36 moved from NORMAL Block#49 to TRAFFIC Block#5
+[136]: Auto#35 is waiting at the RED light.
+[136]: Auto#38 entered simulation via NORMAL Block#34 going WEST
+tick#136
+[137]: Auto#34 left simulation via Block#31 going SOUTH
+[137]: Auto#36 moved from TRAFFIC Block#5 to INTERSECT Block#1
+[137]: Auto#35 is waiting at the RED light.
+[137]: Auto#39 entered simulation via NORMAL Block#36 going EAST
+tick#137
+[138]: Auto#37 moved from NORMAL Block#49 to TRAFFIC Block#5
+[138]: Auto#36 turned right to go WEST
+[138]: Auto#36 moved from INTERSECT Block#1 to NORMAL Block#12
+[138]: Auto#37 is waiting at the ORANGE light.
+[138]: Auto#35 is waiting at the RED light.
+tick#138
+[139]: Auto#37 is waiting at the ORANGE light.
+[139]: Auto#35 is waiting at the RED light.
+tick#139
+[140]: Auto#37 is waiting at the RED light.
+[140]: Auto#35 moved from TRAFFIC Block#6 to INTERSECT Block#2
+tick#140
+[141]: Auto#38 moved from NORMAL Block#50 to TRAFFIC Block#6
+[141]: Auto#35 turned left to go WEST
+[141]: Auto#35 moved from INTERSECT Block#2 to INTERSECT Block#1
+[141]: Auto#37 is waiting at the RED light.
+tick#141
+[142]: Auto#39 moved from NORMAL Block#52 to TRAFFIC Block#8
+[142]: Auto#35 turned left to go SOUTH
+[142]: Auto#35 moved from INTERSECT Block#1 to INTERSECT Block#3
+[142]: Auto#37 is waiting at the RED light.
+[142]: Auto#38 moved from TRAFFIC Block#6 to INTERSECT Block#2
+tick#142
+[143]: Auto#38 turned left to go WEST
+[143]: Auto#38 moved from INTERSECT Block#2 to INTERSECT Block#1
+[143]: Auto#37 is waiting at the RED light.
+[143]: Auto#35 turned right to go SOUTH
+[143]: Auto#35 moved from INTERSECT Block#3 to NORMAL Block#11
+[143]: Auto#39 moved from TRAFFIC Block#8 to INTERSECT Block#3
+tick#143
+[144]: Auto#36 left simulation via Block#32 going WEST
+[144]: Auto#37 is waiting at the RED light.
+[144]: Auto#39 turned right to go SOUTH
+[144]: Auto#39 moved from INTERSECT Block#3 to NORMAL Block#11
+[144]: Auto#40 entered simulation via NORMAL Block#33 going SOUTH
+tick#144
+[145]: Auto#38 turned left to go SOUTH
+[145]: Auto#38 moved from INTERSECT Block#1 to INTERSECT Block#3
+[145]: Auto#37 is waiting at the RED light.
+[145]: Auto#41 entered simulation via NORMAL Block#33 going SOUTH
+tick#145
+[146]: Auto#37 is waiting at the RED light.
+[146]: Auto#38 turned left to go EAST
+[146]: Auto#38 moved from INTERSECT Block#3 to INTERSECT Block#4
+tick#146
+[147]: Auto#37 moved from TRAFFIC Block#5 to INTERSECT Block#1
+[147]: Auto#38 turned left to go NORTH
+[147]: Auto#38 moved from INTERSECT Block#4 to INTERSECT Block#2
+[147]: Auto#42 entered simulation via NORMAL Block#34 going WEST
+tick#147
+[148]: Auto#37 turned right to go WEST
+[148]: Auto#37 moved from INTERSECT Block#1 to NORMAL Block#12
+[148]: Auto#38 turned right to go NORTH
+[148]: Auto#38 moved from INTERSECT Block#2 to NORMAL Block#9
+tick#148
+[149]: Auto#40 moved from NORMAL Block#49 to TRAFFIC Block#5
+[149]: Auto#35 left simulation via Block#31 going SOUTH
+[149]: Auto#43 entered simulation via NORMAL Block#36 going EAST
+tick#149
+[150]: Auto#40 moved from TRAFFIC Block#5 to INTERSECT Block#1
+tick#150
+[151]: Auto#41 moved from NORMAL Block#49 to TRAFFIC Block#5
+[151]: Auto#39 left simulation via Block#31 going SOUTH
+[151]: Auto#40 turned left to go SOUTH
+[151]: Auto#40 moved from INTERSECT Block#1 to INTERSECT Block#3
+[151]: Auto#44 entered simulation via NORMAL Block#35 going NORTH
+tick#151
+[152]: Auto#42 moved from NORMAL Block#50 to TRAFFIC Block#6
+[152]: Auto#41 is waiting at the ORANGE light.
+[152]: Auto#40 turned right to go SOUTH
+[152]: Auto#40 moved from INTERSECT Block#3 to NORMAL Block#11
+[152]: Auto#42 is waiting at the RED light.
+[152]: Auto#45 entered simulation via NORMAL Block#33 going SOUTH
+tick#152
+[153]: Auto#41 is waiting at the ORANGE light.
+[153]: Auto#42 is waiting at the RED light.
+[153]: Auto#46 entered simulation via NORMAL Block#35 going NORTH
+[153]: Auto#47 entered simulation via NORMAL Block#36 going EAST
+tick#153
+[154]: Auto#38 left simulation via Block#29 going NORTH
+[154]: Auto#43 moved from NORMAL Block#52 to TRAFFIC Block#8
+[154]: Auto#37 left simulation via Block#32 going WEST
+[154]: Auto#41 is waiting at the RED light.
+[154]: Auto#42 moved from TRAFFIC Block#6 to INTERSECT Block#2
+tick#154
+[155]: Auto#42 turned right to go NORTH
+[155]: Auto#42 moved from INTERSECT Block#2 to NORMAL Block#9
+[155]: Auto#41 is waiting at the RED light.
+[155]: Auto#43 moved from TRAFFIC Block#8 to INTERSECT Block#3
+[155]: Auto#48 entered simulation via NORMAL Block#33 going SOUTH
+[155]: Auto#49 entered simulation via NORMAL Block#36 going EAST
+tick#155
+[156]: Auto#44 moved from NORMAL Block#51 to TRAFFIC Block#7
+[156]: Auto#41 is waiting at the RED light.
+[156]: Auto#43 turned left to go EAST
+[156]: Auto#43 moved from INTERSECT Block#3 to INTERSECT Block#4
+[156]: Auto#44 is waiting at the RED light.
+tick#156
+[157]: Auto#41 is waiting at the RED light.
+[157]: Auto#43 turned left to go NORTH
+[157]: Auto#43 moved from INTERSECT Block#4 to INTERSECT Block#2
+[157]: Auto#44 is waiting at the RED light.
+tick#157
+[158]: Auto#40 left simulation via Block#31 going SOUTH
+[158]: Auto#47 moved from NORMAL Block#52 to TRAFFIC Block#8
+[158]: Auto#43 turned right to go NORTH
+[158]: Auto#43 moved from INTERSECT Block#2 to NORMAL Block#9
+[158]: Auto#41 is waiting at the RED light.
+[158]: Auto#44 is waiting at the RED light.
+tick#158
+[159]: Auto#41 is waiting at the RED light.
+[159]: Auto#44 is waiting at the RED light.
+[159]: Auto#47 is waiting at the ORANGE light.
+[159]: Auto#50 entered simulation via NORMAL Block#34 going WEST
+tick#159
+[160]: Auto#41 is waiting at the RED light.
+[160]: Auto#44 is waiting at the RED light.
+[160]: Auto#47 is waiting at the ORANGE light.
+tick#160
+[161]: Auto#42 left simulation via Block#29 going NORTH
+[161]: Auto#41 moved from TRAFFIC Block#5 to INTERSECT Block#1
+[161]: Auto#44 moved from TRAFFIC Block#7 to INTERSECT Block#4
+[161]: Auto#47 is waiting at the RED light.
+tick#161
+[162]: Auto#45 moved from NORMAL Block#49 to TRAFFIC Block#5
+[162]: Auto#46 moved from NORMAL Block#51 to TRAFFIC Block#7
+[162]: Auto#41 turned right to go WEST
+[162]: Auto#41 moved from INTERSECT Block#1 to NORMAL Block#12
+[162]: Auto#44 turned left to go NORTH
+[162]: Auto#44 moved from INTERSECT Block#4 to INTERSECT Block#2
+[162]: Auto#47 is waiting at the RED light.
+tick#162
+[163]: Auto#44 turned left to go WEST
+[163]: Auto#44 moved from INTERSECT Block#2 to INTERSECT Block#1
+[163]: Auto#46 moved from TRAFFIC Block#7 to INTERSECT Block#4
+[163]: Auto#47 is waiting at the RED light.
+tick#163
+[164]: Auto#43 left simulation via Block#29 going NORTH
+[164]: Auto#50 moved from NORMAL Block#50 to TRAFFIC Block#6
+[164]: Auto#44 turned left to go SOUTH
+[164]: Auto#44 moved from INTERSECT Block#1 to INTERSECT Block#3
+[164]: Auto#45 moved from TRAFFIC Block#5 to INTERSECT Block#1
+[164]: Auto#46 turned right to go EAST
+[164]: Auto#46 moved from INTERSECT Block#4 to NORMAL Block#10
+[164]: Auto#50 is waiting at the RED light.
+[164]: Auto#47 is waiting at the RED light.
+[164]: Auto#51 entered simulation via NORMAL Block#34 going WEST
+tick#164
+[165]: Auto#48 moved from NORMAL Block#49 to TRAFFIC Block#5
+[165]: Auto#45 turned right to go WEST
+[165]: Auto#45 moved from INTERSECT Block#1 to NORMAL Block#12
+[165]: Auto#44 turned right to go SOUTH
+[165]: Auto#44 moved from INTERSECT Block#3 to NORMAL Block#11
+[165]: Auto#50 is waiting at the RED light.
+[165]: Auto#47 is waiting at the RED light.
+tick#165
+[166]: Auto#48 is waiting at the ORANGE light.
+[166]: Auto#50 is waiting at the RED light.
+[166]: Auto#47 is waiting at the RED light.
+[166]: Auto#52 entered simulation via NORMAL Block#35 going NORTH
+tick#166
+[167]: Auto#48 is waiting at the ORANGE light.
+[167]: Auto#50 is waiting at the RED light.
+[167]: Auto#47 is waiting at the RED light.
+tick#167
+[168]: Auto#41 left simulation via Block#32 going WEST
+[168]: Auto#48 is waiting at the RED light.
+[168]: Auto#50 moved from TRAFFIC Block#6 to INTERSECT Block#2
+[168]: Auto#47 moved from TRAFFIC Block#8 to INTERSECT Block#3
+[168]: Auto#53 entered simulation via NORMAL Block#36 going EAST
+tick#168
+[169]: Auto#51 moved from NORMAL Block#50 to TRAFFIC Block#6
+[169]: Auto#49 moved from NORMAL Block#52 to TRAFFIC Block#8
+[169]: Auto#50 turned right to go NORTH
+[169]: Auto#50 moved from INTERSECT Block#2 to NORMAL Block#9
+[169]: Auto#48 is waiting at the RED light.
+[169]: Auto#47 turned right to go SOUTH
+[169]: Auto#47 moved from INTERSECT Block#3 to NORMAL Block#11
+tick#169
+[170]: Auto#46 left simulation via Block#30 going EAST
+[170]: Auto#48 is waiting at the RED light.
+[170]: Auto#51 moved from TRAFFIC Block#6 to INTERSECT Block#2
+[170]: Auto#49 moved from TRAFFIC Block#8 to INTERSECT Block#3
+tick#170
+[171]: Auto#52 moved from NORMAL Block#51 to TRAFFIC Block#7
+[171]: Auto#44 left simulation via Block#31 going SOUTH
+[171]: Auto#45 left simulation via Block#32 going WEST
+[171]: Auto#51 turned left to go WEST
+[171]: Auto#51 moved from INTERSECT Block#2 to INTERSECT Block#1
+[171]: Auto#48 is waiting at the RED light.
+[171]: Auto#49 turned left to go EAST
+[171]: Auto#49 moved from INTERSECT Block#3 to INTERSECT Block#4
+[171]: Auto#52 is waiting at the RED light.
+tick#171
+[172]: Auto#51 turned right to go WEST
+[172]: Auto#51 moved from INTERSECT Block#1 to NORMAL Block#12
+[172]: Auto#48 is waiting at the RED light.
+[172]: Auto#49 turned right to go EAST
+[172]: Auto#49 moved from INTERSECT Block#4 to NORMAL Block#10
+[172]: Auto#52 is waiting at the RED light.
+tick#172
+[173]: Auto#53 moved from NORMAL Block#52 to TRAFFIC Block#8
+[173]: Auto#48 is waiting at the RED light.
+[173]: Auto#52 is waiting at the RED light.
+[173]: Auto#53 is waiting at the ORANGE light.
+tick#173
+[174]: Auto#48 is waiting at the RED light.
+[174]: Auto#52 is waiting at the RED light.
+[174]: Auto#53 is waiting at the ORANGE light.
+[174]: Auto#54 entered simulation via NORMAL Block#34 going WEST
+tick#174
+[175]: Auto#50 left simulation via Block#29 going NORTH
+[175]: Auto#47 left simulation via Block#31 going SOUTH
+[175]: Auto#48 moved from TRAFFIC Block#5 to INTERSECT Block#1
+[175]: Auto#52 moved from TRAFFIC Block#7 to INTERSECT Block#4
+[175]: Auto#53 is waiting at the RED light.
+tick#175
+[176]: Auto#48 turned right to go WEST
+[176]: Auto#48 moved from INTERSECT Block#1 to NORMAL Block#12
+[176]: Auto#52 turned right to go EAST
+[176]: Auto#52 moved from INTERSECT Block#4 to NORMAL Block#10
+[176]: Auto#53 is waiting at the RED light.
+tick#176
+[177]: Auto#53 is waiting at the RED light.
+[177]: Auto#55 entered simulation via NORMAL Block#35 going NORTH
+tick#177
+[178]: Auto#49 left simulation via Block#30 going EAST
+[178]: Auto#51 left simulation via Block#32 going WEST
+[178]: Auto#53 is waiting at the RED light.
+[178]: Auto#56 entered simulation via NORMAL Block#36 going EAST
+tick#178
+[179]: Auto#54 moved from NORMAL Block#50 to TRAFFIC Block#6
+[179]: Auto#54 is waiting at the RED light.
+[179]: Auto#53 is waiting at the RED light.
+tick#179
+[180]: Auto#54 is waiting at the RED light.
+[180]: Auto#53 is waiting at the RED light.
+tick#180
+[181]: Auto#54 is waiting at the RED light.
+[181]: Auto#53 is waiting at the RED light.
+tick#181
+[182]: Auto#52 left simulation via Block#30 going EAST
+[182]: Auto#55 moved from NORMAL Block#51 to TRAFFIC Block#7
+[182]: Auto#48 left simulation via Block#32 going WEST
+[182]: Auto#55 is waiting at the RED light.
+[182]: Auto#54 moved from TRAFFIC Block#6 to INTERSECT Block#2
+[182]: Auto#53 moved from TRAFFIC Block#8 to INTERSECT Block#3
+[182]: Auto#57 entered simulation via NORMAL Block#33 going SOUTH
+tick#182
+[183]: Auto#56 moved from NORMAL Block#52 to TRAFFIC Block#8
+[183]: Auto#54 turned right to go NORTH
+[183]: Auto#54 moved from INTERSECT Block#2 to NORMAL Block#9
+[183]: Auto#53 turned left to go EAST
+[183]: Auto#53 moved from INTERSECT Block#3 to INTERSECT Block#4
+[183]: Auto#55 is waiting at the RED light.
+tick#183
+[184]: Auto#53 turned left to go NORTH
+[184]: Auto#53 moved from INTERSECT Block#4 to INTERSECT Block#2
+[184]: Auto#55 is waiting at the RED light.
+[184]: Auto#56 moved from TRAFFIC Block#8 to INTERSECT Block#3
+tick#184
+[185]: Auto#53 turned left to go WEST
+[185]: Auto#53 moved from INTERSECT Block#2 to INTERSECT Block#1
+[185]: Auto#56 turned left to go EAST
+[185]: Auto#56 moved from INTERSECT Block#3 to INTERSECT Block#4
+[185]: Auto#55 is waiting at the RED light.
+tick#185
+[186]: Auto#53 turned right to go WEST
+[186]: Auto#53 moved from INTERSECT Block#1 to NORMAL Block#12
+[186]: Auto#56 turned right to go EAST
+[186]: Auto#56 moved from INTERSECT Block#4 to NORMAL Block#10
+[186]: Auto#55 is waiting at the RED light.
+tick#186
+[187]: Auto#57 moved from NORMAL Block#49 to TRAFFIC Block#5
+[187]: Auto#57 is waiting at the RED light.
+[187]: Auto#55 is waiting at the RED light.
+[187]: Auto#58 entered simulation via NORMAL Block#35 going NORTH
+tick#187
+[188]: Auto#57 is waiting at the RED light.
+[188]: Auto#55 is waiting at the RED light.
+tick#188
+[189]: Auto#54 left simulation via Block#29 going NORTH
+[189]: Auto#57 moved from TRAFFIC Block#5 to INTERSECT Block#1
+[189]: Auto#55 moved from TRAFFIC Block#7 to INTERSECT Block#4
+tick#189
+[190]: Auto#57 turned left to go SOUTH
+[190]: Auto#57 moved from INTERSECT Block#1 to INTERSECT Block#3
+[190]: Auto#55 turned left to go NORTH
+[190]: Auto#55 moved from INTERSECT Block#4 to INTERSECT Block#2
+tick#190
+[191]: Auto#55 turned left to go WEST
+[191]: Auto#55 moved from INTERSECT Block#2 to INTERSECT Block#1
+[191]: Auto#57 turned right to go SOUTH
+[191]: Auto#57 moved from INTERSECT Block#3 to NORMAL Block#11
+[191]: Auto#59 entered simulation via NORMAL Block#33 going SOUTH
+[191]: Auto#60 entered simulation via NORMAL Block#35 going NORTH
+tick#191
+[192]: Auto#56 left simulation via Block#30 going EAST
+[192]: Auto#58 moved from NORMAL Block#51 to TRAFFIC Block#7
+[192]: Auto#53 left simulation via Block#32 going WEST
+[192]: Auto#55 turned left to go SOUTH
+[192]: Auto#55 moved from INTERSECT Block#1 to INTERSECT Block#3
+tick#192
+[193]: Auto#55 turned left to go EAST
+[193]: Auto#55 moved from INTERSECT Block#3 to INTERSECT Block#4
+tick#193
+[194]: Auto#55 turned right to go EAST
+[194]: Auto#55 moved from INTERSECT Block#4 to NORMAL Block#10
+[194]: Auto#58 is waiting at the ORANGE light.
+[194]: Auto#61 entered simulation via NORMAL Block#33 going SOUTH
+tick#194
+[195]: Auto#58 is waiting at the ORANGE light.
+tick#195
+[196]: Auto#59 moved from NORMAL Block#49 to TRAFFIC Block#5
+[196]: Auto#59 is waiting at the RED light.
+[196]: Auto#58 is waiting at the RED light.
+tick#196
+[197]: Auto#57 left simulation via Block#31 going SOUTH
+[197]: Auto#59 is waiting at the RED light.
+[197]: Auto#58 is waiting at the RED light.
+[197]: Auto#62 entered simulation via NORMAL Block#34 going WEST
+tick#197
+[198]: Auto#59 is waiting at the RED light.
+[198]: Auto#58 is waiting at the RED light.
+[198]: Auto#63 entered simulation via NORMAL Block#36 going EAST
+tick#198
+[199]: Auto#59 is waiting at the RED light.
+[199]: Auto#58 is waiting at the RED light.
+tick#199
+[200]: Auto#55 left simulation via Block#30 going EAST
+[200]: Auto#59 is waiting at the RED light.
+[200]: Auto#58 is waiting at the RED light.
+[200]: Auto#64 entered simulation via NORMAL Block#35 going NORTH
