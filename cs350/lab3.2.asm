@@ -1,5 +1,5 @@
 .data
-	my_array: .space 10
+	my_array: .space 40
 	initial_value: .word 2
 
 .text
