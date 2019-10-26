@@ -1,5 +1,5 @@
 .data
-	prompt:		.asciiz		"Please input a String: "
+	prompt:		.asciiz		"\nPlease input a String: "
 	inputString:    .space 64
 	stack: 		.space 64
 	
@@ -35,13 +35,9 @@
 	# $v0 : value
 	#####
 	
-	push:
-		
-	pop:
-		
-	
 	reverse:
-	
+
+
 		li $t0, 64	# num chars
 		la $t1, stack	# stack head
 		li $t2, 0	# stack depth
@@ -49,23 +45,22 @@
 		
 			# pop
 			subi $a1, $a1, 1	# 
-			add $a2, $a0, $a1	# 
+			add $a2, $a0, $a1	#
 			lb $v0, 0($a2)		# 
-		
+			
 			
 			# push
 			addi $t2, $t2, 1
 			add $a2, $t1, $t2
-			sb $t1, 0($a2)
+			sb $v0, 0($a2)
 		
-			
 		
 			# update loop counter
 			subi $t0, $t0, 1
 			bnez $t0, stack_loop
 
 		li $v0, 4
-		la $a0,
+		la $a0, stack
 		syscall
 		
 		## Print it out char by char
@@ -79,8 +74,7 @@
 			syscall
 			
 			addi $t0, $t0, 1
-			blt $t0, 64, print_loop
-		
+			ble $t0, 64, print_loop
 		
 		
 		li $v0, 4		# print string system call
