@@ -31,6 +31,9 @@ main:
 	
 	sub.s $f12, $f9, $f11
 	
+	# 8,4 * 1,245*1,245 + -12,6*3,4233*3,4233 - 21,2*1,245*3,4233 = -224,993554614
+	#    looks good 
+	
 	# print the result
 	li $v0, 2          # system call for print_double
         syscall
