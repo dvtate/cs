@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FlightBook</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+		<link rel="stylesheet" href="main.css" />
+        <link rel="stylesheet" href="fa/css/all.min.css" />
+        <script src="main.js"> </script>
+        <script src="dl_polyfill.js"></script>
+
+        <style>
+                div {
+                    /*border: 1px solid red;*/
+                }
+                div#topbar  {
+                    min-height: 50px;
+                }
+                div#flight-search {
+                    background-image: url("https://images6.alphacoders.com/304/304834.jpg");
+                    background-size: fill;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-attachment: fixed;
+                    min-height: 425px;
+                }
+
+                div#flight-search div {
+                    padding: 40px;
+                }
+
+                div#flight-search div div {
+                    border-radius: 4px;
+                    border: 1px solid grey;
+                    background-color: #fff;
+                }
+                div#flight-search div div {
+                    max-width: 100%;
+                }
+                #flight-date {
+                    padding: 25px;
+                }
+
+                #manage-info {
+                    min-height: 200px;
+                }
+
+                .row {
+                    width: 100%;
+                }
+
+                #logout-area {
+                    text-align: right;
+                }
+
+        </style>
+        <script>
+            // log them out of app
+            function logout() {
+                (function clearCookie(name, domain, path){
+                    domain = domain || document.domain;
+                    path = path || "/";
+                    document.cookie = name + "=; expires=" + +new Date + "; domain=" + domain + "; path=" + path;
+                })("authToken", "dvtate.com");
+            }
+
+
+            async function onload() {
+                let customer;
+                try {
+                    customer = await cs425.api.get('/customer');
+                } catch(e) {
+                    console.error(e);
+                    logout();
+                }
+                document.getElementById('bind-customer-name').innerHTML = ", " + customer.name;
+            }
+
+            async function search(){
+                const from = document.getElementById("from-airport").value.toUpperCase();
+                const to = document.getElementById("to-airport").value.toUpperCase();
+                const date = encodeURIComponent(document.getElementById("flight-date").value);
+                window.location = `route.html?depart=${from}&arrive=${to}&transfers=2&wait=0.5&date=${date}`;
+            }
+        </script>
+
+    </head><body onload="onload()">
+
+        <datalist id="airports-list"></datalist>
+
+        <!-- nav bar -->
+        <div class="row" id='topbar'>
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6" id="logout-area">
+                Hello<span id="bind-customer-name"> there!</span>
+                <button onclick="logout()">
+                    Logout
+                </button>
+            </div>
+        </div>
+        <div class="row" id='flight-search'>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div>
+                <center>
+                    <h1>Depart <i class="fas fa-plane-departure"></i></h1>
+                    <input list="airports-list" id="from-airport" placeholder="Airport" />
+                </center></div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div>
+                <center>
+                    <h1>Date <i class="fas fa-plane"></i></h1>
+                    <input type="date" id="flight-date" />
+                </center></div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div>
+                <center>
+                    <h1>Arrive <i class="fas fa-plane-arrival"></i></h1>
+                    <input list="airports-list" id="to-airport" placeholder="Airport" />
+                </center></div>
+            </div>
+        </div>
+        <div class="row">
+            <button style="width:100%" onclick="search()"><h1>GO</h1></button>
+        </div>
+        <div class="row" id='manage-info'>
+                <button style="width:100%" onclick="window.location = 'address.html';"><h1>Manage Addresses</h1></button>
+                <button style="width:100%" onclick="window.location = 'cc.html';"><h1>Manage Credit Cards</h1></button>
+        </div>
+        <div class="row" id="myflights">
+            <h1>Your Flights</h1>
+            <div class="row">
+                <table id="booked-flights" style="width:100%;">
+        			<tr>
+            			<th>Flight</th>
+            			<th>Route</th>
+            			<th>Time</th>
+            			<th>Price</th>
+            			<th>Class</th>
+        			</tr>
+        		</table>
+            </div>
+
+            <h1>Your Bookings</h1>
+            <div class="row">
+                <table id="bookings-table" style="width:100%">
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Flights</th>
+                        <th>Actions</th>
+                    </tr>
+                </table>
+            </div>
+
+
+        </div>
+
+        <script>
+
+            (async function myFlights(){
+                const flights = (await cs425.api.get("/customer/flights/list")).flights;
+
+                if (!flights.length) {
+                    document.getElementById("myflights").style.display = 'none';
+                    return;
+                }
+
+                const fds = await Promise.all(flights.map(f => cs425.api.get('/flights/' + f[0])));
+                const ft = document.getElementById("booked-flights");
+                let flightData = {};
+		console.log({flights})
+                for (let i = 0; i < flights.length; i++) {
+                    const f = fds[i];
+                    ft.innerHTML += `<tr>
+                        <td>${f.airlineName} flight ${f.airline}-${f.flightNumber}</td>
+                        <td>${f.departAirportName} to ${f.arriveAirportName}</td>
+                        <td>${f.arriveTime} - ${f.departTime}</td>
+                        <td>$${f.economyPrice.toFixed(2)} Economy, $${f.firstClassPrice.toFixed(2)} 1<sup>st</sup> Class</td>
+                        <td>${flights[i][1]}</td>
+                    </tr>`;
+                    flightData[flights[i][0]] = f;
+
+                }
+
+                const bookings = (await cs425.api.get("/bookings/list")).data;
+                const bt = document.getElementById("bookings-table")
+		console.log({bookings, flightData})
+                for (const bid in bookings) {
+                    let flights = bookings[bid].map(flightObj => {
+                        const f = flightData[flightObj.flightId]
+                        return `${f.airlineName} flight ${f.airline}-${f.flightNumber} (${flightObj.routeClass})`;
+                    });
+                    bt.innerHTML += `<tr>
+                        <td>${bid}</td>
+                        <td>${flights.join('<br/>')}</td>
+                        <td><button onclick="deleteBooking(${bid})">Remove</button></td>
+                    </tr>`;
+
+                }
+
+            })();
+
+
+            (async function getAirports(){
+                const apts = await cs425.api.get("/airports");
+                const dl = document.getElementById("airports-list");
+                apts.airports.forEach(a =>
+                    dl.innerHTML += `<option value="${a.airportId}">${a.name}</option>`);
+                dl_polyfill();
+            })();
+
+
+            async function deleteBooking(bookingId) {
+                const r = await cs425.api.post("/bookings/delete", { bookingId });
+                console.log("deleted: ", r);
+                location.reload();
+            }
+        </script>
+    </body>
+</html>

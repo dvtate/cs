@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+	<!-- this page will likely be embedded somewhere else -->
+	<head>
+		<title>ManageMyAddress</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+		<link rel="stylesheet" href="main.css" />
+		<script src="main.js"> </script>
+
+	</head>
+	<body>
+		<div class = "creditCard">
+			<h2>Manage Addresses</h2>
+			<form>
+				<fieldset>
+					<lengend> <button type="button" onclick= "window.location ='index.html';">Home</button> <button type="button" onclick="window.location ='add-address.html';">Add A New Address</button></lengend>
+					<div class = "row">
+						<table style="width:100%" id="address-table">
+						  <tr>
+						    <th>Address line1</th>
+						    <th>Address line2</th>
+						    <th>Postal Code</th>
+						    <th>City</th>
+						    <th>State</th>
+						    <th>Country</th>
+						    <th>Action</th>
+						  </tr>
+
+						</table>
+
+
+				</fieldset>
+			</form>
+
+			<script>
+				(async function pupulateList(){
+					const t = document.getElementById("address-table");
+					let ret;
+					try {
+						ret = await cs425.api.get("/customer/address/list");
+					} catch (e) {
+						console.error(e);
+					}
+					ret.addresses.forEach(addr =>
+						t.innerHTML += `<tr>
+							<td>${addr.line1}</td>
+							<td>${addr.line2}</td>
+							<td>${addr.postalCode}</td>
+							<td>${addr.city}</td>
+							<td>${addr.state}</td>
+							<td>${addr.country}</td>
+							<td><button type="button"
+								onclick="del(${addr.addressId})"
+							>delete</button></td>
+						</tr>`);
+				})();
+
+				//
+				async function del(id) {
+					try {
+						const resp = await cs425.api.post("/customer/address/delete", { addressId : id });
+						console.log(resp);
+					} catch (e) {
+						console.error(e);
+					}
+					location.reload();
+				}
+
+			</script>
+
+	</body>

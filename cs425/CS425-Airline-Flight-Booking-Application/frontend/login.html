@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+	<!-- this page will likely be embedded somewhere else -->
+	<head>
+		<title>Sign in - FlightBook</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+		<link rel="stylesheet" href="main.css" />
+		<script src="sha.js"> </script>
+
+	</head>
+	<body>
+		<div class="page-slice">
+			<h2>Unauthenticated<small>Sign in or Sign up to Book Your Flights</small></h2>
+			<form>
+				<fieldset>
+					<legend>Sign In</legend>
+					<div class="row">
+						<label for="email">Email</label>
+						<input type="email" id="email-input" />
+					</div>
+					<div class="row">
+						<label for="password">Password</label>
+						<input type="password" id="password-input" />
+					</div>
+					<button type="button" onclick="sendCreds()" >Sign In</button>
+
+				</fieldset>
+				<br/>
+				<hr/>
+				<br/>
+				<fieldset>
+					<legend>Sign Up</legend>
+					<div class="row">
+						<label for="email">Email</label>
+						<input type="email" id="email-input-su" />
+					</div><div class="row">
+						<label for="password">Password</label>
+						<input type="password" id="password-input-su" />
+					</div><div class="row">
+						<label for="name">Name</label>
+						<input type="text" id="name-input-su" />
+					</div>
+
+					<button type="button" onclick="signUp()">Sign Up</button>
+
+				</fieldset>
+			</form>
+
+		</div>
+		<script>
+
+
+			// hash password to prevent someone from reading user's plaintext password over internet
+			// it's hashed again on backend too :)
+			function hashPassword(u, p) {
+				// DO NOT CHANGE THIS SALT
+				const salt = "saltyCS425sudentneedizza$417nZzM3JmcTRtM3F3ZjM=";
+				const shaObj = new jsSHA("SHA-512", "TEXT");
+				shaObj.update(salt);
+				shaObj.update(u);
+				shaObj.update(p);
+				return shaObj.getHash("B64");
+			}
+
+			function storeToken(token) {
+				(function setCookie(cname, cvalue, exdays) {
+					const d = new Date();
+					d.setTime(d.getTime() + (exdays*24*60*60*1000));
+					const expires = "expires=" + d.toUTCString();
+					document.cookie = `${cname}=${cvalue};${expires};path=/`;
+				})("authToken", token, 1 / 12);
+			}
+			//
+			async function logUserIn(email, password) {
+				const resp = await fetch("http://dvtate.com:4250/customer/login", {
+					method: 'POST',
+					mode: 'cors',
+					headers: {
+					  'Accept': 'application/json',
+					  'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ email, password: hashPassword(email, password) })
+				});
+				const { token } = await resp.json();
+				if (token)
+					storeToken(token);
+
+				return token;
+			}
+
+			//
+			async function sendCreds() {
+				const email = document.getElementById("email-input").value;
+				const password = document.getElementById("password-input").value;
+				if (await logUserIn(email, password)) {
+					window.location = '/';
+				} else {
+					alert("invalid credentials entered");
+				}
+			}
+
+			//
+			async function signUp() {
+				//console.log('ff');
+				const emailBox = document.getElementById("email-input-su");
+				const passwordBox = document.getElementById("password-input-su");
+				const nameBox = document.getElementById("name-input-su");
+				function reset(df) {
+					df = df || { e: true, p: true, n: true };
+					if (df.e) emailBox.value = '';
+					if (df.p) passwordBox.value = '';
+					if (df.n) nameBox.value = '';
+				}
+				const email = emailBox.value, password = passwordBox.value, name = nameBox.value;
+
+				console.log({ email, password: hashPassword(email, password), name });
+				const resp = await fetch("http://dvtate.com:4250/customer/create", {
+					method: 'POST',
+					mode: 'cors',
+					headers: {
+					  'Accept': 'application/json',
+					  'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ email, password: hashPassword(email, password), name })
+				});
+				console.log({resp});
+				const r = await resp.json();
+				console.log({r});
+				if (r.token)
+					storeToken(r.token);
+				else
+					alert(r.message);
+
+			}
+
+		</script>
+	</body>
+</html>

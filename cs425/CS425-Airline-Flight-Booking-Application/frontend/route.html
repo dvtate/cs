@@ -1,0 +1,156 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flight List</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+		<link rel="stylesheet" href="main.css" />
+		<script src="main.js"> </script>
+		<style>
+				#user_name {
+                    text-align: right;
+                }
+
+		</style>
+</head>
+<body>
+	<div>
+		<h2>Flight List</h2>
+		<fieldset>
+			<div class="row">
+        			<div class="col-sm-12 col-md-6 col-lg-6">
+            			<h1><button type="button" onclick="window.location.href ='index.html';">Home</button></h1>
+        			</div>
+
+				<!--
+        			<div class="col-sm-12 col-md-6 col-lg-6" id="user_name">
+            			<h1>Name<h1>
+				</div>-->
+
+    		</div>
+    		<div>
+				<fieldset>
+					<div class="row">
+						<div class="col-sm-12 col-md-6 col-lg-6">
+							<h2>Ticket</h2>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-6">
+							<select id="sort-type-dd" onchange="populateList()">
+								<option value="ecoSortedFlights">Economy Price</option>
+								<option value="firstSortedFlights">First Class Price</option>
+								<option value="speedSortedFlights">Speed Sorted Flights</option>
+								<option value="skylineFlights">Skyline Flights</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<table style="width: 100%" id="flights-table">
+							<tr>
+	            				<th>Time</th>
+	            				<th>Price</th>
+	            				<th>Route</th>
+	            				<th>Actions</th>
+	            			</tr>
+							<tr>
+								<td>Scanning...</td>
+								<td>Finding Best Routes...</td>
+								<td>Saving you money...</td>
+								<td>Saving you time...</td>
+							</tr>
+						</table>
+					</div>
+				</fieldset>
+    		</div>
+		</fieldset>
+	</div>
+	<script>
+
+		let routes;
+
+		function populateList(rdata) {
+			if (!rdata) rdata = routes;
+			if (!rdata) return;
+			const sort = document.getElementById("sort-type-dd").value;
+			const flights = rdata[sort];
+			const t = document.getElementById("flights-table");
+
+
+			function timeString(seconds) {
+				const hours = Math.floor(seconds / (60 * 60));
+				const mins = Math.floor((seconds - (hours * 60 * 60)) / 60);
+				return `${hours}:${mins}`;
+			}
+
+			function priceString(r) {
+				const eco = r.routeEcoCost.toFixed(2);
+				const first = r.routeFirstCost.toFixed(2);
+				return `$${eco}, $${first}`;
+			}
+
+			function routeString(route) {
+				let apStr = "";
+				let cStr = "";
+				let prevAp = null;
+				for (f of route) {
+					apStr += f[2] + '->';
+					if (prevAp)
+						cStr += '->';
+					cStr += f[1];
+					prevAp = f[3];
+				}
+				if (prevAp)
+					apStr += prevAp;
+				return `${apStr}<br/>${cStr}`;
+			}
+
+			t.innerHTML = `<tr>
+				<th>Time</th>
+				<th>Price</th>
+				<th>Route</th>
+				<th>Actions</th>
+			</tr>`;
+
+			flights.forEach(r => {
+				const rs = encodeURIComponent(JSON.stringify(r.route));
+				t.innerHTML += `<tr>
+					<td>${timeString(r.routeData.routeTime)}</td>
+					<td>${priceString(r.routeData)}</td>
+					<td>${routeString(r.route)}</td>
+					<td><button onclick="book('${rs}')">Book</button></td>
+				</tr>`;
+			});
+		}
+
+
+
+		(async function downloadData(){
+
+			function findGetParameter(parameterName) {
+				let result = null, tmp = [];
+				location.search.substr(1).split("&")
+					.forEach(function (item) {
+						tmp = item.split("=");
+						if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+					});
+				return result;
+			}
+
+			const departAirportId = findGetParameter("depart");
+			const arriveAirportId = findGetParameter("arrive");
+			const tokens = findGetParameter("transfers") || 2;
+			const waitTime = findGetParameter("wait") || 0.5;
+			const departTime = findGetParameter("date") || (new Date()).toString();
+			console.log("making request");
+			const list = await cs425.api.post("/flights/search", {
+				departAirportId, arriveAirportId, tokens, waitTime, departTime, });
+			console.log("made request", list);
+			routes = list;
+			populateList(routes);
+		})();
+
+		async function book(route) {
+			window.location = `book.html?route=${route}`;
+		}
+	</script>
+</body>
+</html>

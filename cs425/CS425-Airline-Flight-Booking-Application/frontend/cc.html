@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+	<!-- this page will likely be embedded somewhere else -->
+	<head>
+		<title>ManageMyCreditCard</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+		<link rel="stylesheet" href="main.css" />
+		<script src="main.js"> </script>
+		<style>
+			#addCreditCard {
+                text-align: right;
+            }
+		</style>
+
+	</head>
+	<body>
+		<div class = "creditCard">
+			<h2>Manage Credit Cards
+			</h2>
+			<form>
+				<fieldset>
+					<div class="row" id='manage-info'>
+            					<div class="col-sm-12 col-md-4 col-lg-4">
+                					<h1><button type="button" onclick="window.location.href ='index.html';">Home</button><h1>
+            					</div>
+           	 					<div class="col-sm-12 col-md-4 col-lg-4">
+            					</div>
+            					<div class="col-sm-12 col-md-4 col-lg-4" id="addCreditCard">
+                					<h1><button type="button" onclick="window.location ='add-cc.html';">Add Credit Card</button><h1>
+            					</div>
+        				</div>
+
+					<div class = "row">
+						<table style="width:100%" id="card-list">
+						  <tr>
+						    <th>Card Number</th>
+						    <th>Expiration</th>
+						    <th>Name On Card</th>
+						    <th>CVC</th>
+						    <th>Address</th>
+						    <th>Action</th>
+						  </tr>
+
+						</table>
+
+
+				</fieldset>
+			</form>
+			<script>
+
+				let addresses = {};
+
+				async function loadAddresses() {
+					try {
+						const ret = await cs425.api.get('/customer/address/list');
+						console.log({ret});
+						//const addrSel = document.getElementById("billing-addr");
+						ret.addresses.forEach(addr =>
+							addresses[addr.addressId] = addr.line1 + ' ' + addr.line2);
+					} catch (e) {
+						console.error(e);
+					}
+				}
+
+				(async function populateTable(){
+					let resp;
+					try {
+						resp = await cs425.api.get("/customer/cc/list");
+						console.log(resp);
+					} catch (e) {
+						console.error(e);
+					}
+
+					await loadAddresses();
+
+					const t = document.getElementById('card-list');
+					resp.cards.forEach(cc =>
+						t.innerHTML += `<tr>
+							<td>${cc.cardNumber}</td>
+							<td>${cc.expiration}</td>
+							<td>${cc.nameOnCard}</td>
+							<td>${cc.cvcCode}</td>
+							<td>${addresses[cc.addressId] || cc.addressId }</td>
+							<td><button onclick="del(${cc.cardId})">Delete</button></td>
+						</tr>`
+					);
+				})();
+
+				async function del(id) {
+					try {
+						const resp = await cs425.api.post("/customer/cc/delete", { cardId : id });
+						console.log(resp);
+					} catch (e) {
+						console.error(e);
+					}
+					location.reload();
+				}
+			</script>
+	</body>
+</html>

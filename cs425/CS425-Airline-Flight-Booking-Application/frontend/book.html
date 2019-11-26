@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BookingPage</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+		<link rel="stylesheet" href="main.css" />
+		<script src="main.js"> </script>
+		<style>
+				#user_name {
+                    text-align: right;
+                }
+
+
+		</style>
+
+</head>
+<body>
+<div>
+	<h2>Booking Page</h2>
+	<fieldset>
+		<div class="row">
+			<div class="col-sm-12 col-md-6 col-lg-6">
+				<h1><button type="button" onclick="window.location.href ='index.html';">Home</button></h1>
+			</div>
+
+			<div class="col-sm-12 col-md-6 col-lg-6" id="user_name">
+				<h2>Name<h2>
+			</div>
+
+		</div>
+		<div>
+		<fieldset>
+		<h2>Ticket</h2>
+		<div class="row">
+			<table id="flights-ticket">
+				<tr>
+					<th>Flight</th>
+					<th>Route</th>
+					<th>Time</th>
+					<th>Price</th>
+					<th>Class</th>
+				</tr>
+			</table>
+		</div>
+
+		<h2>Payment</h2>
+		<div class="row" id="payment">
+
+		<div class="row">
+			<div class="col-sm-12 col-md-6 col-lg-6">
+				<h2>Billing Address:</h2>
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-6">
+				<select id="billing-addr"></select>
+			</div>
+		</div><hr/>
+
+		<div class="row">
+		<div class="col-sm-12 col-md-6 col-lg-6"><h2>Payment Card:</h2></div>
+		<div class="col-sm-12 col-md-6 col-lg-6">
+		<select id="billing-cc"></select>
+		</div>
+		</div>
+		</div>
+		</fieldset>
+		</div>
+
+		<button onclick="book()" type="button" style="width:100%"><h1>Book</h1></button>
+
+	</fieldset>
+</div>
+
+	<script>
+		// load cc dropdown
+		(async function populateCC() {
+			const ccs = await cs425.api.get('/customer/cc/list');
+			console.log({ccs});
+			const ccSel = document.getElementById("billing-cc");
+			ccs.cards.forEach(cc =>
+				ccSel.innerHTML += `<option value="${cc.cardId}">${cc.expiration + ': ' + cc.cardNumber}</option>`)
+		})();
+
+		// load address dropdown
+		(async function populateAddresses() {
+			const ret = await cs425.api.get('/customer/address/list');
+			console.log({addresses: ret})
+			const addrSel = document.getElementById("billing-addr");
+			ret.addresses.forEach(addr =>
+				addrSel.innerHTML += `<option value="${addr.addressId}">${addr.line1 + ' ' + addr.line2}</option>`);
+		})();
+
+
+
+		function findGetParameter(parameterName) {
+			let result = null, tmp = [];
+			location.search.substr(1).split("&")
+				.forEach(function (item) {
+					tmp = item.split("=");
+					if (tmp[0] === parameterName)
+						result = decodeURIComponent(tmp[1]);
+				});
+			return result;
+		}
+
+
+		(async function populateTicket() {
+			const route = JSON.parse(findGetParameter("route"));
+			const fids = route.map(f => f[0]);
+			let flights = fids.map(fid => cs425.api.get('/flights/' + fid));
+			flights = await Promise.all(flights).catch(console.error);
+			console.log({flights});
+			const t = document.getElementById("flights-ticket");
+			flights.forEach(f =>
+				t.innerHTML += `<tr>
+					<td>${f.airlineName} flight ${f.airline}-${f.flightNumber}</td>
+					<td>${f.departAirportName} to ${f.arriveAirportName}</td>
+					<td>${f.arriveTime}  - ${f.departTime}</td>
+					<td>$${f.economyPrice.toFixed(2)} Economy, $${f.firstClassPrice.toFixed(2)} 1<sup>st</sup> Class</td>
+					<td><select class="routeclass-dd">
+						<option value="economy">Economy</option>
+						<option value="first">1st Class</option>
+					</select></td>
+				</tr>`)
+		})();
+
+		async function book() {
+			const classes = Array.from(document.getElementsByClassName("routeclass-dd")).map(c => c.value);
+			const route = JSON.parse(findGetParameter("route"));
+			const fids = route.map(f => f[0]);
+			const address = document.getElementById("billing-addr").value;
+			const cc = document.getElementById("billing-cc").value;
+
+			const body = {
+				cc, address, route, routeClass: classes
+			};
+			console.log({body});
+
+			console.log(await cs425.api.post("/bookings/add", body));
+			console.log(classes);
+			window.location = "index.html";
+		}
+
+	</script>
+</body>
+</html>
