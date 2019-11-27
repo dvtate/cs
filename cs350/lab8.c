@@ -43,17 +43,16 @@ int add (struct bTree* root, int value) {
 			return 1;
 	}
 	// insert
-	if (prev->value > value) {
-		prev->leftChild = malloc(sizeof(struct Node));
-		prev->leftChild->leftChild = NULL;
-		prev->leftChild->rightChild = NULL;
-		prev->leftChild->value = value;
-	} else {
-		prev->rightChild = malloc(sizeof(struct Node));
-		prev->rightChild->leftChild = NULL;
-		prev->rightChild->rightChild = NULL;
-		prev->rightChild->value = value;
-	}
+    const struct Node* ret = malloc(sizeof(struct Node));
+    ret->leftChild = NULL;
+    ret->rightChild = NULL;
+    ret->value = value;
+
+	if (prev->value > value)
+		prev->leftChild = ret;
+	else
+		prev->rightChild = ret;
+	
 	return 0;   
 }
 
