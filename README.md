@@ -19,7 +19,16 @@ Classwork and assignments done as part of studying Computer Science at [IIT](htt
   - C, MIPS assembly
 - CS 425: Database Organization
   - Yousef Elmehdwi, Fall 2019
-  - SQL, relational algebra, (final was webapp with flask and ajax)
+  - SQL, relational algebra, Python, HTML, CSS, JS
 - CS 411: Computer Graphics
   - Gady Agam, Fall 2019
   - JavaScript
+- CS 351: Systems Programming
+  - Michael Lee, Spring 2020
+  - C
+- CS 440: Programming Languages and Translators
+  - James Sasaki
+  - Haskell, Prolog
+- CS 487: Software Engineering
+  - Ola Tannous
+  - Node.js, HTML, CSS, JS, SQL
