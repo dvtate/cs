@@ -28,11 +28,9 @@
 		$list swap ~ =
 		$lam swap ~ =
 		{ # for each elem
-
-			# select highest elem
-			$m_ind 0 =
-
-			# find next lowest elem
+			
+			# find highest remaining
+			$m_ind $i ~ =
 			{
 				{
 					$m_ind $g ~ =
@@ -55,20 +53,19 @@ $bestApplicants {
 
 	# lambda to attribute a score to the applicant
 	$score {
-		$app 4 ] num 2 *        # data structures importance factor of 2
-		$app 5 ] num 1.5 * +    # software engineering importance factor 1.5
-		$app 6 ] num 2   * +    # algorithms importance factor 2
-		$app 7 ] num 0.5 * +    # computer organization importance factor .5
-		$app 8 ] num +          # OSs importance factor 1
-		$app 9 ] num +          # overall avg importance factor 1
+		$app 4 ] 2 *        # data structures importance factor of 2
+		$app 5 ] 1.5 * +    # software engineering importance factor 1.5
+		$app 6 ] 2   * +    # algorithms importance factor 2
+		$app 7 ] 0.5 * +    # computer organization importance factor .5
+		$app 8 ] +          # OSs importance factor 1
+		$app 9 ] +          # overall avg importance factor 1
 			return
 	} ($app) lam =
 
-
+	# remove apps who didnt make a 100 in cs100
+	# and apps whos overall college average less than a 75
 	$ret
-		# remove apps who didnt make a 100 in intro class
-		# and apps whos overall college average less than a 75
-		{ $u 3 ] num 100 >= $u 9 ] num 75 >= && return } ($u) lam
+		{ $u 3 ] 100 >= $u 9 ] 75 >= && return } ($u) lam
 			$apps ~ list:filter
 
 	"removed weakest apps." println
@@ -93,12 +90,15 @@ $bestApplicants {
 } ($apps) lambda =
 
 
-
-
 # populate applicant list using file "input.txt"
 $apps () =
-{
-	$apps $line "," split list:push
+{ # convert applicant to a list of numbers
+	
+	$app () =
+	{
+		$app $v num list:push
+	} $line "," split $v foreach
+	$apps $app list:push
 } "input.txt" file_get_contents "\n" split $line foreach
 
 "loaded " $apps list:size + " applications." + println
@@ -111,6 +111,3 @@ $finalists list:size " Finalists found:" + println
 {
 	$i 1 + ":\t" + $finalists $i ] + println
 } 0 $finalists list:size range $i foreach
-
-
-exit
