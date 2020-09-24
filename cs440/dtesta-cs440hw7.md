@@ -1,0 +1,115 @@
+Dustin Van Tate Testa
+
+
+
+1. 
+  a. 
+	S
+	- rule 1
+	E$
+	- rule 2
+	T Ttail
+	- rule 5
+	F Ftail Ttail
+	- rule 8
+    x PArgs Ftail Ttail
+	- rule 10
+	x ( Args ) Ftail Ttail
+	- rule 12
+	x ( E Atail) Ftail Ttail
+	- rule 2
+	x ( T Ttail Atail ) Ftail Ttail
+	- rule 5
+	x ( F Ftail Ttail Atail ) Ftail Ttail
+	- rule 8
+	x ( x PArgs Ftail Ttail Atail ) Ftail Ttail
+	- rule 11
+	x ( x Ftail Ttail Atail ) Ftail Ttail
+	- rule 6
+	x ( x * F Ftail Ttail Atail ) Ftail Ttail 
+	- rule 8
+	x ( x * x Pargs Ftail Ttail Atail ) Ftail Ttail
+	- rule 11
+	x ( x * x Ftail Ttail Atail ) Ftail Ttail
+	- rule 7
+	x ( x * x Ttail Atail ) Ftail Ttail
+	- rule 4
+	x ( x * x Atail ) Ftail Ttail
+	- rule 14
+	x ( x * x , E Atail ) Ftail Ttail
+	- rule 2 
+	x ( x * x , T Ttail Atail ) Ftail Ttail
+	- rule 5
+	x ( x * x , F Ftail Ttail Atail ) Ftail Ttail
+	- rule 8
+	x ( x * x , x PArgs Ftail Ttail Atail ) Ftail Ttail
+	- rule 11
+	x ( x * x , x Ftail Ttail Atail ) Ftail Ttail
+	- rule 7
+	x ( x * x , x Ttail Atail ) Ftail Ttail
+	- rule 4
+	x ( x * x , x Atail ) Ftail Ttail
+	- rule 15
+	x ( x * x , x ) Ftail Ttail
+	- rule 7
+	x ( x * x , x ) Ttail
+	- rule 4
+	x ( x * x , x )
+
+
+  b.
+stack  | rule   | input
+-------|--------|-------
+S 	   | 1      | x ( x * x, x) $
+E $    | 2      | x ( x * x, x) $
+T Ttail | 5     | x ( x * x, x) $
+F Ftail Ttail | 8 | x ( x * x, x) $
+x PArgs Ftail Ttail | = | ( x * x, x) $
+PArgs Ftail Ttail | 10 | ( x * x, x) $
+...
+
+
+
+
+2. 
+  a.
+	Non-Terminal Symbol -> First Set
+	$ -> $
+	p -> p
+	s -> s
+	r -> r
+	u -> u
+	v -> v
+	S' -> $, p, u
+	P -> p, u
+	R -> r
+	Q -> u
+	S -> p, u
+
+  b. Follow Set
+	S' -> $
+	S  -> $
+	P  -> p,s,u,r,$
+	R  -> s
+	Q  -> v,s,r	
+
+  c. predict table
+0 | $ | p | s | r | u | v | $
+--|---|---|---|---|---|---|---
+0 | 0 | 0 | 0 | 0 | 0 | 0 | 0
+0 | 1 | 1 | 8 | 8 | 1 | 8 | 1
+0 | 7 | 2 | 8 | 8 | 2 | 8 | 7
+0 | 7 | 3 | 8 | 8 | 4 | 8 | 7
+0 | 8 | 8 | 7 | 5 | 8 | 8 | 8
+0 | 8 | 8 | 7 | 7 | 6 | 7 | 8
+
+
+  d. 
+stack | rule | input
+--|--|--
+S' | 0 | s u v r s p $
+S $  | 1 | s u v r s p $ 
+
+
+
+
