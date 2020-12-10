@@ -277,6 +277,31 @@ function interpolate(pk_n1,pk,pk_p1,pk_p2)
     u => s * Math.pow(u, 3) - s * Math.pow(u, 2),
   ];
 
+  /*
+  // cardinal
+  const bFns = [
+    u => -s * Math.pow(u, 3) + 2 * s * Math.pow(u, 2) - s * u,
+    u => (2 - s) * Math.pow(u, 3) + (s - 3) * Math.pow(u, 2) + 1,
+    u => (s - 2) * Math.pow(u, 3) + (3 - 2 * s) * Math.pow(u, 2) + s * u,
+    u => s * Math.pow(u, 3) - s * Math.pow(u, 2),
+  ];
+
+  // hermite
+  const bFns = [
+    u => 2 * Math.pow(u, 3) - 3 * Math.pow(u, 2) + 1,
+    u => -2 * Math.pow(u, 3) + 3 * Math.pow(u, 2),
+    u => Math.pow(u, 3) - 2 * Math.pow(u, 2) + u,
+    u => Math.pow(u, 3) - Math.pow(u, 2),
+  ];
+
+  // bezier
+  const bFns = [
+    u => bbfn(3, 0, u),
+    u => bbfn(3, 1, u),
+    u => bbfn(3, 2, u),
+    u => bbfn(3, 3, u),
+  ];
+  */
 
   // gives point at specific u value
   const spline = u => 
