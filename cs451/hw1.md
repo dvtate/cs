@@ -35,7 +35,7 @@
 			* Scaleability - Data bus no longer bottleneck
 		+ Cons:
 			* Overhead and complexity associated with message passing over network not suitable for some applications
-
+			
 4. 
 	- Anti-dependence = Write After Read
 	- Example Problem: There is an anti-dependence between instructions 2 and 3
@@ -61,11 +61,10 @@
 		- The average execution time of the single processor example is (3+4+6+7+10+11+13+14)/8 = 8.5
 		- The average execution time of the dual processor example is (4+4+6+7)/4 = 5 
 		- Thus the speedup for the average case is 8.5/5 = 1.7 which is not superlinear
-
 6. 
-	- hitrates: p = [.5, .7, .9, 1]
-	- latencies(ns): t = [2, 5, 20, 100]
-	- average access time: p[0]*t[0] + (1-p[0])*p[1]*(t[0]+t[1]) + (1-p[0])*(1-p[1])*p[2]*(t[0]+t[1]+t[2]) + (1-p[0])*(1-p[1])*(1-p[2])*(t[0]+t[1]+t[2]+t[3])
+	- hitrates: `p = [.5, .7, .9, 1]`
+	- latencies(ns): `t = [2, 5, 20, 100]`
+	- average access time: `p[0]*t[0] + (1-p[0])*p[1]*(t[0]+t[1]) + (1-p[0])*(1-p[1])*p[2]*(t[0]+t[1]+t[2]) + (1-p[0])*(1-p[1])*(1-p[2])*(t[0]+t[1]+t[2]+t[3])`
 	- this was derived as the sum of the probailities of each cache missing multiplied by the latency of the corresponding access in order to give the expected value
 	- 9 ns (via calculator)
 	
