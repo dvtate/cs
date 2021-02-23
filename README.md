@@ -27,8 +27,17 @@ Classwork and assignments done as part of studying Computer Science at [IIT](htt
   - Michael Lee, Spring 2020
   - C
 - CS 440: Programming Languages and Translators
-  - James Sasaki
+  - James Sasaki, Spring 2020
   - Haskell, Prolog
 - CS 487: Software Engineering
-  - Ola Tannous
+  - Ola Tannous, Spring 2020
   - Node.js, HTML, CSS, JS, SQL
+- CS 450: Operating Systems
+  - Kyle Hale, Fall 2020
+  - C, x86 assembly
+- CS 484: Intro to Machine Learning
+  - Ming-Long Lam, Fall 2020
+  - Python
+- CS 451: Parallel and Distributed Systems
+  - Zhiling Lan, Spring 2021
+  - C/C++
