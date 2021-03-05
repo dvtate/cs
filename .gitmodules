@@ -7,3 +7,6 @@
 [submodule "cs487-parking"]
 	path = cs487-parking
 	url = https://github.com/dvtate/cs487-parking
+[submodule "cs425/CS425-Airline-Flight-Booking-Application"]
+	path = cs425/CS425-Airline-Flight-Booking-Application
+	url = https://github.com/tdeng9886/CS425-Airline-Flight-Booking-Application
