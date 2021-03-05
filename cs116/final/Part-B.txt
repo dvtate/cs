@@ -1,3 +1,4 @@
 
 1. you should attempt to catch the more specific RuntimeException before catching the Exception
-2. 
+2. d
+3. a

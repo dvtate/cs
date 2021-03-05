@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+	<head>
+		<style>
+			canvas {
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="mycanvas"> </canvas>
+		<script>
+			const canv = document.getElementById("mycanvas");
+			if (!canv)
+				console.error("no canv?!");
+			canv.onmousedown = ev => console.log(ev);
+		</script>
+	</body>
+</html>
