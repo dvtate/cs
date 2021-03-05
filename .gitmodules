@@ -4,3 +4,6 @@
 [submodule "cs484"]
 	path = cs484
 	url = https://github.com/dvtate/cs484
+[submodule "cs487-parking"]
+	path = cs487-parking
+	url = https://github.com/dvtate/cs487-parking
