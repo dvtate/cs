@@ -1,5 +1,5 @@
 /* Gaussian elimination without pivoting.
- * Compile with "gcc gauss_serial.c" 
+ * Compile with "gcc gauss_serial.c"
  */
 
 /* ****** ADD YOUR CODE AT THE END OF THIS FILE. ******
@@ -55,7 +55,7 @@ void parameters(int argc, char **argv) {
 		srand(seed);
 		numThreads=atoi(argv[3]);
 		printf("Random seed = %i\n", seed);
-	} 
+	}
 	if (argc >= 2) {
 		N = atoi(argv[1]);
 		if (N < 1 || N > MAXN) {
@@ -65,7 +65,7 @@ void parameters(int argc, char **argv) {
 	}
 	else {
 		printf("Usage: %s <matrix_dimension> [random seed]\n",
-				argv[0]);    
+				argv[0]);
 		exit(0);
 	}
 
@@ -171,7 +171,7 @@ int main(int argc, char **argv) {
 	 (float)CLOCKS_PER_SEC * 1000);
       /* Contrary to the man pages, this appears not to include the parent */
   printf("--------------------------------------------\n");
-  
+
   exit(0);
 }
 
