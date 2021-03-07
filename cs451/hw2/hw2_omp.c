@@ -1,5 +1,5 @@
 /* Gaussian elimination without pivoting.
- * Compile with "gcc gauss_serial.c" 
+ * Compile with "gcc gauss_serial.c"
  */
 
 /* ****** ADD YOUR CODE AT THE END OF THIS FILE. ******
@@ -43,6 +43,7 @@ unsigned int time_seed() {
   return (unsigned int)(t.tv_usec);
 }
 
+
 /* Set the program parameters from the command-line arguments */
 void parameters(int argc, char **argv) {
 	int seed = 0;  /* Random seed */
@@ -51,12 +52,12 @@ void parameters(int argc, char **argv) {
 	/* Read command-line arguments */
 	srand(time_seed());  /* Randomize */
 
-	if (argc == 4) {
-		seed = atoi(argv[2]);
-		srand(seed);
-		numThreads=atoi(argv[3]);
-		printf("Random seed = %i\n", seed);
-	} 
+	if (argc < 2) {
+		printf("Usage: %s <matrix_dimension> [random seed]\n",
+				argv[0]);
+		exit(0);
+	}
+
 	if (argc >= 2) {
 		N = atoi(argv[1]);
 		if (N < 1 || N > MAXN) {
@@ -64,10 +65,19 @@ void parameters(int argc, char **argv) {
 			exit(0);
 		}
 	}
-	else {
-		printf("Usage: %s <matrix_dimension> [random seed]\n",
-				argv[0]);    
-		exit(0);
+
+  if (argc >= 3) {
+    seed = atoi(argv[2]);
+		srand(seed);
+		printf("Random seed = %i\n", seed);
+  }
+
+	if (argc >= 4) {
+		numThreads = atoi(argv[3]);
+    // Only one thread per dimension
+    if (numThreads > N)
+      numThreads = N;
+    omp_set_num_threads(numThreads);
 	}
 
 	/* Print parameters */
@@ -172,7 +182,7 @@ int main(int argc, char **argv) {
 	 (float)CLOCKS_PER_SEC * 1000);
       /* Contrary to the man pages, this appears not to include the parent */
   printf("--------------------------------------------\n");
-  
+
   exit(0);
 }
 
@@ -183,25 +193,52 @@ int main(int argc, char **argv) {
  * defined in the beginning of this code.  X[] is initialized to zeros.
  */
 void gauss() {
-  int norm, row, col;  /* Normalization row, and zeroing
-			* element row and col */
-  float multiplier;
+  // Perform Gaussian Elimination in order to obtain an upper triangular matrix
+  // For each row
+  for (int n = 0; n < N - 1; n++) {
+    // Normalize the row
+    {
+      // Normalize row making diagonal element 1
+      const float norm = 1 / A[n][n];
+      A[n][n] = 1;
+      for (int c = n + 1; c < N; c++)
+        A[n][c] *= norm;
 
-  /* Gaussian elimination */
-  # pragma omp parallel for
-  for (int norm = 0; norm < N - 1; norm++)
-    for (int row = norm + 1; row < N; row++) {
-      multiplier = A[row][norm] / A[norm][norm];
-      for (int col = norm; col < N; col++)
-	      A[row][col] -= A[norm][col] * multiplier;
-      B[row] -= B[norm] * multiplier;
+      // Normalize vector
+      B[n] *= norm;
+    };
+
+    // Eliminate lower elements in n'th column
+    // Parallelize by row
+    #pragma omp parallel for
+    for (int r = n + 1; r < N; r++) {
+      // Update elements
+      const float multiplier = A[r][n];
+      for (int c = n + 1; c < N; c++)
+        A[r][c] -= A[n][c] * multiplier;
+
+      // Update vector
+      B[r] -= B[n] * multiplier;
+
+      // Note: to be mathematically correct we should set the eliminated element to zero
+      // However we don't have to as our backsubsitution algorithm doesn't check
+      // A[r][n] = 0;
     }
-    
+  }
+
+  // Note: Again, to be mathematically correct we should also update the last row
+  // but not needed for backsubstitution
+  // B[N-1] /= A[N-1][N-1];
+  // A[N-1][N-1] = 1;
+
   /* (Diagonal elements are not normalized to 1.  This is treated in back
    * substitution.)
    */
+  print_inputs();
 
-  /* Back substitution */
+  /* Back substitution
+    Note: this ignores the elements not in the upper trianglular matrix so we don't need to set them to zero
+   */
   for (int row = N - 1; row >= 0; row--) {
     X[row] = B[row];
     for (int col = N-1; col > row; col--)

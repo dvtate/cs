@@ -1,5 +1,5 @@
 CC := gcc
-FLAGS := -g
+FLAGS := -g -O3
 
 .PHONY: all pthread omp clean test
 
@@ -18,6 +18,6 @@ clean:
 	rm gauss_serial
 
 test: all
-	./gauss_openmp 2000 1 4
-	./gauss_pthread 2000 1 4
-	./gauss_serial 2000 1 4
+	./gauss_openmp 2000 1 `nproc`
+	./gauss_pthread 2000 1 `nproc`
+	./gauss_serial 2000 1 `nproc`

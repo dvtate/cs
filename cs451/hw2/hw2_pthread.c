@@ -1,5 +1,5 @@
 /* Gaussian elimination without pivoting.
- * Compile with "gcc gauss_serial.c" 
+ * Compile with "gcc gauss_serial.c"
  */
 
 /* ****** ADD YOUR CODE AT THE END OF THIS FILE. ******
@@ -45,18 +45,15 @@ unsigned int time_seed() {
 
 /* Set the program parameters from the command-line arguments */
 void parameters(int argc, char **argv) {
-	int seed = 0;  /* Random seed */
 	// char uid[32]; /*User name */
 
 	/* Read command-line arguments */
-	srand(time_seed());  /* Randomize */
+	if (argc < 2) {
+		printf("Usage: %s <matrix_dimension> [random seed]\n",
+				argv[0]);
+		exit(0);
+	}
 
-	if (argc == 4) {
-		seed = atoi(argv[2]);
-		srand(seed);
-		numThreads=atoi(argv[3]);
-		printf("Random seed = %i\n", seed);
-	} 
 	if (argc >= 2) {
 		N = atoi(argv[1]);
 		if (N < 1 || N > MAXN) {
@@ -64,10 +61,21 @@ void parameters(int argc, char **argv) {
 			exit(0);
 		}
 	}
-	else {
-		printf("Usage: %s <matrix_dimension> [random seed]\n",
-				argv[0]);    
-		exit(0);
+
+  // Seed random
+  if (argc >= 3) {
+    const int seed = atoi(argv[2]);
+		srand(seed);
+		printf("Random seed = %i\n", seed);
+  } else {
+  	srand(time_seed());
+  }
+
+	if (argc >= 4) {
+		numThreads = atoi(argv[3]);
+    // Only one thread per dimension
+    if (numThreads > N)
+      numThreads = N;
 	}
 
 	/* Print parameters */
@@ -172,7 +180,7 @@ int main(int argc, char **argv) {
 	 (float)CLOCKS_PER_SEC * 1000);
       /* Contrary to the man pages, this appears not to include the parent */
   printf("--------------------------------------------\n");
-  
+
   exit(0);
 }
 
@@ -194,18 +202,18 @@ void* elim_thread(void* id) {
   int norm, row, col;  /* Normalization row, and zeroing
 			* element row and col */
   float multiplier;
-  
+
   /* Gaussian elimination */
   // Split each normal across all the threads
-  for (norm = (int)(intptr_t) id; norm < N - 1; norm += numThreads) {
-    for (row = norm + 1; row < N; row++) {
+  for (norm = 0; norm < N - 1; norm++) {
+    for (row = norm + 1 + (int)(intptr_t) id; row < N; row += numThreads) {
       multiplier = A[row][norm] / A[norm][norm];
       for (col = norm; col < N; col++)
 	      A[row][col] -= A[norm][col] * multiplier;
       B[row] -= B[norm] * multiplier;
     }
   }
-  
+
   /* NOTE Diagonal elements are not normalized to 1.  This is treated in back
    * substitution.
    */
@@ -213,7 +221,7 @@ void* elim_thread(void* id) {
 }
 
 void gauss() {
- 
+
   // Spawn threads to perform gausian elimination
   pthread_t threads[numThreads];
   for (int i = 0; i < numThreads; i++)
