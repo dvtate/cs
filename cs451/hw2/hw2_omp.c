@@ -196,24 +196,12 @@ void gauss() {
   // Perform Gaussian Elimination in order to obtain an upper triangular matrix
   // For each row
   for (int n = 0; n < N - 1; n++) {
-    // Normalize the row
-    {
-      // Normalize row making diagonal element 1
-      const float norm = 1 / A[n][n];
-      A[n][n] = 1;
-      for (int c = n + 1; c < N; c++)
-        A[n][c] *= norm;
-
-      // Normalize vector
-      B[n] *= norm;
-    };
-
     // Eliminate lower elements in n'th column
     // Parallelize by row
     #pragma omp parallel for
     for (int r = n + 1; r < N; r++) {
-      // Update elements
-      const float multiplier = A[r][n];
+      // Update matrix
+      const float multiplier = A[r][n] / A[n][n];
       for (int c = n + 1; c < N; c++)
         A[r][c] -= A[n][c] * multiplier;
 
@@ -241,7 +229,7 @@ void gauss() {
    */
   for (int row = N - 1; row >= 0; row--) {
     X[row] = B[row];
-    for (int col = N-1; col > row; col--)
+    for (int col = N - 1; col > row; col--)
       X[row] -= A[row][col] * X[col];
     X[row] /= A[row][row];
   }

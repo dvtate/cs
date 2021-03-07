@@ -191,6 +191,15 @@ int main(int argc, char **argv) {
  * defined in the beginning of this code.  X[] is initialized to zeros.
  */
 
+// Note that the algorithm here is essentially the same as the one used in the OMP version
+// with the only differences being:
+//  (1) pthreads instead of omp
+//  (2) threads maintined through life of program
+
+//
+int normal_index = 0;
+pthread_barrier_t barrier;
+
 /*
  * Pthread callback that Performs Gausian Elimination
  *  - Operates on matricies stored in static memory
@@ -199,28 +208,38 @@ int main(int argc, char **argv) {
  * \returns null
  */
 void* elim_thread(void* id) {
-  int norm, row, col;  /* Normalization row, and zeroing
-			* element row and col */
-  float multiplier;
-
-  /* Gaussian elimination */
-  // Split each normal across all the threads
-  for (norm = 0; norm < N - 1; norm++) {
-    for (row = norm + 1 + (int)(intptr_t) id; row < N; row += numThreads) {
-      multiplier = A[row][norm] / A[norm][norm];
-      for (col = norm; col < N; col++)
+  // Perform Gaussian Elimination in order to obtain an upper triangular matrix
+  // Eliminate elements below n'th diagonal
+  for (int norm = 0; norm < N - 1; norm++) {
+    // Eliminate lower elements in n'th column
+    // Parallelize by row
+    // TODO instead assign based on work needed
+    for (int row = norm + 1 + (int)(intptr_t) id; row < N; row += numThreads) {
+      // Update matrix
+      const float multiplier = A[row][norm] / A[norm][norm];
+      for (int col = norm; col < N; col++)
 	      A[row][col] -= A[norm][col] * multiplier;
+
+      // Update vector
       B[row] -= B[norm] * multiplier;
     }
+
+    // Wait until all rows have been eliminated before moving on to next one
+    pthread_barrier_wait(&barrier);
   }
 
   /* NOTE Diagonal elements are not normalized to 1.  This is treated in back
+   * substitution.
+   * NOTE Eliminated elements are left in the matrix as they're ignored by back
    * substitution.
    */
    return NULL;
 }
 
 void gauss() {
+
+  // Initialize barrier
+  pthread_barrier_init(&barrier, NULL, numThreads);
 
   // Spawn threads to perform gausian elimination
   pthread_t threads[numThreads];
