@@ -1,32 +1,63 @@
+body {
+	font-family: 'Noto Sans', sans-serif;
+	background-color: #ff000f;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: Arial, Helvetica, sans-serif;
+	color: black;
+	size: 200%;
+	font-weight: 700;
+}
+
+#testimonials > div.container > div {
+	background-color: #12589d; /* used color picker from logo */
+	color: white;
+}
+
 div#page {
 	width: 960px;
 	margin-left: auto;
 	margin-right: auto;
+	background-color: #fff;
+	padding: 20px;
 }
 
-.left_column {
-	width: 300px;
-	padding: 15px;
-}
-
-.left_column > img {
+.container {
 	width: 100%;
-	}
-
-.center_column {
-	width: 300px;
-	padding: 15px;
+}
+.card {
+	width: 30%;
+	float: left;
+	margin: 2px;
+	border-radius: 5px;
 }
 
-.center_column > img {
-	width: 100%;
-	}
-
-.right_column {
-	width: 300px;
-	padding: 15px;
+.card-8 {
+	width: 60%;
+}
+.card-3 {
+	width: 20%;
+}
+.card-6 {
+	width: 45%;
+}
+.card-12 {
+	width: 90%;
 }
 
-.right_column > img {
+.card > * {
+	margin: 20px;
+}
+.card > img {
 	width: 100%;
-	}
+	margin: 0;
+}
+.clear {
+	clear: both;
+}
+
+p.quote {
+	font-style: italic;
+	font-family: 'noto';
+}
