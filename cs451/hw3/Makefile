@@ -9,12 +9,12 @@ clean:
 	rm gauss_mpi
 
 test_single: all
-	mpirun -n 1 gauss_mpi 3000 1
+	mpirun -n 1 ./gauss_mpi 3008 1
 
 test_multi: all
-	mpirun -n 1 gauss_mpi 3000 1
-	mpirun -n 2 gauss_mpi 3000 1
-	mpirun -n 4 gauss_mpi 3000 1
-	mpirun -n 8 gauss_mpi 3000 1
-	mpirun -n 12 gauss_mpi 3000 1
-	mpirun -n 16 gauss_mpi 3000 1
+	mpirun -n 1 ./gauss_mpi 3024 1
+	mpirun -n 2 ./gauss_mpi 3024 1
+	mpirun -n 4 ./gauss_mpi 3024 1
+	mpirun -n 8 ./gauss_mpi 3024 1
+	mpirun -n 12 ./gauss_mpi 3024 1
+	mpirun -n 16 ./gauss_mpi 3024 1

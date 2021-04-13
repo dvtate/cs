@@ -83,8 +83,8 @@ int main(int argc, char** argv) {
     }
     // Calculate work for each processor
     const unsigned rows_per_rank = N / comm_size;
-    if (N % rows_per_rank) {
-        printf("ERROR: Dimension must be divisible by number of processors, %d", comm_size);
+    if (N % comm_size) {
+        printf("ERROR: Dimension must be divisible by number of processors, %d, (%d)", comm_size, N % comm_size);
         return -1;
     }
 
@@ -198,8 +198,8 @@ int main(int argc, char** argv) {
             print_vector(solution, N);
         }
 
-        printf("\ngausian elimination time: %f seconds\n", pre_sol_time);
-        printf("total time: %f seconds\n", time);
+        printf("gausian elimination time: %f seconds\n", pre_sol_time);
+        printf("total time: %f seconds\n\n", time);
 
         // Clean up
         free(matrix);
