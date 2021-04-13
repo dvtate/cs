@@ -45,7 +45,8 @@ void print_aug_matrix(float matrix[]) {
     printf("matrix:\n\t");
     for (unsigned r = 0; r < N; r++)
         for (unsigned c = 0; c < N + 1; c++)
-            printf("%f.2f%s", matrix[r * N + c], (c < N) ? (c == N - 1 ? " | ": ", ") : "\n\t");
+            printf("%f.2f%s", matrix[r * (N + 1) + c], (c < N) ? (c == N - 1 ? " | ": ", ") : "\n\t");
+    printf("\n");
 }
 void print_vector(float vector[], unsigned len) {
     printf("vector: [");
@@ -68,9 +69,7 @@ int main(int argc, char** argv) {
     // Read command line args
     read_params(argc, argv);
 
-    ////////
-    // Distr work
-    ////////
+    // Distribute the work
 
     // Rank zero holds complete solution
     // Notice that we're storing the augmented matrix in order to reduce MPI
@@ -82,7 +81,6 @@ int main(int argc, char** argv) {
         matrix = malloc(N * (N + 1) * sizeof(float));
         random_fill(matrix, N * (N + 1));
     }
-
     // Calculate work for each processor
     const unsigned rows_per_rank = N / comm_size;
     if (N % rows_per_rank) {
@@ -91,44 +89,43 @@ int main(int argc, char** argv) {
     }
 
     // Distribute the work to the processors
-    float work[row_width * rows_per_rank];
+    // Note: for N >= 2500 this is too big to put on the stack
+    float* work = (float*) malloc(row_width * rows_per_rank * sizeof(float));
     if (comm_size == 1)
-        memcpy(work, matrix, N * N * sizeof(float)); // want to be able to measure overhead
+        memcpy(work, matrix, N * (N + 1) * sizeof(float)); // want to be able to measure overhead
     else
         for (unsigned i = 0; i < rows_per_rank; i++)
+        {
             MPI_Scatter(
                 matrix + i * row_width * comm_size, row_width, MPI_FLOAT, // send
                 work + i * row_width, row_width, MPI_FLOAT,              // recv
                 0, MPI_COMM_WORLD);                                     // env
+        }
 
+    // Do the work
 
     // Gaussian Elimination
     float row[row_width];
 
     // Start tracking time
+    double start_time;
     if (comm_rank == 0) {
-        // start_time = MPI_Wtime();
-
-        print_aug_matrix(matrix);
+        start_time = MPI_Wtime();
     }
-
-    // Locals
 
     // For each diagonal, pivot
     for (unsigned n = 0; n < N; n++) {
         // Row in work[]
         const unsigned loc_row = n / comm_size;
+
         // Rank responsible for this row's elimination
         const int elim_rank = n % comm_size;
-
 
         if (comm_rank == elim_rank) {
             // Divide row to right of the pivot by the pivot
             // Note: Optimizations: mul by reciporocal, assignment for trivial case
-            printf("pivot=%f\n", work[loc_row * row_width + n]);
             const float rpivot = 1.0f / work[loc_row * row_width + n];
             work[loc_row * row_width + n] = 1.0f;
-            printf("pivot: work(%d)[%d][%d] = %f\n", comm_rank, loc_row, n, rpivot);
             for (unsigned i = n + 1; i < row_width; i++)
                 work[loc_row * row_width + i] *= rpivot;
 
@@ -139,13 +136,12 @@ int main(int argc, char** argv) {
             // Eliminate other rows mapped to this rank
             for (unsigned i = loc_row + 1; i < rows_per_rank; i++) {
                 const float scale = work[i * row_width + n];
-                for (unsigned j = i  + 1; j < row_width; j++)
+                for (unsigned j = n + 1; j < row_width; j++)
                     work[i * row_width + j] -= scale * row[j];
 
                 // Mathematically correct but overkill
-                work[i * N + 1] = 0;
+                work[i * row_width + n] = 0;
             }
-
         } else {
             // Recive row from elimination thread
             MPI_Bcast(row, row_width, MPI_FLOAT, elim_rank, MPI_COMM_WORLD);
@@ -153,17 +149,18 @@ int main(int argc, char** argv) {
             for (unsigned i = loc_row; i < rows_per_rank; i++)
                 if (elim_rank < comm_rank || i > loc_row) {
                     const float scale = work[i * row_width + n];
-                    for (unsigned j = i  + 1; j < row_width; j++)
+                    for (unsigned j = n  + 1; j < row_width; j++)
                         work[i * row_width + j] -= scale * row[j];
 
                     // Mathematically correct but overkill
-                    work[i * N + 1] = 0;
+                    work[i * row_width + n] = 0;
                 }
         }
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
 
+    // Finish the task
     // Stop timer
     if (comm_rank == 0) {
         // t_end = MPI_Wtime();
@@ -173,32 +170,40 @@ int main(int argc, char** argv) {
     if (comm_size == 1)
         memcpy(matrix, work, N * row_width * sizeof(float));
     else
-        for (unsigned i = 0; i < rows_per_rank; i++)
+        for (unsigned i = 0; i < rows_per_rank; i++) {
             MPI_Gather(
                 work + i * row_width, row_width, MPI_FLOAT,                 // send
                 matrix + i * comm_size * row_width, row_width, MPI_FLOAT,   // recv
                 0, MPI_COMM_WORLD);                                         // env
-
+        }
 
     // Find the solution
     if (comm_rank == 0) {
+        // Time before backsubstitution
+        double pre_sol_time = MPI_Wtime() - start_time;
+
         // Backsubstitution
         float solution[N];
         for (int r = N -1; r >= 0; r--) {
             solution[r] = matrix[r * row_width + row_width - 1];
-            for (int c = N - 1; c >= 0; c--)
+            for (int c = N - 1; c > r; c--)
                 solution[r] -= matrix[r * row_width + c] * solution[c];
             solution[r] /= matrix[r * row_width + r];
         }
 
-        print_aug_matrix(matrix);
-        print_vector(solution, N);
+        // Finished all calculations, take time
+        double time = MPI_Wtime() - start_time;
+        if (N < 10) {
+            print_aug_matrix(matrix);
+            print_vector(solution, N);
+        }
+
+        printf("\ngausian elimination time: %f seconds\n", pre_sol_time);
+        printf("total time: %f seconds\n", time);
+
+        // Clean up
+        free(matrix);
     }
 
     MPI_Finalize();
-
-    // Debug args
-    // if (comm_rank == 0)
-    //     for (int i = 0 ; i < argc; i++)
-    //         puts(argv[i]);
 }
