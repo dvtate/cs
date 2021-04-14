@@ -36,9 +36,10 @@ void read_params(int argc, char** argv) {
 // Populate with random floats
 void random_fill(float* p, unsigned len) {
     for (unsigned n = 0; n < len; n++)
-            p[n] = (float)rand() / (float) (1 << 19);
+        p[n] = (float)rand() / (float) (1 << 19);
 }
 
+// Pretty-Print augmented matrix
 void print_aug_matrix(float matrix[], unsigned rows) {
     printf("matrix(%d):\n\t", rows);
     for (unsigned r = 0; r < rows; r++)
@@ -46,11 +47,13 @@ void print_aug_matrix(float matrix[], unsigned rows) {
             printf("%10.5f%s", matrix[r * (N + 1) + c], (c < N) ? (c == N - 1 ? " | ": ", ") : "\n\t");
     printf("\n");
 }
+// Pretty print vector
 void print_vector(float vector[], unsigned len) {
     printf("vector: [");
     for (unsigned i = 0; i < len; i++)
         printf("%5.2f%s", vector[i], (i < N -1) ? ", " : "]\n");
 }
+
 
 int main(int argc, char** argv) {
     // This proc rank
@@ -68,19 +71,25 @@ int main(int argc, char** argv) {
 
     // Distribute the work
 
-    // Rank zero holds complete solution
+    // Rank zero holds complete matrix
     // Notice that we're storing the augmented matrix in order to reduce MPI
-    // calls and better mimic the math
+    // calls and better mimic the math involved
     const unsigned row_width = N + 1;
     float* matrix;
     if (comm_rank == 0 ) {
         // Notice that the last column is our vector
         matrix = malloc(N * (N + 1) * sizeof(float));
         random_fill(matrix, N * (N + 1));
+        print_aug_matrix(matrix, N);
     }
 
-    // Calculate work for each processor
-    // And any overflowed rows in the event that N isn't divisible
+    // Start tracking time as we now have the matrix
+    double start_time;
+    if (comm_rank == 0)
+        start_time = MPI_Wtime();
+
+    // Calculate work for each rank
+    // And any overflow rows in the event that N isn't evenly divisible
     // Rows per rank is lower for the processors which don't have overflow work
     const unsigned overflow_rows = N % comm_size;
     const unsigned rows_per_rank = N / comm_size
@@ -89,10 +98,9 @@ int main(int argc, char** argv) {
     // Distribute the work to the processors
     // Note: for N >= 2500 this is too big to put on the stack
     float* work = (float*) malloc(row_width * (rows_per_rank + 1) * sizeof(float));
-
     if (comm_size == 1)
-        memcpy(work, matrix, N * (N + 1) * sizeof(float)); // want to be able to measure overhead
-    else 
+        work = matrix;
+    else
         // Distribute the work to the ranks
         for (unsigned r = 0; r < N; r++) {
             const int loc_row = r / comm_size;
@@ -115,11 +123,9 @@ int main(int argc, char** argv) {
     // Communication buffer
     float row[row_width];
 
-    // Start tracking time
-    double start_time;
-    if (comm_rank == 0) {
-        start_time = MPI_Wtime();
-    }
+    double gauss_start_time;
+    if (comm_rank == 0)
+        gauss_start_time = MPI_Wtime();
 
     // For each diagonal, pivot
     for (unsigned n = 0; n < N; n++) {
@@ -169,17 +175,9 @@ int main(int argc, char** argv) {
 
     MPI_Barrier(MPI_COMM_WORLD);
 
-    // Finish the task
-    // Stop timer
-    if (comm_rank == 0) {
-        // t_end = MPI_Wtime();
-        // t_total = t_end - t_start;
-    }
-
-    if (comm_size == 1)
-        memcpy(matrix, work, N * row_width * sizeof(float));
-    else {
-        // Retreive work from ranks
+    // Recombine work from ranks
+    // if comm_size == 1 then don't need to recombine
+    if (comm_size != 1)
         for (unsigned r = 0; r < N; r++) {
             const int loc_row = r / comm_size;
             const int loc_rank = r % comm_size;
@@ -195,12 +193,11 @@ int main(int argc, char** argv) {
                     row_width, MPI_FLOAT,
                     0, r, MPI_COMM_WORLD);
         }
-    }
 
     // Find the solution
     if (comm_rank == 0) {
         // Time before backsubstitution
-        double pre_sol_time = MPI_Wtime() - start_time;
+        double pre_sol_time = MPI_Wtime();
 
         // Backsubstitution
         float solution[N];
@@ -218,7 +215,7 @@ int main(int argc, char** argv) {
             print_vector(solution, N);
         }
 
-        printf("gausian elimination time: %f seconds\n", pre_sol_time);
+        printf("gausian elimination time: %f seconds\n", pre_sol_time - gauss_start_time);
         printf("total time: %f seconds\n\n", time);
 
         // Clean up
