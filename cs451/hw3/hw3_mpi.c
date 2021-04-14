@@ -35,8 +35,6 @@ void read_params(int argc, char** argv) {
 
 // Populate with random floats
 void random_fill(float* p, unsigned len) {
-    // for (unsigned j = 0; j < c; j++)
-    //     for (unsigned i = 0; i < r; i++)
     for (unsigned n = 0; n < len; n++)
             p[n] = (float)rand() / (float) (1 << 19);
 }
@@ -94,11 +92,12 @@ int main(int argc, char** argv) {
 
     if (comm_size == 1)
         memcpy(work, matrix, N * (N + 1) * sizeof(float)); // want to be able to measure overhead
-    else {
+    else 
         // Distribute the work to the ranks
         for (unsigned r = 0; r < N; r++) {
             const int loc_row = r / comm_size;
             const int loc_rank = r % comm_size;
+            MPI_Status tmp;
             if (comm_rank == 0 && loc_rank == 0)
                 memcpy(work + loc_row * row_width, matrix + r * row_width, row_width * sizeof(float));
             else if (comm_rank == 0)
@@ -108,9 +107,8 @@ int main(int argc, char** argv) {
             else if (comm_rank == loc_rank)
                 MPI_Recv(work + loc_row * row_width,
                     row_width, MPI_FLOAT,
-                    0, r, MPI_COMM_WORLD, NULL);
+                    0, r, MPI_COMM_WORLD, &tmp);
         }
-    }
 
     // Do the work
 
@@ -149,8 +147,8 @@ int main(int argc, char** argv) {
                 for (unsigned j = n + 1; j < row_width; j++)
                     work[i * row_width + j] -= scale * row[j];
 
-                // Mathematically correct but overkill
-                work[i * row_width + n] = 0;
+                // Mathematically correct but not needed
+                //work[i * row_width + n] = 0;
             }
         } else {
             // Recive row from elimination thread
@@ -163,8 +161,8 @@ int main(int argc, char** argv) {
                     for (unsigned j = n  + 1; j < row_width; j++)
                         work[i * row_width + j] -= scale * row[j];
 
-                    // Mathematically correct but overkill
-                    work[i * row_width + n] = 0;
+                    // Mathematically correct but not needed
+                    //work[i * row_width + n] = 0;
                 }
         }
     }
@@ -185,12 +183,13 @@ int main(int argc, char** argv) {
         for (unsigned r = 0; r < N; r++) {
             const int loc_row = r / comm_size;
             const int loc_rank = r % comm_size;
+            MPI_Status tmp;
             if (comm_rank == 0 && loc_rank == 0)
                 memcpy(matrix + r * row_width, work + loc_row * row_width, row_width * sizeof(float));
             else if (comm_rank == 0)
                 MPI_Recv(matrix + r * row_width,
                     row_width, MPI_FLOAT,
-                    loc_rank, r, MPI_COMM_WORLD, NULL);
+                    loc_rank, r, MPI_COMM_WORLD, &tmp);
             else if (comm_rank == loc_rank)
                 MPI_Send(work + loc_row * row_width,
                     row_width, MPI_FLOAT,
