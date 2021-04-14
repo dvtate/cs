@@ -1,4 +1,4 @@
-FLAGS := -g -O3 -Wall -Wextra
+FLAGS := -g -Wall -Wextra
 
 .PHONY: all clean test
 

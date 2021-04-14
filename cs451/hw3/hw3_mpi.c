@@ -41,20 +41,19 @@ void random_fill(float* p, unsigned len) {
             p[n] = (float)rand() / (float) (1 << 19);
 }
 
-void print_aug_matrix(float matrix[]) {
-    printf("matrix:\n\t");
-    for (unsigned r = 0; r < N; r++)
+void print_aug_matrix(float matrix[], unsigned rows) {
+    printf("matrix(%d):\n\t", rows);
+    for (unsigned r = 0; r < rows; r++)
         for (unsigned c = 0; c < N + 1; c++)
-            printf("%f.2f%s", matrix[r * (N + 1) + c], (c < N) ? (c == N - 1 ? " | ": ", ") : "\n\t");
+            printf("%10.5f%s", matrix[r * (N + 1) + c], (c < N) ? (c == N - 1 ? " | ": ", ") : "\n\t");
     printf("\n");
 }
 void print_vector(float vector[], unsigned len) {
     printf("vector: [");
     for (unsigned i = 0; i < len; i++)
-        printf("%5.2f%s", vector[i], (i < N -1) ? ", " : ";\n\t");
+        printf("%5.2f%s", vector[i], (i < N -1) ? ", " : "]\n");
 }
 
-//
 int main(int argc, char** argv) {
     // This proc rank
     int comm_rank;
@@ -81,30 +80,41 @@ int main(int argc, char** argv) {
         matrix = malloc(N * (N + 1) * sizeof(float));
         random_fill(matrix, N * (N + 1));
     }
+
     // Calculate work for each processor
-    const unsigned rows_per_rank = N / comm_size;
-    if (N % comm_size) {
-        printf("ERROR: Dimension must be divisible by number of processors, %d, (%d)", comm_size, N % comm_size);
-        return -1;
-    }
+    // And any overflowed rows in the event that N isn't divisible
+    // Rows per rank is lower for the processors which don't have overflow work
+    const unsigned overflow_rows = N % comm_size;
+    const unsigned rows_per_rank = N / comm_size
+       + (((int)overflow_rows > comm_rank) ? 1 : 0);
 
     // Distribute the work to the processors
     // Note: for N >= 2500 this is too big to put on the stack
-    float* work = (float*) malloc(row_width * rows_per_rank * sizeof(float));
+    float* work = (float*) malloc(row_width * (rows_per_rank + 1) * sizeof(float));
+
     if (comm_size == 1)
         memcpy(work, matrix, N * (N + 1) * sizeof(float)); // want to be able to measure overhead
-    else
-        for (unsigned i = 0; i < rows_per_rank; i++)
-        {
-            MPI_Scatter(
-                matrix + i * row_width * comm_size, row_width, MPI_FLOAT, // send
-                work + i * row_width, row_width, MPI_FLOAT,              // recv
-                0, MPI_COMM_WORLD);                                     // env
+    else {
+        // Distribute the work to the ranks
+        for (unsigned r = 0; r < N; r++) {
+            const int loc_row = r / comm_size;
+            const int loc_rank = r % comm_size;
+            if (comm_rank == 0 && loc_rank == 0)
+                memcpy(work + loc_row * row_width, matrix + r * row_width, row_width * sizeof(float));
+            else if (comm_rank == 0)
+                MPI_Send(matrix + r * row_width,
+                    row_width, MPI_FLOAT,
+                    loc_rank, r, MPI_COMM_WORLD);
+            else if (comm_rank == loc_rank)
+                MPI_Recv(work + loc_row * row_width,
+                    row_width, MPI_FLOAT,
+                    0, r, MPI_COMM_WORLD, NULL);
         }
+    }
 
     // Do the work
 
-    // Gaussian Elimination
+    // Communication buffer
     float row[row_width];
 
     // Start tracking time
@@ -147,7 +157,8 @@ int main(int argc, char** argv) {
             MPI_Bcast(row, row_width, MPI_FLOAT, elim_rank, MPI_COMM_WORLD);
 
             for (unsigned i = loc_row; i < rows_per_rank; i++)
-                if (elim_rank < comm_rank || i > loc_row) {
+                if (elim_rank < comm_rank || i > loc_row)
+                {
                     const float scale = work[i * row_width + n];
                     for (unsigned j = n  + 1; j < row_width; j++)
                         work[i * row_width + j] -= scale * row[j];
@@ -169,13 +180,23 @@ int main(int argc, char** argv) {
 
     if (comm_size == 1)
         memcpy(matrix, work, N * row_width * sizeof(float));
-    else
-        for (unsigned i = 0; i < rows_per_rank; i++) {
-            MPI_Gather(
-                work + i * row_width, row_width, MPI_FLOAT,                 // send
-                matrix + i * comm_size * row_width, row_width, MPI_FLOAT,   // recv
-                0, MPI_COMM_WORLD);                                         // env
+    else {
+        // Retreive work from ranks
+        for (unsigned r = 0; r < N; r++) {
+            const int loc_row = r / comm_size;
+            const int loc_rank = r % comm_size;
+            if (comm_rank == 0 && loc_rank == 0)
+                memcpy(matrix + r * row_width, work + loc_row * row_width, row_width * sizeof(float));
+            else if (comm_rank == 0)
+                MPI_Recv(matrix + r * row_width,
+                    row_width, MPI_FLOAT,
+                    loc_rank, r, MPI_COMM_WORLD, NULL);
+            else if (comm_rank == loc_rank)
+                MPI_Send(work + loc_row * row_width,
+                    row_width, MPI_FLOAT,
+                    0, r, MPI_COMM_WORLD);
         }
+    }
 
     // Find the solution
     if (comm_rank == 0) {
@@ -193,8 +214,8 @@ int main(int argc, char** argv) {
 
         // Finished all calculations, take time
         double time = MPI_Wtime() - start_time;
-        if (N < 10) {
-            print_aug_matrix(matrix);
+        if (N <= 10) {
+            print_aug_matrix(matrix, N);
             print_vector(solution, N);
         }
 
