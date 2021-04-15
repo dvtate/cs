@@ -80,7 +80,7 @@ int main(int argc, char** argv) {
         // Notice that the last column is our vector
         matrix = malloc(N * (N + 1) * sizeof(float));
         random_fill(matrix, N * (N + 1));
-        print_aug_matrix(matrix, N);
+        //print_aug_matrix(matrix, N);
     }
 
     // Start tracking time as we now have the matrix
