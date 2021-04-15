@@ -27,7 +27,7 @@ unsigned N;
 // Parse parameters
 void read_params(int argc, char** argv) {
     // Read dimension from params
-    N = argc >= 2 ? atoi(argv[1]) : 5000;
+    N = argc >= 2 ? atoi(argv[1]) : 3000;
 
     // Read random seed from params
     srand(argc >= 3 ? atoi(argv[2]) : time_seed());
@@ -144,7 +144,7 @@ int main(int argc, char** argv) {
                 work[loc_row * row_width + i] *= rpivot;
 
             // Send row to other ranks
-            memcpy(row, work + loc_row * row_width, row_width * sizeof(float)); // TODO remove this ?
+            memcpy(row, work + loc_row * row_width, row_width * sizeof(float));
             MPI_Bcast(row, row_width, MPI_FLOAT, elim_rank, MPI_COMM_WORLD);
 
             // Eliminate other rows mapped to this rank
