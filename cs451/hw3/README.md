@@ -18,7 +18,7 @@ To get an idea of the performance characteristics you can use `make test_assgine
 ## Notice on rewrite
 Because the number of changes involved for this assignment were relatively signficant (changing structures and such)
 
-### Optimizations
+## Optimizations
 - The provided serial algorithm performs the elimination operation on the entire row despite elements not in the upper triangular matrix being known to result in zeros or being used in the back-substitution phase. Instead I simply left those values to what they were initialized so that we don't have to waste resources on them
 - Minor changes to improve cache efficiency
 - I normalized the diagonal pivots to 1 before sending the row to the other ranks such as to reduce the amount of expensive divisions. It's possible that like in hw2 this didn't provide a meaningful improvement in performance however I feel that the threads would have to synchronize over this anyway so there would be a delay regardless unlike with the shared memory progra
@@ -46,7 +46,7 @@ As shown in the below image, the parallelism priveds a noticable improvement in 
 
 ![image](performance.png)
 
-|slots  | time      |
+|slots  | time (s)  |
 |-------|-----------|
 |1       | 9.601567 |
 |2       | 4.850437 |
