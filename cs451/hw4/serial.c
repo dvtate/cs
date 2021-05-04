@@ -39,15 +39,20 @@ void matrixNorm() {
     printf("Computing Serially.\n");
 
     for (col=0; col < N; col++) {
+        // Calculate mean for the column
         mu = 0.0;
         for (row=0; row < N; row++)
             mu += A[row][col];
         mu /= (float) N;
+
+        // Calculate standard deviation for the column
         sigma = 0.0;
         for (row=0; row < N; row++)
             sigma += powf(A[row][col] - mu, 2.0);
         sigma /= (float) N;
         sigma = sqrt(sigma);
+
+        //  Normalize column
         for (row=0; row < N; row++) {
             if (sigma == 0.0)
                 B[row][col] = 0.0;
@@ -55,7 +60,6 @@ void matrixNorm() {
                 B[row][col] = (A[row][col] - mu) / sigma;
         }
     }
-
 }
 
 
