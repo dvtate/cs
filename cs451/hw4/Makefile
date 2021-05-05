@@ -20,4 +20,4 @@ clean:
 test:
 	./serial
 	./omp 6000 `nproc` 1
-	./cuda 6000 13 1 1
+	./cuda 6000 32 16 1
