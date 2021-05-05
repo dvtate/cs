@@ -69,8 +69,6 @@ void matrixNorm(float* A, float* B) {
 
     float mu, sigma; // Mean and Standard Deviation
 
-    printf("Computing Serially.\n");
-
     for (col=0; col < N; col++) {
         // Calculate mean for the column
         mu = 0.0;
