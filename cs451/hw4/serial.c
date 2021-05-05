@@ -14,11 +14,9 @@
 /* Matrices */
 volatile float A[N][N], B[N][N];
 
-
 /* Initialize A and B*/
 void initialize_inputs() {
     int row, col;
-
     srand((unsigned)time(NULL));
     for (row = 0; row < N; row++) {
         for (col = 0; col < N; col++) {
@@ -26,7 +24,17 @@ void initialize_inputs() {
             B[row][col] = 0.0;
         }
     }
+}
 
+/// Print a matrix's content for debugging
+void print_matrix(float* m) {
+    printf("[");
+    for (int row = 0; row < N; row++) {
+        printf("\n\t");
+        for (int col = 0; col < N; col++)
+            printf("%10.5f\t", m[row * N + col]);
+    }
+    printf("]\n");
 }
 
 
@@ -94,6 +102,12 @@ int main(int argc, char **argv) {
     printf("Runtime = %g ms.\n", (float)runtime/(float)1000);
     printf("\nStopped clock.");
     printf("\n---------------------------------------------\n");
+
+    // For proof of correction we print matricies for small N
+    if (N <= 20) {
+        print_matrix((float*) A);
+        print_matrix((float*) B);
+    }
 
     exit(0);
 }

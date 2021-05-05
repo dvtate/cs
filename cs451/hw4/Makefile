@@ -1,8 +1,8 @@
-cuda: 
+cuda:
 	nvcc normalize.cu
 
 omp:
-	g++ omp.c -o omp -O3 -Wall -Wextra -fopenmp
+	g++ omp.c -o omp -O3 -Wall -Wextra -fopenmp -g -lefence
 
 serial:
 	g++ serial.c -o serial -O3 -Wall -Wextra -g
@@ -13,4 +13,3 @@ clean:
 	rm a.out
 	rm omp
 	rm serial
-	
