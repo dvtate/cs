@@ -35,8 +35,6 @@ __global__ void matrixNorm(float* A, float* B) {
      __shared__ int row;
      __shared__ float mu, sigma; // Mean and Standard Deviation
 
-     printf("Computing Serially.\n");
-
     // Clamp to number of cols
     if (col < N) {
         // Calculate mean for column
@@ -49,17 +47,17 @@ __global__ void matrixNorm(float* A, float* B) {
         // Calculate standard deviation for the column
         sigma = 0.0;
         for (row = 0; row < N; ++row)
-            sigma += powf(A[col*n+row] - mu, 2.0);
-        sigma /= (float) N;
+            sigma += powf(A[col * N + row] - mu, 2.0);
+        sigma /= N;
         sigma = sqrt(sigma);
         __syncthreads();
 
         // Normalize column
-        for (row = 0; row < n; ++row)
+        for (row = 0; row < N; ++row)
             if (sigma == 0.0)
-                B[row * n + col] = 0.0;
+                B[row * N + col] = 0.0;
             else
-                B[row * n + col] = (A[col * n + row] - mu) / sigma;
+                B[row * N + col] = (A[col * N + row] - mu) / sigma;
     }
 }
 
@@ -72,34 +70,34 @@ int main(int argc, char **argv) {
     /* Initialize A and B */
     initialize_inputs();
 
-    /* Start Clock */
+    /* Start Clock *//*
     printf("\n---------------------------------------------\n");
     printf("Matrix size N = %d", N);
-    printf("\nStarting clock.\n\n");
+    printf("\nStarting clock.\n\n");*/
     gettimeofday(&start, &tzdummy);
 
     // Create buffers on device
-    float* gpu_A, gpu_B;
-    cudaMalloc((void **) &gpu_A, sizeof(float) * N * N);
-    cudaMalloc((void **) &gpu_B, sizeof(float) * N * N);
+    float* gpu_A, * gpu_b;
+    cudaMalloc((void**) &gpu_A, sizeof(float) * N * N);
+    cudaMalloc((void**) &gpu_B, sizeof(float) * N * N);
 
     // Send problem to device
-    cudaMemcpy(gpu_A, A, sizeof(float) * N * N, cudaMemcpyHostToDevice);
+    cudaMemcpy(A, gpu_A, sizeof(float) * N * N, cudaMemcpyHostToDevice);
 
     /* Matrix Normalization */
     matrixNorm<<<numBlocks,numThreadsPerBlock>>>(gpu_A, gpu_B);
 
     // Pull result from the device
-    cudaMemcpy(B, gpu_B, sizeof(float) * N * N, cudaMemcpyDeviceToHost);
+    cudaMemcpy((void*)B, gpu_B, sizeof(float) * N * N, cudaMemcpyDeviceToHost);
 
     /* Stop Clock */
     gettimeofday(&stop, &tzdummy);
     runtime = (unsigned long long)(stop.tv_sec - start.tv_sec) * 1000000 + (stop.tv_usec - start.tv_usec);
 
     /* Display timing results */
-    printf("Runtime = %g ms.\n", (float)runtime/(float)1000);
+/*    printf("Runtime = %g ms.\n", (float)runtime/(float)1000);
     printf("\nStopped clock.");
-    printf("\n---------------------------------------------\n");
+    printf("\n---------------------------------------------\n");*/
 
-    exit(0);
+    return 0;
 }
