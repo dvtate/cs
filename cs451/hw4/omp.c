@@ -68,7 +68,7 @@ void matrixNorm(float* A, float* B) {
 
     // Do each row separately
     #pragma omp parallel for
-    for (col=0; col < N; col++) {
+    for (int col=0; col < N; col++) {
         // Mean and Standard Deviation
         float mu, sigma;
 
