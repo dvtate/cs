@@ -65,29 +65,28 @@ void print_matrix(float* m) {
 
 /* Kernel function */
 void matrixNorm(float* A, float* B) {
-    int row, col;
 
-    float mu, sigma; // Mean and Standard Deviation
-
-    printf("Computing Serially.\n");
-
+    // Do each row separately
     #pragma omp parallel for
     for (col=0; col < N; col++) {
+        // Mean and Standard Deviation
+        float mu, sigma;
+
         // Calculate mean for the column
         mu = 0.0;
-        for (row=0; row < N; row++)
+        for (int row = 0; row < N; row++)
             mu += A[row * N + col];
         mu /= (float) N;
 
         // Calculate standard deviation for the column
         sigma = 0.0;
-        for (row=0; row < N; row++)
+        for (int row = 0; row < N; row++)
             sigma += powf(A[row * N + col] - mu, 2.0);
         sigma /= (float) N;
         sigma = sqrt(sigma);
 
         //  Normalize column
-        for (row=0; row < N; row++) {
+        for (int row = 0; row < N; row++) {
             if (sigma == 0.0)
                 B[row * N + col] = 0.0;
             else
