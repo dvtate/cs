@@ -71,24 +71,22 @@ void matrixNorm(float* A, float* B) {
 
     printf("Computing Serially.\n");
 
+    #pragma omp parallel for
     for (col=0; col < N; col++) {
         // Calculate mean for the column
         mu = 0.0;
-        #pragma omp parallel for
         for (row=0; row < N; row++)
             mu += A[row * N + col];
         mu /= (float) N;
 
         // Calculate standard deviation for the column
         sigma = 0.0;
-        #pragma omp parallel for
         for (row=0; row < N; row++)
             sigma += powf(A[row * N + col] - mu, 2.0);
         sigma /= (float) N;
         sigma = sqrt(sigma);
 
         //  Normalize column
-        #pragma omp parallel for
         for (row=0; row < N; row++) {
             if (sigma == 0.0)
                 B[row * N + col] = 0.0;
@@ -97,7 +95,6 @@ void matrixNorm(float* A, float* B) {
         }
     }
 }
-
 
 
 int main(int argc, char **argv) {

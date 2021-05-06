@@ -1,0 +1,26 @@
+cc@hw4-dtesta1:~/cs/cs451/hw4$ make test
+./serial
+
+---------------------------------------------
+Matrix size N = 6000
+Starting clock.
+
+Computing Serially.
+Runtime = 2068.48 ms.
+
+Stopped clock.
+---------------------------------------------
+./omp 6000 `nproc` 1
+
+---------------------------------------------
+Matrix size N = 6000
+Starting clock.
+
+Runtime = 281.217 ms.
+
+Stopped clock.
+---------------------------------------------
+./cuda 6000 13 1 1
+Runtime = 1191.95 ms.
+Normalization time = 0.019 ms.
+

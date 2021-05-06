@@ -113,7 +113,6 @@ int main(int argc, char** argv) {
 
     /* Start Clock */
     gettimeofday(&start, &tzdummy);
-
     // Create buffers on device
     float* gpu_A, * gpu_B;
     cudaMalloc((void**) &gpu_A, N * N * sizeof(float));
