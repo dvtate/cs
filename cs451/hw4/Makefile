@@ -18,6 +18,7 @@ clean:
 	rm serial
 
 test:
+<<<<<<< HEAD
 	echo "computing serial..."
 	./serial
 	echo "computing with omp..."
@@ -29,4 +30,8 @@ test:
 	./omp 6000 16 1
 	./omp 6000 `nproc` 1
 	echo "computing with cuda..."
+=======
+	./serial
+	./omp 6000 `nproc` 1
+>>>>>>> 2173fa6e003aff0f8a7277d92370576367e52c03
 	./cuda 6000 32 16 1

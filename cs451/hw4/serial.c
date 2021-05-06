@@ -73,6 +73,9 @@ void matrixNorm() {
 
 
 int main(int argc, char **argv) {
+    (void)argc;
+    (void)argv;
+
     /* Timing variables */
     struct timeval start, stop;  /* Elapsed times using gettimeofday() */
     struct timezone tzdummy;

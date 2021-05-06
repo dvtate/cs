@@ -34,7 +34,7 @@ void initialize_inputs(int argc, char** argv, float*& A, float*& B) {
 
     // Set threads per block
     if (argc > 3) {
-        n_threads_per_block = atoi(argv[2]);
+        n_threads_per_block = atoi(argv[3]);
     }
 
     // Set seed
@@ -98,12 +98,12 @@ __global__ void matrixNorm(float* A, float* B, int N) {
             else
                 B[row * N + col] = (A[col * N + row] - mu) / sigma;
     }
-    __syncthreads();
 }
 
 int main(int argc, char** argv) {
     /* Timing variables */
     struct timeval start, stop;  /* Elapsed times using gettimeofday() */
+    struct timeval norm_start, norm_stop; // time values for the normalization algorithm
     struct timezone tzdummy;
     unsigned long long runtime;
 
@@ -123,20 +123,22 @@ int main(int argc, char** argv) {
     cudaMemcpy((void*) gpu_B, B, N * N * sizeof(float), cudaMemcpyHostToDevice);
 
     /* Matrix Normalization */
+    gettimeofday(&norm_start, &tzdummy);
     matrixNorm<<<n_blocks, n_threads_per_block>>>(gpu_A, gpu_B, N);
-
-    // This should get overwritten
-    B[1] = 1233456.12345;
+    gettimeofday(&norm_stop, &tzdummy);
 
     // Pull result from the device
     cudaMemcpy((void*) B, gpu_B, N * N * sizeof(float), cudaMemcpyDeviceToHost);
 
-    /* Stop Clock */
+    /* Calculate runtimes */
     gettimeofday(&stop, &tzdummy);
     runtime = (unsigned long long)(stop.tv_sec - start.tv_sec) * 1000000 + (stop.tv_usec - start.tv_usec);
+    unsigned long long norm_time = (unsigned long long)
+	    (norm_stop.tv_sec - norm_start.tv_sec) * 1000000 + (norm_stop.tv_usec - norm_start.tv_usec);
 
     /* Display timing results */
     printf("Runtime = %g ms.\n", (float)runtime/(float)1000);
+    printf("Normalization time = %g ms.\n", (float)norm_time/(float)1000);
 
     // Debug for small N
     if (N <= 20) {
@@ -145,7 +147,9 @@ int main(int argc, char** argv) {
     }
 
     // Cleanup and exit
-    // free(A);
-    // free(B);
+    free(A);
+    free(B);
+    cudaFree(gpu_A);
+    cudaFree(gpu_B);
     return 0;
 }
