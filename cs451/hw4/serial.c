@@ -9,7 +9,7 @@
 #include <math.h>
 
 /* Program Parameters */
-#define N 6000  /* Matrix size */
+#define N 10  /* Matrix size */
 
 /* Matrices */
 volatile float A[N][N], B[N][N];
@@ -17,7 +17,7 @@ volatile float A[N][N], B[N][N];
 /* Initialize A and B*/
 void initialize_inputs() {
     int row, col;
-    srand((unsigned)time(NULL));
+    srand(1/*(unsigned)time(NULL)*/);
     for (row = 0; row < N; row++) {
         for (col = 0; col < N; col++) {
             A[row][col] = (float)rand() / 32768.0;

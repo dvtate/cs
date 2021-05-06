@@ -68,14 +68,14 @@ void print_matrix(float* m) {
 
  /* Kernel function */
 __global__ void matrixNorm(float* A, float* B, int N) {
-    int row;         // Row index for loops
-    float mu, sigma; // Mean and Standard Deviation
-
     // Calculate column number
     int col = blockIdx.x * blockDim.x + threadIdx.x;
 
     // Maybe some wasted threads
     if (col < N) {
+        int row;         // Row index for loops
+        float mu, sigma; // Mean and Standard Deviation
+
         // Calculate mean for column
         mu = 0.0;
         for (row = 0; row < N; ++row)
