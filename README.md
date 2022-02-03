@@ -4,7 +4,7 @@ Classwork and assignments done as part of studying Computer Science at [IIT](htt
 ## Classes taken:
 - CS 100: Intro to the Profession
   - Matthew Bauer, Fall 2018
-  - Java, YodaScript (XD), HTML, JS
+  - Java, [YodaScript](https://github.com/dvtate/yodascript), HTML, JS
 - CS 116: Object Oriented Programming 2
   - ?, Fall 2018
   - Java
@@ -41,3 +41,10 @@ Classwork and assignments done as part of studying Computer Science at [IIT](htt
 - CS 451: Parallel and Distributed Systems
   - Zhiling Lan, Spring 2021
   - C/C++
+- CS 485: Computers and Society
+  - ?, Fall 2021
+  - Ethics, English
+- CS 494: Programming Languages and Applications
+  - Stefan Mueller
+  - Math, STLC, [Postfix Haskell](https://github.com/dvtate/postfix-haskell)
+
