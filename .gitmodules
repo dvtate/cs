@@ -10,3 +10,6 @@
 [submodule "cs425/CS425-Airline-Flight-Booking-Application"]
 	path = cs425/CS425-Airline-Flight-Booking-Application
 	url = https://github.com/tdeng9886/CS425-Airline-Flight-Booking-Application
+[submodule "CS595-PLT"]
+	path = CS595-PLT
+	url = https://github.com/dvtate/CS595-PLT
