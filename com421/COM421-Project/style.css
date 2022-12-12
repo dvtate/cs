@@ -1,0 +1,10 @@
+
+/* title section */
+div#title-section {
+    background-color: #b0dcf4;
+    color: #f00;
+    text-align: center;
+}
+div#title-section h1 {
+    font-size: 400%;
+}
