@@ -1,7 +1,3 @@
-/* Matrix normalization.
- * Compile with "gcc matrixNorm.c"
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -80,7 +76,7 @@ __global__ void matrixNorm(float* A, float* B, int N) {
         mu = 0.0;
         for (row = 0; row < N; ++row)
             mu += A[row * N + col];
-            mu /= N;
+        mu /= N;
         __syncthreads();
 
         // Calculate standard deviation for the column
